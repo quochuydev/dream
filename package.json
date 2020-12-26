@@ -10,6 +10,9 @@
     "start:prod": "node dist/server/main.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^24.0.0",
+    "@ckeditor/ckeditor5-react": "^3.0.0",
+    "antd": "^4.9.4",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "next": "^10.0.0",
