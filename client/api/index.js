@@ -1,3 +1,5 @@
+import Fetch from "./fetch";
+
 const API = new Fetch("http://localhost:3000", {
   headers: {
     Accept: "application/json",

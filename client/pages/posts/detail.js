@@ -3,16 +3,10 @@ import Head from "next/head";
 import { Input, Button, Modal } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import Fetch from "../../api";
+
+import API from "../../../client/api";
 
 import "antd/dist/antd.css";
-
-const API = new Fetch("http://localhost:3000", {
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
-});
 
 export default function Post({}) {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
