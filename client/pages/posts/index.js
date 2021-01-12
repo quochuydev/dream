@@ -1,53 +1,28 @@
-import React from 'react';
-import Head from 'next/head'
-import { Input, Button,Modal } from 'antd';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React from "react";
 
-import 'antd/dist/antd.css';
+import API from "../../../client/api";
 
-export default function Post({  }) {
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
+import "antd/dist/antd.css";
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
+export default function Posts({}) {
+  const [blogs, setBlogs] = React.useState([]);
 
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
+  React.useEffect(() => {
+    fetchBlogs();
+  }, []);
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  async function fetchBlogs() {
+    const result = await API.get("/api/blogs");
+    setBlogs(result.blogs);
+  }
 
   return (
     <>
-      <Input placeholder="Basic usage" />
-      <Button type="primary" onClick={showModal}>
-        Upload
-      </Button>
-      <CKEditor
-                    editor={ ClassicEditor }
-                    data="<p>Hello from CKEditor 5!</p>"
-                    onReady={ editor => {
-                        // You can store the "editor" and use when it is needed.
-                        console.log( 'Editor is ready to use!', editor );
-                    } }
-                    onChange={ ( event, editor ) => {
-                        const data = editor.getData();
-                        console.log( { event, editor, data } );
-                    } }
-                    onBlur={ ( event, editor ) => {
-                        console.log( 'Blur.', editor );
-                    } }
-                    onFocus={ ( event, editor ) => {
-                        console.log( 'Focus.', editor );
-                    } }
-                />
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-      </Modal>
+      <ul>
+        {blogs.map((e) => (
+          <li key={e._id}>{e.title}</li>
+        ))}
+      </ul>
     </>
-  )
+  );
 }

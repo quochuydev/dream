@@ -8,4 +8,6 @@ const noSSRWithLoadingDynamic = (component) => {
   });
 };
 
-export default noSSRWithLoadingDynamic(import("../../client/pages/posts"));
+export default noSSRWithLoadingDynamic(
+  import("../../client/pages/posts/detail")
+);
