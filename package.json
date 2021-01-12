@@ -7,8 +7,8 @@
     "server:dev": "node server/index",
     "web:dev": "next dev",
     "build": "next build",
-    "start": "next start -p $PORT",
-    "start:dev": "next start",
+    "start": "node server/index",
+    "start:dev": "node start",
     "start:prod": "node dist/server/main.js"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "@ckeditor/ckeditor5-react": "^3.0.0",
     "antd": "^4.9.4",
     "date-fns": "^2.11.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "gray-matter": "^4.0.2",
     "mongoose": "^5.11.11",

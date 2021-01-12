@@ -1,8 +1,11 @@
 const next = require("next");
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
-mongoose.connect("mongodb://localhost/dream", {
+const PORT = process.env.PORT || 3000;
+
+mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -20,10 +23,6 @@ app.prepare().then(() => {
 
   server.get("/_next/*", (req, res) => {
     handle(req, res);
-  });
-
-  server.get("/blogs", async (req, res) => {
-    app.render(req, res, "/blogs");
   });
 
   server.get("/blogs/:id", async (req, res) => {
@@ -47,7 +46,14 @@ app.prepare().then(() => {
     handle(req, res);
   });
 
-  server.listen(3000, () => {
-    console.log("> Ready on http://localhost:3000");
+  server.use((err, req, res, next) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    next();
+  });
+
+  server.listen(PORT, () => {
+    console.log(`> Ready on http://localhost:${PORT}`);
   });
 });
