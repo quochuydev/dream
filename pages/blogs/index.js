@@ -1,11 +1,3 @@
-import React from "react";
-import dynamic from "next/dynamic";
-
-const noSSRWithLoadingDynamic = (component) => {
-  return dynamic(() => component, {
-    ssr: false,
-    loading: () => <></>,
-  });
-};
+import { noSSRWithLoadingDynamic } from "../../client/utils/dynamic.import";
 
 export default noSSRWithLoadingDynamic(import("../../client/pages/posts"));
