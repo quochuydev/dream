@@ -1,6 +1,7 @@
 const next = require("next");
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
@@ -21,13 +22,11 @@ const { BlogModel } = require("./models/blog");
 app.prepare().then(() => {
   const server = express();
 
+  server.use(bodyParser.urlencoded({ extended: false }));
+  server.use(bodyParser.json());
+
   server.get("/_next/*", (req, res) => {
     handle(req, res);
-  });
-
-  server.get("/blogs/:id", async (req, res) => {
-    const blog = await BlogModel.findOne({ _id: req.params.id });
-    app.render(req, res, "/blogs/detail", { id: req.params.id, blog });
   });
 
   server.get("/api/blogs", async (req, res) => {
@@ -35,9 +34,32 @@ app.prepare().then(() => {
     res.json({ blogs });
   });
 
+  server.get("/api/blogs/:id", async (req, res) => {
+    const blog = await BlogModel.findOne({ _id: req.params.id }).lean(true);
+    res.json(blog);
+  });
+
   server.post("/api/blogs", async (req, res) => {
-    const blog = await BlogModel.create({ title: "test" });
-    res.json({ blog });
+    const data = req.body;
+    const blog = await BlogModel.create({ title: data.title, body: data.body });
+    res.json(blog);
+  });
+
+  server.put("/api/blogs/:id", async (req, res) => {
+    const data = req.body;
+    const blog = await BlogModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        title: data.title,
+        body: data.body,
+      },
+      {
+        lean: true,
+        new: true,
+        setDefaultsOnInsert: true,
+      }
+    );
+    res.json(blog);
   });
 
   server.get("/", (req, res) => res.redirect("/blogs"));

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Router, { useRouter } from "next/router";
 import Head from "next/head";
 import { Input, Button, Modal } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Form, message } from "antd";
 
 import API from "../../../client/api";
 
@@ -10,6 +12,10 @@ import "antd/dist/antd.css";
 
 export default function Post({}) {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+  const [form] = Form.useForm();
+  const [data, setData] = useState({ title: "", body: "" });
+  const router = useRouter();
+  const { id } = router.query;
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -23,39 +29,63 @@ export default function Post({}) {
     setIsModalVisible(false);
   };
 
+  useEffect(() => {
+    console.log(id);
+    if (id) {
+      API.get(`/api/blogs/${id}`).then((blog) => {
+        setData({ title: blog.title, body: blog.body || "" });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data]);
+
+  const onFinish = async (value) => {
+    if (id) {
+      API.put(`/api/blogs/${id}`, {
+        title: value.title,
+        body: value.body,
+      }).then(() => {
+        message.success("updateEmailConfig");
+      });
+    } else {
+      API.post("/api/blogs", {
+        title: value.title,
+        body: value.body,
+      }).then(() => {
+        message.success("updateEmailConfig");
+      });
+    }
+  };
   return (
     <>
-      <Input placeholder="Basic usage" />
-      <Button
-        type="primary"
-        onClick={() => {
-          API.post("/api/blogs", {
-            title: "test post",
-          });
-        }}
-      >
-        Submit
-      </Button>
-      <Button type="primary" onClick={showModal}>
-        Upload
-      </Button>
-      <CKEditor
-        editor={ClassicEditor}
-        data="<p>Hello from CKEditor 5!</p>"
-        onReady={(editor) => {
-          console.log("Editor is ready to use!", editor);
-        }}
-        onChange={(event, editor) => {
-          const data = editor.getData();
-          console.log({ event, editor, data });
-        }}
-        // onBlur={(event, editor) => {
-        //   console.log("Blur.", editor);
-        // }}
-        // onFocus={(event, editor) => {
-        //   console.log("Focus.", editor);
-        // }}
-      />
+      <Form form={form} onFinish={onFinish}>
+        <Form.Item>
+          <Button type="primary" onClick={showModal}>
+            Upload
+          </Button>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+        <Form.Item name="title" label="Title">
+          <Input placeholder="Basic usage" />
+        </Form.Item>
+        <Form.Item
+          name="body"
+          valuePropName="data"
+          getValueFromEvent={(event, editor) => {
+            const data = editor.getData();
+            return data;
+          }}
+        >
+          <CKEditor editor={ClassicEditor} />
+        </Form.Item>
+      </Form>
       <Modal
         title="Basic Modal"
         visible={isModalVisible}

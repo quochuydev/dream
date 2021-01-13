@@ -33,10 +33,10 @@ export default class Fetch {
         referrerPolicy,
         signal,
         window,
-        isStringifyBody,
+        notStringifyBody,
       } = this.config;
 
-      body = isStringifyBody ? JSON.stringify(body) : body;
+      body = notStringifyBody ? body : JSON.stringify(body);
       fetch(this.buildURL(url), {
         method,
         credentials,
