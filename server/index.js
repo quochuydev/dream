@@ -21,6 +21,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const { BlogModel } = require("./models/blog");
+const { TagModel } = require("./models/tag");
 
 app.prepare().then(() => {
   const server = express();
@@ -72,6 +73,7 @@ app.prepare().then(() => {
         $set: {
           title: data.title,
           body: data.body,
+          tags: data.tags,
         },
       },
       {
@@ -85,6 +87,20 @@ app.prepare().then(() => {
   server.delete("/api/blogs/:id", async (req, res) => {
     await BlogModel.remove({ _id: req.params.id });
     res.json({ success: true });
+  });
+
+  server.get("/api/tags", async (req, res) => {
+    const tags = await TagModel.find({}).lean(true);
+    res.json({ tags });
+  });
+
+  server.post("/api/tags", async (req, res) => {
+    const data = req.body;
+    if (!data.name) {
+      return res.status(400).json({ message: "invalid data" });
+    }
+    const tag = await TagModel.create({ name: data.name });
+    res.json(tag);
   });
 
   server.get("/", (req, res) => res.redirect("/blogs"));

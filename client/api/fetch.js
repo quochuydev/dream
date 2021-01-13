@@ -50,7 +50,7 @@ export default class Fetch {
         referrerPolicy,
         signal,
         window,
-        body: body,
+        body,
       })
         .then(async (response) => {
           let contentType = response.headers.get("content-type");

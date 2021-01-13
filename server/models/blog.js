@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const BlogSchema = new Schema({
   title: { type: String, default: null },
   body: { type: String, default: null },
+  tags: [],
   created_at: { type: Date, default: Date.now },
 });
 

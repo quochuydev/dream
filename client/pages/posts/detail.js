@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Head from "next/head";
 import Link from "next/link";
+import Select from "react-select";
 
 import { Input, Button, Modal, Upload } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -18,6 +19,7 @@ export default function Post({}) {
   const [data, setData] = useState({ title: "", body: "" });
   const router = useRouter();
   const { id } = router.query;
+  const [multi, setMulti] = React.useState([]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -32,10 +34,10 @@ export default function Post({}) {
   };
 
   useEffect(() => {
-    console.log(id);
     if (id) {
       API.get(`/api/blogs/${id}`).then((blog) => {
         setData({ title: blog.title, body: blog.body || "" });
+        setMulti(blog.tags);
       });
     }
   }, []);
@@ -49,6 +51,7 @@ export default function Post({}) {
       API.put(`/api/blogs/${id}`, {
         title: value.title,
         body: value.body,
+        tags: multi,
       }).then(() => {
         message.success("updateEmailConfig");
       });
@@ -56,11 +59,26 @@ export default function Post({}) {
       API.post("/api/blogs", {
         title: value.title,
         body: value.body,
+        tags: multi,
       }).then(() => {
         message.success("updateEmailConfig");
       });
     }
   };
+
+  const Menu = (props) => {
+    const { innerRef, innerProps, children, selectProps } = props;
+    console.log(props);
+    return (
+      <div ref={innerRef} {...innerProps}>
+        <div>ADD {selectProps.inputValue}</div>
+        {children}
+        <div>-+</div>
+      </div>
+    );
+  };
+  const idTag = `react-select-tags`;
+
   return (
     <>
       <Link href={`/blogs`}>List</Link>
@@ -79,6 +97,23 @@ export default function Post({}) {
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
         </Form.Item>
+        <Select
+          inputId={idTag}
+          options={[
+            { value: 1, label: "1" },
+            { value: 2, label: "2" },
+          ]}
+          value={multi}
+          isMulti={true}
+          components={{ Menu }}
+          onChange={(value) => {
+            if (!value) {
+              value = [];
+            }
+            setMulti(value);
+          }}
+          onInputChange={(e) => console.log(e)}
+        />
         <Form.Item
           name="body"
           valuePropName="data"
