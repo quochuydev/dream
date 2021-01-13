@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Head from "next/head";
-import { Input, Button, Modal } from "antd";
+import Link from "next/link";
+
+import { Input, Button, Modal, Upload } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
@@ -61,6 +63,8 @@ export default function Post({}) {
   };
   return (
     <>
+      <Link href={`/blogs`}>List</Link>
+
       <Form form={form} onFinish={onFinish}>
         <Form.Item>
           <Button type="primary" onClick={showModal}>
@@ -83,7 +87,14 @@ export default function Post({}) {
             return data;
           }}
         >
-          <CKEditor editor={ClassicEditor} />
+          <CKEditor
+            editor={ClassicEditor}
+            config={{
+              ckfinder: {
+                uploadUrl: "/api/files",
+              },
+            }}
+          />
         </Form.Item>
       </Form>
       <Modal
@@ -92,7 +103,15 @@ export default function Post({}) {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Some contents...</p>
+        <Upload
+          name="avatar"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          action="/api/files"
+        >
+          <Button>Choose File</Button>
+        </Upload>
       </Modal>
     </>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { Input, Button, Modal, Upload } from "antd";
 
 import API from "../../../client/api";
 
@@ -23,8 +24,17 @@ export default function Posts({}) {
       <ul>
         {blogs.map((e) => (
           <li key={e._id}>
-            <Link href={`/blogs/edit/${e._id}`}>{e.title}</Link>
-            <p>{e.body}</p>
+            <Button
+              onClick={() => {
+                console.log(e._id);
+              }}
+            >
+              Remove
+            </Button>
+            <Link href={`/blogs/edit/${e._id}`}>
+              <a>post: {e.title}</a>
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: e.body }}></div>
           </li>
         ))}
       </ul>

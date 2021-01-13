@@ -4,6 +4,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
+var multer = require("multer");
+var upload = multer({ dest: "uploads/" });
+
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -29,6 +32,16 @@ app.prepare().then(() => {
     handle(req, res);
   });
 
+  server.post("/api/files", upload.single("upload"), async (req, res) => {
+    const data = req.body;
+    const file = req.file;
+    res.json({
+      uploaded: true,
+      url:
+        "https://cdn.tuoitre.vn/zoom/504_315/2021/1/13/trump-1610512805643570101638-crop-1610512812069805927149.jpg",
+    });
+  });
+
   server.get("/api/blogs", async (req, res) => {
     const blogs = await BlogModel.find({}).lean(true);
     res.json({ blogs });
@@ -41,25 +54,37 @@ app.prepare().then(() => {
 
   server.post("/api/blogs", async (req, res) => {
     const data = req.body;
+    if (!data.title) {
+      return res.json({ message: "invalid data" });
+    }
     const blog = await BlogModel.create({ title: data.title, body: data.body });
     res.json(blog);
   });
 
   server.put("/api/blogs/:id", async (req, res) => {
     const data = req.body;
+    if (!data.title) {
+      return res.json({ message: "invalid data" });
+    }
     const blog = await BlogModel.findOneAndUpdate(
       { _id: req.params.id },
       {
-        title: data.title,
-        body: data.body,
+        $set: {
+          title: data.title,
+          body: data.body,
+        },
       },
       {
         lean: true,
         new: true,
-        setDefaultsOnInsert: true,
       }
     );
     res.json(blog);
+  });
+
+  server.delete("/api/blogs/:id", async (req, res) => {
+    await BlogModel.remove({ _id: req.params.id });
+    res.json({ success: true });
   });
 
   server.get("/", (req, res) => res.redirect("/blogs"));
