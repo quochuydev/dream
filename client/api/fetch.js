@@ -21,6 +21,10 @@ export default class Fetch {
 
   buildRequest(url, method, body) {
     return new Promise((resolve, reject) => {
+      for (const before of this.handle.before) {
+        before(this.config)
+      }
+
       const {
         credentials,
         headers,

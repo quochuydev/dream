@@ -10,6 +10,11 @@ const API = new Fetch(BACKEND_URL, {
     Accept: "application/json",
     "Content-Type": "application/json",
   },
-});
+}, { before: [setHeader] });
+
+function setHeader(config){
+  localStorage.setItem('accessToken', 'accessToken')
+  config.headers['accessToken'] = localStorage.getItem('accessToken')
+}
 
 export default API;

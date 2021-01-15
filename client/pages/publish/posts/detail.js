@@ -12,6 +12,7 @@ import { Form, message } from "antd";
 import API from "../../../../client/api";
 
 import "antd/dist/antd.css";
+import { da } from "date-fns/locale";
 
 export default function Post({}) {
   const [isModalVisible, setIsModalVisible] = React.useState(false);
@@ -147,6 +148,7 @@ export default function Post({}) {
         >
           <Button>Choose File</Button>
         </Upload>
+
       </Modal>
     </>
   );

@@ -15,6 +15,7 @@
     "@ckeditor/ckeditor5-build-classic": "^24.0.0",
     "@ckeditor/ckeditor5-react": "^3.0.0",
     "antd": "^4.9.4",
+    "axios": "^0.21.1",
     "date-fns": "^2.11.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

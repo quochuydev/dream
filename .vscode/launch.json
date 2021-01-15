@@ -9,7 +9,7 @@
       "program": "${workspaceFolder}/server/index.js",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
+      "type": "node"
     }
   ]
 }

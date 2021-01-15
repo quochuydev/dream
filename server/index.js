@@ -20,6 +20,7 @@ const handle = app.getRequestHandler();
 
 const { BlogModel } = require("./models/blog");
 const { TagModel } = require("./models/tag");
+const { UserModel } = require("./models/user");
 
 var multer = require("multer");
 var fs = require("fs-extra");
@@ -37,9 +38,22 @@ app.prepare().then(() => {
   });
   const { uploadToDisk } = require("./upload");
 
+
+  server.use("/api/*", async (req, res, next) => {
+    if(req.headers['accesstoken'] != 'accessToken') {
+      return res.status(401).send()
+    }
+    next()
+  });
+
+
   server.post("/api/files", uploadToDisk.single("upload"), async (req, res) => {
     const data = req.body;
     const file = req.file;
+
+if(!file){
+  return res.status(400)
+}
 
     res.json({
       uploaded: true,
