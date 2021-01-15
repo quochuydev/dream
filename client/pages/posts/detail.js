@@ -20,6 +20,7 @@ export default function Post({}) {
   const router = useRouter();
   const { id } = router.query;
   const [tags, setTags] = React.useState([]);
+  const [fileList, setFileList] = React.useState([]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -150,11 +151,17 @@ export default function Post({}) {
         onCancel={handleCancel}
       >
         <Upload
-          name="avatar"
+          name="upload"
           listType="picture-card"
           className="avatar-uploader"
-          showUploadList={false}
           action="/api/files"
+          fileList={fileList}
+          // showUploadList={false}
+          // data={(e) => console.log(e)}
+          onPreview={(e) => console.log(e)}
+          onChange={(e) => {
+            setFileList(e.fileList);
+          }}
         >
           <Button>Choose File</Button>
         </Upload>
