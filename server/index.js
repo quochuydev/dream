@@ -4,9 +4,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 
-var multer = require("multer");
-var upload = multer({ dest: "uploads/" });
-
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -23,6 +20,11 @@ const handle = app.getRequestHandler();
 const { BlogModel } = require("./models/blog");
 const { TagModel } = require("./models/tag");
 
+var multer = require("multer");
+var fs = require("fs-extra");
+var upload = multer({ dest: "uploads/" });
+const { Route } = require("./core/route");
+
 app.prepare().then(() => {
   const server = express();
 
@@ -32,46 +34,36 @@ app.prepare().then(() => {
   server.get("/_next/*", (req, res) => {
     handle(req, res);
   });
+  const { uploadToDisk } = require("./upload");
 
-  server.post("/api/files", upload.single("upload"), async (req, res) => {
+  server.post("/api/files", uploadToDisk.single("upload"), async (req, res) => {
     const data = req.body;
     const file = req.file;
+
     res.json({
       uploaded: true,
-      url:
-        "https://cdn.tuoitre.vn/zoom/504_315/2021/1/13/trump-1610512805643570101638-crop-1610512812069805927149.jpg",
+      url: `http://localhost:${PORT}/${file.path}`,
     });
   });
 
-  class API {
-    constructor(server) {
-      this.server = server;
-      this.req = null;
-      this.res = null;
-    }
-
-    addRoute(route, func) {
-      for (let key in func) {
-        this.server[key](route, async (req, res) => {
-          try {
-            func.body = req.body;
-            func.params = req.params;
-            func.query = req.query;
-            const result = await func[key]();
-            res.json(result);
-          } catch (error) {
-            res.status(400).send(error);
-          }
-        });
+  server.get("/uploads/:filename", async (req, res) => {
+    let fileName = req.params.filename;
+    let fullPath = path.join(path.resolve("./uploads"), fileName);
+    fs.exists(fullPath, function (exists) {
+      if (!exists) {
+        return res.status(400).send({ message: "File không tồn tại!" });
       }
-    }
-  }
+      let name = path.basename(fullPath);
+      res.setHeader("Content-disposition", "attachment; filename=" + name);
+      let filestream = fs.createReadStream(fullPath);
+      filestream.pipe(res);
+    });
+  });
 
-  Api = new API(server);
+  Api = new Route(server);
 
   Api.addRoute("/api/blogs", {
     async get() {
-      console.log(this.query);
       const blogs = await BlogModel.find({}).lean(true);
       return { blogs };
     },
