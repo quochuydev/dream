@@ -43,64 +43,100 @@ app.prepare().then(() => {
     });
   });
 
-  server.get("/api/blogs", async (req, res) => {
-    const blogs = await BlogModel.find({}).lean(true);
-    res.json({ blogs });
-  });
-
-  server.get("/api/blogs/:id", async (req, res) => {
-    const blog = await BlogModel.findOne({ _id: req.params.id }).lean(true);
-    res.json(blog);
-  });
-
-  server.post("/api/blogs", async (req, res) => {
-    const data = req.body;
-    if (!data.title) {
-      return res.json({ message: "invalid data" });
+  class API {
+    constructor(server) {
+      this.server = server;
+      this.req = null;
+      this.res = null;
     }
-    const blog = await BlogModel.create({ title: data.title, body: data.body });
-    res.json(blog);
-  });
 
-  server.put("/api/blogs/:id", async (req, res) => {
-    const data = req.body;
-    if (!data.title) {
-      return res.json({ message: "invalid data" });
-    }
-    const blog = await BlogModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          title: data.title,
-          body: data.body,
-          tags: data.tags,
-        },
-      },
-      {
-        lean: true,
-        new: true,
+    addRoute(route, func) {
+      for (let key in func) {
+        this.server[key](route, async (req, res) => {
+          try {
+            func.body = req.body;
+            func.params = req.params;
+            func.query = req.query;
+            const result = await func[key]();
+            res.json(result);
+          } catch (error) {
+            res.status(400).send(error);
+          }
+        });
       }
-    );
-    res.json(blog);
-  });
-
-  server.delete("/api/blogs/:id", async (req, res) => {
-    await BlogModel.remove({ _id: req.params.id });
-    res.json({ success: true });
-  });
-
-  server.get("/api/tags", async (req, res) => {
-    const tags = await TagModel.find({}).lean(true);
-    res.json({ tags });
-  });
-
-  server.post("/api/tags", async (req, res) => {
-    const data = req.body;
-    if (!data.name) {
-      return res.status(400).json({ message: "invalid data" });
     }
-    const tag = await TagModel.create({ name: data.name });
-    res.json(tag);
+  }
+
+  Api = new API(server);
+
+  Api.addRoute("/api/blogs", {
+    async get() {
+      console.log(this.query);
+      const blogs = await BlogModel.find({}).lean(true);
+      return { blogs };
+    },
+
+    async post() {
+      const data = this.body;
+      if (!data.title) {
+        throw { message: "invalid data" };
+      }
+      const blog = await BlogModel.create({
+        title: data.title,
+        body: data.body,
+      });
+      return blog;
+    },
+  });
+
+  Api.addRoute("/api/blogs/:id", {
+    async get() {
+      const blog = await BlogModel.findOne({ _id: this.params.id }).lean(true);
+      return blog;
+    },
+
+    async put() {
+      const data = this.body;
+      if (!data.title) {
+        throw { message: "Invalid data!" };
+      }
+      const blog = await BlogModel.findOneAndUpdate(
+        { _id: this.params.id },
+        {
+          $set: {
+            title: data.title,
+            body: data.body,
+            tags: data.tags,
+          },
+        },
+        {
+          lean: true,
+          new: true,
+        }
+      );
+      return blog;
+    },
+
+    async delete() {
+      await BlogModel.remove({ _id: this.params.id });
+      return { success: true };
+    },
+  });
+
+  Api.addRoute("/api/tags", {
+    async get() {
+      const tags = await TagModel.find({}).lean(true);
+      return { tags };
+    },
+
+    async post() {
+      const data = this.body;
+      if (!data.name) {
+        throw { message: "invalid data" };
+      }
+      const tag = await TagModel.create({ name: data.name });
+      return tag;
+    },
   });
 
   server.get("/", (req, res) => res.redirect("/blogs"));

@@ -53,7 +53,7 @@ export default function Post({}) {
         body: value.body,
         tags: multi,
       }).then(() => {
-        message.success("updateEmailConfig");
+        message.success("Update blog");
       });
     } else {
       API.post("/api/blogs", {
@@ -61,7 +61,7 @@ export default function Post({}) {
         body: value.body,
         tags: multi,
       }).then(() => {
-        message.success("updateEmailConfig");
+        message.success("Create blog");
       });
     }
   };
