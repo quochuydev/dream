@@ -21,8 +21,25 @@ export default function Posts({}) {
     setBlogs(result.blogs);
   }
 
+  function loginGoogle() {
+    return fetch(`/login-google`, { method: "POST" })
+      .then(res => {
+        res.text().then(body => {
+          window.location.href = body;
+        })
+      })
+      .catch(error => {
+        message.error(error.message);
+      });
+  }
+  
   return (
     <>
+      <Button
+        onClick={() => { loginGoogle() }}
+      >
+        loginGoogle
+      </Button>
       <Link href={`/blogs/create`}>New</Link>
       <ul>
         {blogs.map((e) => (

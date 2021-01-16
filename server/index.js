@@ -38,7 +38,9 @@ app.prepare().then(() => {
   });
   const { uploadToDisk } = require("./upload");
 
-
+  const { loginGoogle } = require('./loginGoogle')
+  server.post("/login-google", loginGoogle);
+      
   server.use("/api/*", async (req, res, next) => {
     if(req.headers['accesstoken'] != 'accessToken') {
       return res.status(401).send()
@@ -46,36 +48,31 @@ app.prepare().then(() => {
     next()
   });
 
-
   server.post("/api/files", uploadToDisk.single("upload"), async (req, res) => {
-    const data = req.body;
     const file = req.file;
-
-if(!file){
-  return res.status(400)
-}
-
-    res.json({
-      uploaded: true,
-      url: `http://localhost:${PORT}/${file.path}`,
-    });
-  });
-
-  server.get("/uploads/:filename", async (req, res) => {
-    let fileName = req.params.filename;
-    let fullPath = path.join(path.resolve("./uploads"), fileName);
-    fs.exists(fullPath, function (exists) {
-      if (!exists) {
-        return res.status(400).send({ message: "File không tồn tại!" });
-      }
-      let name = path.basename(fullPath);
-      res.setHeader("Content-disposition", "attachment; filename=" + name);
-      let filestream = fs.createReadStream(fullPath);
-      filestream.pipe(res);
-    });
+    if(!file) {
+      return res.status(400)
+    }
+    res.json({ uploaded: true, url: `http://localhost:${PORT}/${file.path}` });
   });
 
   Api = new Route(server);
+  Api.addRoute("/uploads/:filename", {
+    async get() {
+      const _this = this;
+      let fileName = this.params.filename;
+      let fullPath = path.join(path.resolve("./uploads"), fileName);
+      // fs.exists(fullPath, function (exists) {
+        // if (!exists) {
+        //   throw { message: "File không tồn tại!" };
+        // }
+        let name = path.basename(fullPath);
+        _this.res.setHeader("Content-disposition", "attachment; filename=" + name);
+        let filestream = fs.createReadStream(fullPath);
+        filestream.pipe(_this.res);
+      // });
+    },
+  });
 
   Api.addRoute("/api/blogs", {
     async get() {

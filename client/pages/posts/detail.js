@@ -104,7 +104,16 @@ export default function Post({}) {
 
   const uploadSetting = {
     action: "http://localhost:3000/api/files",
-    headers: getHeader()
+    headers: getHeader(),
+    accept: ".jpg, .png",
+    // data={(e) => console.log(e)}
+    beforeUpload: (file, fileList) => {
+        return true;
+    },
+    onPreview: (e) => console.log(e),
+    onChange: (e) => {
+      setFileList(e.fileList);
+    }
   }
 
   class UploadAdapter {
@@ -115,10 +124,7 @@ export default function Post({}) {
     async upload() {
       const data = new FormData();
       const file = await this.loader.file
-      console.log(file)
-
       data.append('upload', file);
-  
       return new Promise((resolve, reject) => {
         axios({
           url: `/api/files`,
@@ -127,7 +133,6 @@ export default function Post({}) {
           headers: getHeader(),
           withCredentials: true
         }).then(res => {
-          console.log(res)
           var resData = res.data;
           resData.default = resData.url;
           resolve(resData);
@@ -218,18 +223,8 @@ export default function Post({}) {
           name="upload"
           listType="picture-card"
           className="avatar-uploader"
-          
           fileList={fileList}
           // showUploadList={false}
-          // data={(e) => console.log(e)}
-          accept=".jpg, .png"
-          beforeUpload={(file, fileList) => {
-              return true;
-          }}
-          onPreview={(e) => console.log(e)}
-          onChange={(e) => {
-            setFileList(e.fileList);
-          }}
           {...uploadSetting}
         >
           <Button>Choose File</Button>

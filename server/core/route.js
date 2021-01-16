@@ -15,6 +15,7 @@ class Route {
           func.params = req.params;
           func.query = req.query;
           const result = await func[key]();
+          if(!result) { return }
           res.json(result);
         } catch (error) {
           res.status(400).send(error);
