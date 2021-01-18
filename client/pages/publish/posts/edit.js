@@ -9,7 +9,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
 
-import API from "../../../../client/api";
+import API from "../../../api";
 
 import "antd/dist/antd.css";
 import { da } from "date-fns/locale";
@@ -148,7 +148,6 @@ export default function Post({}) {
         >
           <Button>Choose File</Button>
         </Upload>
-
       </Modal>
     </>
   );

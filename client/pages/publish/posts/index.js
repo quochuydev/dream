@@ -37,7 +37,7 @@ export default function Posts({}) {
             >
               Remove
             </Button>
-            <Link href={`/blogs/edit/${e._id}`}>
+            <Link href={`/publish/blogs/edit/${e._id}`}>
               <a>post: {e.title}</a>
             </Link>
             <div dangerouslySetInnerHTML={{ __html: e.body }}></div>

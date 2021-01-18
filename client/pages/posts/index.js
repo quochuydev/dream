@@ -23,20 +23,22 @@ export default function Posts({}) {
 
   function loginGoogle() {
     return fetch(`/login-google`, { method: "POST" })
-      .then(res => {
-        res.text().then(body => {
+      .then((res) => {
+        res.text().then((body) => {
           window.location.href = body;
-        })
+        });
       })
-      .catch(error => {
+      .catch((error) => {
         message.error(error.message);
       });
   }
-  
+
   return (
     <>
       <Button
-        onClick={() => { loginGoogle() }}
+        onClick={() => {
+          loginGoogle();
+        }}
       >
         loginGoogle
       </Button>
@@ -44,20 +46,10 @@ export default function Posts({}) {
       <ul>
         {blogs.map((e) => (
           <li key={e._id}>
-            <Button
-              onClick={() => {
-                API.delete(`/api/blogs/${e._id}`).then((res) => {
-                  setQuery(initQuery);
-                  message.success("Delete success.");
-                });
-              }}
-            >
-              Remove
-            </Button>
-            <Link href={`/blogs/edit/${e._id}`}>
+            <Link href={`/blogs/${e._id}`}>
               <a>post: {e.title}</a>
             </Link>
-            <div dangerouslySetInnerHTML={{ __html: e.body }}></div>
+            {/* <div dangerouslySetInnerHTML={{ __html: e.body }}></div> */}
           </li>
         ))}
       </ul>
