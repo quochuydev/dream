@@ -5,7 +5,7 @@ import ImageCrop from "./image-crop";
 
 export default function (props) {
   const [form] = Form.useForm();
-  let value = "first_name";
+  const value = "first_name";
 
   useEffect(() => {
     form.setFieldsValue({ first_name: value });
@@ -13,6 +13,7 @@ export default function (props) {
 
   const onFinish = (values) => {
     console.log(values);
+    return;
   };
 
   return (
