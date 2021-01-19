@@ -9,6 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "postinstall": "tsc --sourceMap false",
     "start": "node dist/main.js",
     "dev": "nest start",
     "start:dev": "nest start --watch",
