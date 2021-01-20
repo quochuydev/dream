@@ -11,10 +11,9 @@ export default function (props) {
     form.setFieldsValue({ first_name: value });
   }, [value]);
 
-  const onFinish = (values) => {
+  function onFinish(values): any {
     console.log(values);
-    return;
-  };
+  }
 
   return (
     <div>
