@@ -40,7 +40,7 @@ export default function Posts({}) {
           loginGoogle();
         }}
       >
-        loginGoogle
+        loginGoogle 123 123
       </Button>
       <Link href={`/publish/blogs/create`}>New</Link>
       <ul>

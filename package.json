@@ -7,7 +7,9 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "concurrently \"npm run build:server\" \" npm run build:web \"",
+    "build:server": "nest build --config tsconfig.build.json",
+    "build:web": "cd src/client && next build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "postinstall": "tsc --sourceMap false",
     "start": "node dist/main.js",
