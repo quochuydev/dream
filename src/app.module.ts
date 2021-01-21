@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
@@ -6,7 +7,7 @@ import { SSRModule } from "./server";
 
 @Module({
   imports: [
-    MongooseModule.forRoot("mongodb://localhost/dream"),
+    MongooseModule.forRoot(process.env.MONGO_URL),
     BlogModule,
     SSRModule.forRoot(),
   ],

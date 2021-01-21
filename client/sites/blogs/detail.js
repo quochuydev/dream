@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 
 import API from "../../../client/api";
@@ -20,11 +20,12 @@ export default function Post({}) {
   useEffect(() => {
     if (id) {
       API.get(`/api/blogs/${id}`).then((blog) => {
+        console.log(blog);
         setData({
           title: blog.title,
-          title: blog.body,
-          title: blog.tags,
-          title: blog.created_at,
+          body: blog.body,
+          tags: blog.tags,
+          created_at: blog.created_at,
         });
       });
     }

@@ -10,23 +10,19 @@ import { Blog, BlogDocument } from "../../schemas/blog.schema";
 export class BlogService {
   constructor(@InjectModel(Blog.name) private blogModel: Model<BlogDocument>) {}
 
-  async test(): Promise<any> {
+  async list(): Promise<any> {
+    return await this.blogModel.find().exec();
+  }
+
+  async create(data: any): Promise<any> {
     const newBlog = new this.blogModel({
       title: String(Math.random() * 1000),
     });
-
     const blog = await newBlog.save();
-    console.log(blog);
-
-    const blogs = await this.blogModel.find().exec();
-    return blogs;
+    return blog;
   }
 
   get(id: string): any {
     return this.blogModel.findOne({ _id: id });
-  }
-
-  create(data: any): any {
-    return {};
   }
 }
