@@ -6,7 +6,6 @@ import {
   Get,
   Req,
   Res,
-  Post,
 } from "@nestjs/common";
 import next from "next";
 const dev = process.env.NODE_ENV !== "production";
