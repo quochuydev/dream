@@ -17,12 +17,6 @@
       "type": "node-terminal"
     },
     {
-      "command": "npm run start:dev",
-      "name": "Run npm start:dev",
-      "request": "launch",
-      "type": "node-terminal"
-    },
-    {
       "name": "dist/main",
       "program": "${workspaceFolder}/dist/main.js",
       "request": "launch",
