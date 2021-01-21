@@ -7,7 +7,7 @@ import { SSRModule } from "./server";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGO_URL),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     BlogModule,
     SSRModule.forRoot(),
   ],

@@ -16,7 +16,8 @@ export class BlogService {
 
   async create(data: any): Promise<any> {
     const newBlog = new this.blogModel({
-      title: String(Math.random() * 1000),
+      title: data.title,
+      body: data.body,
     });
     const blog = await newBlog.save();
     return blog;
