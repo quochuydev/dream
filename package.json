@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "concurrently \"npm run build:server\" \" npm run build:web \"",
+    "build": "npm run build:web",
     "build:server": "nest build --config tsconfig.build.json",
     "build:web": "cd client && next build",
     "dev:web": "cross-env NODE_ENV=development ts-node -P tsconfig.build.json src/dev.server",

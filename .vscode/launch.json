@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "command": "npm run dev:web",
+      "name": "Run npm dev:web",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "command": "npm run dev",
       "name": "Run npm start",
       "request": "launch",
