@@ -6,6 +6,7 @@ import {
   Get,
   Req,
   Res,
+  Post,
 } from "@nestjs/common";
 import next from "next";
 const dev = process.env.NODE_ENV !== "production";
@@ -17,11 +18,6 @@ class SSRController {
   @Get("/_next/*")
   async _next(@Req() request: Request, @Res() response: Response) {
     handle(request, response);
-  }
-
-  @Get("/blogs")
-  async index() {
-    return { success: true };
   }
 
   @Get("*")

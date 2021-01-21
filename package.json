@@ -8,8 +8,10 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "heroku-postbuild": "npm run build:server && npm run build:web",
+    "build:both": "concurrently \"npm run build:server\" \" npm run build:web \"",
     "build:server": "nest build --config tsconfig.build.json",
     "build:web": "cd client && next build",
+    "dev:server": "cross-env NODE_ENV=development nest start --watch",
     "dev:web": "cross-env NODE_ENV=development ts-node -P tsconfig.build.json src/dev.server",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "postinstall": "tsc --sourceMap false",

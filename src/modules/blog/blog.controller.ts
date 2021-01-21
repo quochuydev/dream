@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Post } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 
 @Controller("/api/blogs")
@@ -8,5 +8,10 @@ export class BlogController {
   @Get()
   list() {
     return { blogs: [] };
+  }
+
+  @Post()
+  async createBlog() {
+    return { success: true, blog: { id: 100, name: "test" } };
   }
 }
