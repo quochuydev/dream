@@ -5,6 +5,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { BlogModule } from "./modules/blog/blog.module";
 import { SSRModule } from "./server";
 
+console.log("process.env.MONGO_URI", process.env.MONGO_URI);
 @Module({
   imports: [
     MongooseModule.forRoot(process.env.MONGO_URI),
