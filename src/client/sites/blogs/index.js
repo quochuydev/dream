@@ -42,7 +42,7 @@ export default function Posts({}) {
       >
         loginGoogle
       </Button>
-      <Link href={`/blogs/create`}>New</Link>
+      <Link href={`/publish/blogs/create`}>New</Link>
       <ul>
         {blogs.map((e) => (
           <li key={e._id}>

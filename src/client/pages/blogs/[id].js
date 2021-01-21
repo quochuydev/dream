@@ -1,5 +1,3 @@
-import { noSSRWithLoadingDynamic } from "../../client/utils/dynamic.import";
+import { noSSRWithLoadingDynamic } from "../../utils/dynamic.import";
 
-export default noSSRWithLoadingDynamic(
-  import("../../client/pages/posts/detail")
-);
+export default noSSRWithLoadingDynamic(import("../../sites/blogs/detail"));
