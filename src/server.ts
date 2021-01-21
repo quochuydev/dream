@@ -19,9 +19,9 @@ class SSRController {
     handle(request, response);
   }
 
-  @Get("/")
-  async index(@Res() response: Response) {
-    response.redirect("/blogs");
+  @Get("/blogs")
+  async index() {
+    return { success: true };
   }
 
   @Get("*")

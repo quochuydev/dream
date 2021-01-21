@@ -6,7 +6,7 @@ import { BlogModule } from "./modules/blog/blog.module";
 import { SSRModule } from "./server";
 
 @Module({
-  imports: [BlogModule, SSRModule],
+  imports: [BlogModule, SSRModule.forRoot()],
   controllers: [],
   providers: [],
 })

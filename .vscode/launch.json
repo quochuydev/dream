@@ -12,9 +12,16 @@
     },
     {
       "command": "npm run dev",
-      "name": "Run npm start",
+      "name": "Run npm dev",
       "request": "launch",
       "type": "node-terminal"
+    },
+    {
+      "name": "dist/main",
+      "program": "${workspaceFolder}/dist/main.js",
+      "request": "launch",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node"
     }
   ]
 }
