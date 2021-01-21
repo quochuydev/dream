@@ -1,6 +1,6 @@
 /dist
 /node_modules
-/src/client/.next
+/client/.next
 /.next
 /package-lock.json
 yarn.lock
