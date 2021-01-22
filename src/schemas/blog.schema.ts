@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 import * as mongoose from "mongoose";
 
@@ -14,6 +14,7 @@ export class Blog {
 }
 
 export const BlogSchema = new mongoose.Schema({
-  title: String,
-  body: String,
+  title: { type: String, default: null },
+  body: { type: String, default: "" },
+  tags: { type: Array, default: [] },
 });

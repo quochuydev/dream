@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body } from "@nestjs/common";
+import { Controller, Get, Post, Param, Body, Put } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 
 @Controller("/api/blogs")
@@ -18,5 +18,10 @@ export class BlogController {
   @Post()
   async createBlog(@Body() data: any) {
     return await this.blogService.create(data);
+  }
+
+  @Put("/:id")
+  async updateBlog(@Param("id") id: string, @Body() data: any) {
+    return await this.blogService.update(id, data);
   }
 }
