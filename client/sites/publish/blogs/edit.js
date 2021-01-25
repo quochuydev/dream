@@ -4,12 +4,12 @@ import Head from "next/head";
 import Link from "next/link";
 import Select from "react-select";
 import _ from "lodash";
-import axios from "axios";
 
 import { Input, Button, Modal, Upload } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
+import UploadAdapter from "../../../utils/upload-adapter";
 
 import API from "../../../../client/api";
 
@@ -89,12 +89,6 @@ export default function Post({}) {
   };
   const idTag = `react-select-tags`;
 
-  // const baseHeaders = {
-  //   'AccessToken': token ? token : null,
-  //   'Accept': 'application/json',
-  //   'Content-Type': 'application/json'
-  // };
-
   function getHeader(option = {}) {
     let base = {
       accesstoken: "accessToken",
@@ -103,10 +97,9 @@ export default function Post({}) {
   }
 
   const uploadSetting = {
-    action: "http://localhost:3000/api/files",
+    action: "http://localhost:8000/api/files",
     headers: getHeader(),
     accept: ".jpg, .png",
-    // data={(e) => console.log(e)}
     beforeUpload: (file, fileList) => {
       return true;
     },
@@ -115,38 +108,6 @@ export default function Post({}) {
       setFileList(e.fileList);
     },
   };
-
-  class UploadAdapter {
-    constructor(loader) {
-      this.loader = loader;
-    }
-
-    async upload() {
-      const data = new FormData();
-      const file = await this.loader.file;
-      data.append("upload", file);
-      return new Promise((resolve, reject) => {
-        axios({
-          url: `/api/files`,
-          method: "post",
-          data,
-          headers: getHeader(),
-          withCredentials: true,
-        })
-          .then((res) => {
-            var resData = res.data;
-            resData.default = resData.url;
-            resolve(resData);
-          })
-          .catch((error) => {
-            console.log(error);
-            reject(error);
-          });
-      });
-    }
-
-    abort() {}
-  }
 
   return (
     <>
@@ -206,7 +167,7 @@ export default function Post({}) {
             }}
             config={{
               ckfinder: {
-                uploadUrl: "/api/files",
+                uploadUrl: "http://localhost:8000/api/files",
                 headers: {
                   accesstoken: "accessToken",
                   Authorization: "Bearer accessToken",
@@ -227,7 +188,6 @@ export default function Post({}) {
           listType="picture-card"
           className="avatar-uploader"
           fileList={fileList}
-          // showUploadList={false}
           {...uploadSetting}
         >
           <Button>Choose File</Button>

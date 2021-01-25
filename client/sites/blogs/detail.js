@@ -20,7 +20,6 @@ export default function Post({}) {
   useEffect(() => {
     if (id) {
       API.get(`/api/blogs/${id}`).then((blog) => {
-        console.log(blog);
         setData({
           title: blog.title,
           body: blog.body,
@@ -34,10 +33,9 @@ export default function Post({}) {
   return (
     <>
       <Link href={`/blogs`}>List</Link>
-      <p>{data.created_at}</p>
-      <p>{data.title}</p>
-      <p>{data.tags}</p>
-      <div dangerouslySetInnerHTML={{ __html: data.body }} />
+      <h1>{data.title}</h1>
+      <h1>{data.createdAt}</h1>
+      <div dangerouslySetInnerHTML={{ __html: data.body }}></div>
     </>
   );
 }

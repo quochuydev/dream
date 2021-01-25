@@ -11,6 +11,12 @@
       "type": "node-terminal"
     },
     {
+      "command": "npm run dev:next",
+      "name": "dev:next",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "command": "npm run dev:web",
       "name": "dev:web",
       "request": "launch",

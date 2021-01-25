@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import Fetch from "./fetch";
 
 const BACKEND_URL =
@@ -22,3 +24,10 @@ function setHeader(config) {
 }
 
 export default API;
+
+function getHeader(option = {}) {
+  let base = {
+    accesstoken: "accessToken",
+  };
+  return _.assign({}, base, option);
+}
