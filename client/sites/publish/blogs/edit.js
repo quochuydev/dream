@@ -11,7 +11,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
 import UploadAdapter from "../../../utils/upload-adapter";
 
-import API from "../../../../client/api";
+import { API, BACKEND_URL } from "../../../../client/api";
 
 import "antd/dist/antd.css";
 
@@ -97,7 +97,7 @@ export default function Post({}) {
   }
 
   const uploadSetting = {
-    action: "http://localhost:8000/api/files",
+    action: `${BACKEND_URL}/api/files`,
     headers: getHeader(),
     accept: ".jpg, .png",
     beforeUpload: (file, fileList) => {
@@ -167,7 +167,7 @@ export default function Post({}) {
             }}
             config={{
               ckfinder: {
-                uploadUrl: "http://localhost:8000/api/files",
+                uploadUrl: `${BACKEND_URL}/api/files`,
                 headers: {
                   accesstoken: "accessToken",
                   Authorization: "Bearer accessToken",

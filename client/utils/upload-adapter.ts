@@ -1,5 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
+import { BACKEND_URL } from "../api";
 
 function getHeader(option = {}) {
   let base = {
@@ -21,7 +22,7 @@ export default class UploadAdapter {
     data.append("upload", file);
     return new Promise((resolve, reject) => {
       axios({
-        url: `http://localhost:8000/api/files`,
+        url: `${BACKEND_URL}/api/files`,
         method: "post",
         data,
         headers: getHeader(),

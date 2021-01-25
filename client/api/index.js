@@ -2,12 +2,12 @@ import _ from "lodash";
 
 import Fetch from "./fetch";
 
-const BACKEND_URL =
+export const BACKEND_URL =
   process.env.NODE_ENV == "production"
     ? process.env.BACKEND_URL
     : "http://localhost:8000";
 
-const API = new Fetch(
+export const API = new Fetch(
   BACKEND_URL,
   {
     headers: {
@@ -22,8 +22,6 @@ function setHeader(config) {
   localStorage.setItem("accessToken", "accessToken");
   config.headers["accessToken"] = localStorage.getItem("accessToken");
 }
-
-export default API;
 
 function getHeader(option = {}) {
   let base = {

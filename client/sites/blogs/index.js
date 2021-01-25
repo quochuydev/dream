@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Button, message } from "antd";
 
-import API from "../../../client/api";
+import { API } from "../../../client/api";
 
 import "antd/dist/antd.css";
 
@@ -46,6 +46,10 @@ export default function Posts({}) {
       <ul>
         {blogs.map((e) => (
           <li key={e._id}>
+            <Link href={`/publish/blogs/edit/${e._id}`}>
+              <a>edit</a>
+            </Link>
+            {" | "}
             <Link href={`/blogs/${e._id}`}>
               <a>post: {e.title}</a>
             </Link>

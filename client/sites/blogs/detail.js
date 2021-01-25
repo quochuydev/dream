@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import API from "../../../client/api";
+import { API } from "../../../client/api";
 
 import "antd/dist/antd.css";
 
