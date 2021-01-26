@@ -26,4 +26,12 @@ export class UserService {
     const user = await newUser.save();
     return user;
   }
+
+  async upsertByEmail(data) {
+    let user = await this.findOne({ email: data.email });
+    if (!user) {
+      user = await this.create({ email: data.email });
+    }
+    return user;
+  }
 }

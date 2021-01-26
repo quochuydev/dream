@@ -38,15 +38,12 @@ export class AuthService {
       throw { status: 401 };
     }
 
-    let user = await this.userService.findOne({ email: userAuth.email });
-    if (!user) {
-      user = await this.userService.create({ email: userAuth.email });
-    }
-
+    let user = await this.userService.upsertByEmail({ email: userAuth.email });
     let user_gen_token = {
       email: user.email,
       exp: (Date.now() + 8 * 60 * 60 * 1000) / 1000,
     };
+
     let userToken = jwt.sign(user_gen_token, "hash_token");
     return userToken;
   }
