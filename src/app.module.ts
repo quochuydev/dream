@@ -5,6 +5,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { AuthModule } from "./modules/auth/auth.module";
 import { BlogModule } from "./modules/blog/blog.module";
 import { FileModule } from "./modules/file/file.module";
+import { UserModule } from "./modules/user/user.module";
 import { SSRModule } from "./server";
 
 @Module({
@@ -12,6 +13,7 @@ import { SSRModule } from "./server";
     MongooseModule.forRoot(process.env.MONGO_URI),
     AuthModule,
     FileModule,
+    UserModule,
     BlogModule,
     ...(process.env.NODE_ENV == "production" ? [SSRModule.forRoot()] : []),
   ],
