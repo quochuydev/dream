@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Button, message } from "antd";
+import Router from "next/router";
 
 import { API, BACKEND_URL } from "../../../client/api";
 
@@ -35,13 +36,32 @@ export default function Posts({}) {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          loginGoogle();
-        }}
-      >
-        loginGoogle
-      </Button>
+      {localStorage.getItem("me") ? (
+        <>
+          <p>{localStorage.getItem("me")}</p>
+          <Button
+            onClick={() => {
+              localStorage.clear();
+              Router.push("/blogs");
+            }}
+          >
+            logout
+          </Button>
+        </>
+      ) : (
+        <>
+          <Button
+            onClick={() => {
+              loginGoogle();
+            }}
+          >
+            login
+          </Button>
+        </>
+      )}
+
+      <br />
+      <br />
       <Link href={`/publish/blogs/create`}>New</Link>
       <ul>
         {blogs.map((e) => (

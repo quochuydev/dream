@@ -10,8 +10,13 @@ export class AuthController {
     return this.authService.buildLink();
   }
 
-  @Get("/auth")
+  @Get("/api/auth")
   async auth(@Query("code") code: string) {
     return this.authService.auth(code);
+  }
+
+  @Get("/api/me")
+  async me(@Query("token") token: string) {
+    return this.authService.me(token);
   }
 }

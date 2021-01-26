@@ -3,9 +3,9 @@ import { google } from "googleapis";
 import jwt from "jsonwebtoken";
 
 const google_app = {
-  clientId: process.env.clientId,
-  clientSecret: process.env.clientSecret,
-  redirectUrl: process.env.redirectUrl,
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  redirectUrl: process.env.REDIRECT_URL,
 };
 
 const { clientId, clientSecret, redirectUrl } = google_app;
@@ -41,5 +41,10 @@ export class AuthService {
     };
     let userToken = jwt.sign(user_gen_token, "hash_token");
     return userToken;
+  }
+
+  async me(token) {
+    let user = jwt.verify(token, "hash_token");
+    return { email: user.email };
   }
 }
