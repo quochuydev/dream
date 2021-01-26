@@ -1,5 +1,6 @@
 import { Controller, Get, Post, Param, Body, Put } from "@nestjs/common";
 import { BlogService } from "./blog.service";
+import { BlogDto } from "./blog.dto";
 
 @Controller("/api/blogs")
 export class BlogController {
@@ -8,6 +9,7 @@ export class BlogController {
   @Get()
   async list() {
     return { blogs: await this.blogService.list() };
+    // return { blogs: [] };
   }
 
   @Get("/:id")
@@ -16,12 +18,12 @@ export class BlogController {
   }
 
   @Post()
-  async createBlog(@Body() data: any) {
+  async createBlog(@Body() data: BlogDto) {
     return await this.blogService.create(data);
   }
 
   @Put("/:id")
-  async updateBlog(@Param("id") id: string, @Body() data: any) {
+  async updateBlog(@Param("id") id: string, @Body() data: BlogDto) {
     return await this.blogService.update(id, data);
   }
 }

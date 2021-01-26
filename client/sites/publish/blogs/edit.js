@@ -13,6 +13,7 @@ import UploadAdapter from "../../../utils/upload-adapter";
 
 import { API, BACKEND_URL } from "../../../../client/api";
 import { BlogService } from "../../../services";
+import SearchSelect from "../../../components/SearchSelect";
 
 import "antd/dist/antd.css";
 
@@ -55,43 +56,32 @@ export default function Post({}) {
 
   const onFinish = async (value) => {
     try {
+      if (id) {
+        await BlogService.update(
+          { id },
+          {
+            title: value.title,
+            body: value.body,
+            tags,
+          }
+        );
+        message.success("Update blog");
+      } else {
+        const result = await BlogService.create(
+          { id },
+          {
+            title: value.title,
+            body: value.body,
+            tags,
+          }
+        );
+        message.success("Create blog");
+        Router.push(`/blogs/${result._id}`);
+      }
     } catch (error) {
       message.error(error.message);
     }
-    if (id) {
-      await BlogService.update(
-        { id },
-        {
-          title: value.title,
-          body: value.body,
-          tags,
-        }
-      );
-      message.success("Update blog");
-    } else {
-      await BlogService.create(
-        { id },
-        {
-          title: value.title,
-          body: value.body,
-          tags,
-        }
-      );
-      message.success("Create blog");
-    }
   };
-
-  const Menu = (props) => {
-    const { innerRef, innerProps, children, selectProps } = props;
-    return (
-      <div ref={innerRef} {...innerProps}>
-        <div>ADD {selectProps.inputValue}</div>
-        {children}
-        <div>-+</div>
-      </div>
-    );
-  };
-  const idTag = `react-select-tags`;
 
   function getHeader(option = {}) {
     let base = {
@@ -128,27 +118,7 @@ export default function Post({}) {
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
         </Form.Item>
-        <Select
-          inputId={idTag}
-          options={[
-            { value: 1, label: "1" },
-            { value: 2, label: "2" },
-          ]}
-          value={tags}
-          isMulti={true}
-          components={{ Menu }}
-          onChange={(value) => {
-            if (!value) {
-              value = [];
-            }
-            setTags(value);
-          }}
-          onInputChange={(e) => {
-            if (e) {
-              console.log(e);
-            }
-          }}
-        />
+        <SearchSelect />
         <Form.Item
           name="body"
           valuePropName="data"
