@@ -13,7 +13,7 @@ import { SSRModule } from "./server";
     AuthModule,
     FileModule,
     BlogModule,
-    SSRModule.forRoot(),
+    ...(process.env.NODE_ENV == "production" ? [SSRModule.forRoot()] : []),
   ],
   controllers: [],
   providers: [],

@@ -62,6 +62,13 @@ export default function Posts({}) {
 
       <br />
       <br />
+      <Button
+        onClick={() => {
+          fetchBlogs();
+        }}
+      >
+        Apply
+      </Button>
       <Link href={`/publish/blogs/create`}>New</Link>
       <ul>
         {blogs.map((e) => (

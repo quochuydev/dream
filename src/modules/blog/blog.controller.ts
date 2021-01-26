@@ -9,7 +9,6 @@ export class BlogController {
   @Get()
   async list() {
     return { blogs: await this.blogService.list() };
-    // return { blogs: [] };
   }
 
   @Get("/:id")
