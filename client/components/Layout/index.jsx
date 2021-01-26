@@ -11,6 +11,7 @@ import {
 import "./style.css";
 import "antd/dist/antd.css";
 import { APIClient, BACKEND_URL } from "../../../client/api";
+import { MENU_DATA } from "../../utils/routes";
 
 export default function LayoutComponent({ ...props }) {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -50,16 +51,6 @@ export default function LayoutComponent({ ...props }) {
 }
 
 function LeftMenu() {
-  const MENU_DATA = [
-    {
-      is_open: true,
-      key: "tag",
-      name: "Tag",
-      icon: <RightCircleOutlined />,
-      path: "#",
-    },
-  ];
-
   const menuItems = [];
 
   for (let i = 0; i < MENU_DATA.length; i++) {
