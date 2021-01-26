@@ -7,16 +7,7 @@ export type UserDocument = User & Document;
 @Schema()
 export class User {
   @Prop()
-  url: string;
-
-  @Prop()
-  key: string;
-
-  @Prop()
-  contentType: string;
-
-  @Prop()
-  size: number;
+  email: string;
 
   @Prop()
   createdAt: Date;
@@ -29,11 +20,8 @@ export class User {
 }
 
 export const UserSchema = new mongoose.Schema({
-  url: { type: String, default: null },
-  key: { type: String, default: null },
-  contentType: { type: String, default: null },
-  size: { type: Number, default: null },
-  createdAt: { type: Date, default: null },
-  updatedAt: { type: Date, default: null },
+  email: { type: String, default: null },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
   deletedAt: { type: Date, default: null },
 });

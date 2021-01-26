@@ -9,6 +9,10 @@ import { Model } from "mongoose";
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
+  findOne(criteria) {
+    return this.userModel.findOne(criteria);
+  }
+
   list(query) {
     return this.userModel.find({});
   }

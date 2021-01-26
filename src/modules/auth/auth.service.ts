@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { google } from "googleapis";
 import jwt from "jsonwebtoken";
 
+import { UserService } from "../user/user.service";
+
 const google_app = {
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
@@ -22,7 +24,7 @@ const url = oauth2Client.generateAuthUrl({
 
 @Injectable()
 export class AuthService {
-  constructor() {}
+  constructor(private readonly userService: UserService) {}
 
   async buildLink() {
     return url;
@@ -35,8 +37,14 @@ export class AuthService {
     if (!email) {
       throw { status: 401 };
     }
+
+    let user = await this.userService.findOne({ email: userAuth.email });
+    if (!user) {
+      user = await this.userService.create({ email: userAuth.email });
+    }
+
     let user_gen_token = {
-      email: userAuth.email,
+      email: user.email,
       exp: (Date.now() + 8 * 60 * 60 * 1000) / 1000,
     };
     let userToken = jwt.sign(user_gen_token, "hash_token");
@@ -44,7 +52,7 @@ export class AuthService {
   }
 
   async me(token) {
-    let user = jwt.verify(token, "hash_token");
-    return { email: user.email };
+    let userAuth = jwt.verify(token, "hash_token");
+    return { email: userAuth.email };
   }
 }
