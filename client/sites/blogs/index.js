@@ -18,7 +18,7 @@ export default function Posts({}) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await API.get("/api/blogs");
+    const result = await API.get("/api/blogs", query);
     setBlogs(result.blogs);
   }
 
