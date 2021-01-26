@@ -10,6 +10,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
 
 import { API } from "../../../../client/api";
+import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";
 
@@ -35,12 +36,15 @@ export default function Post({}) {
 
   useEffect(() => {
     if (id) {
-      API.get(`/api/blogs/${id}`).then((blog) => {
-        setData({ title: blog.title, body: blog.body || "" });
-        setMulti(blog.tags);
-      });
+      getBlog(id);
     }
   }, []);
+
+  async function getBlog(id) {
+    const result = await BlogService.detail(id);
+    setData({ title: result.title, body: result.body || "" });
+    setMulti(result.tags);
+  }
 
   useEffect(() => {
     form.setFieldsValue(data);
@@ -48,21 +52,22 @@ export default function Post({}) {
 
   const onFinish = async (value) => {
     if (id) {
-      API.put(`/api/blogs/${id}`, {
-        title: value.title,
-        body: value.body,
-        tags: multi,
-      }).then(() => {
-        message.success("Update blog");
-      });
+      await BlogService.update(
+        { id },
+        {
+          title: value.title,
+          body: value.body,
+          tags: multi,
+        }
+      );
+      message.success("Update blog");
     } else {
-      API.post("/api/blogs", {
+      await BlogService.create({
         title: value.title,
         body: value.body,
         tags: multi,
-      }).then(() => {
-        message.success("Create blog");
       });
+      message.success("Create blog");
     }
   };
 

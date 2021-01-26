@@ -12,6 +12,7 @@ import { Form, message } from "antd";
 import UploadAdapter from "../../../utils/upload-adapter";
 
 import { API, BACKEND_URL } from "../../../../client/api";
+import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";
 
@@ -38,42 +39,45 @@ export default function Post({}) {
 
   useEffect(() => {
     if (id) {
-      API.get(`/api/blogs/${id}`).then((blog) => {
-        setData({ title: blog.title, body: blog.body || "" });
-        setTags(blog.tags);
-      });
+      getBlog(id);
     }
   }, []);
+
+  async function getBlog(id) {
+    const result = await BlogService.detail(id);
+    setData({ title: result.title, body: result.body || "" });
+    setTags(result.tags);
+  }
 
   useEffect(() => {
     form.setFieldsValue(data);
   }, [data]);
 
   const onFinish = async (value) => {
+    try {
+    } catch (error) {
+      message.error(error.message);
+    }
     if (id) {
-      API.put(`/api/blogs/${id}`, {
-        title: value.title,
-        body: value.body,
-        tags,
-      })
-        .then(() => {
-          message.success("Update blog");
-        })
-        .catch((error) => {
-          message.error(error.message);
-        });
+      await BlogService.update(
+        { id },
+        {
+          title: value.title,
+          body: value.body,
+          tags,
+        }
+      );
+      message.success("Update blog");
     } else {
-      API.post("/api/blogs", {
-        title: value.title,
-        body: value.body,
-        tags,
-      })
-        .then(() => {
-          message.success("Create blog");
-        })
-        .catch((error) => {
-          message.error(error.message);
-        });
+      await BlogService.create(
+        { id },
+        {
+          title: value.title,
+          body: value.body,
+          tags,
+        }
+      );
+      message.success("Create blog");
     }
   };
 
@@ -100,9 +104,6 @@ export default function Post({}) {
     action: `${BACKEND_URL}/api/files`,
     headers: getHeader(),
     accept: ".jpg, .png",
-    beforeUpload: (file, fileList) => {
-      return true;
-    },
     onPreview: (e) => console.log(e),
     onChange: (e) => {
       setFileList(e.fileList);
@@ -192,22 +193,6 @@ export default function Post({}) {
         >
           <Button>Choose File</Button>
         </Upload>
-        {fileList.map((e) => (
-          <div key={e.uid}>
-            {e.response && (
-              <a
-                onClick={() => {
-                  const newBody =
-                    form.getFieldValue("body") +
-                    `<figure class="image"><img src="${e.response.url}"/></figure>`;
-                  setData({ ...data, body: newBody });
-                }}
-              >
-                {e.response.url}
-              </a>
-            )}
-          </div>
-        ))}
       </Modal>
     </>
   );

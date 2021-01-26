@@ -35,7 +35,10 @@ export default function Post({}) {
       <Link href={`/blogs`}>List</Link>
       <h1>{data.title}</h1>
       <h1>{data.createdAt}</h1>
-      <div dangerouslySetInnerHTML={{ __html: data.body }}></div>
+      <div
+        className="ck-content"
+        dangerouslySetInnerHTML={{ __html: data.body }}
+      ></div>
     </>
   );
 }
