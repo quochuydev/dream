@@ -7,6 +7,17 @@ export const BACKEND_URL =
     ? process.env.BACKEND_URL
     : "http://localhost:8000";
 
+export const APIClient = new Fetch(
+  BACKEND_URL,
+  {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  },
+  { before: [] }
+);
+
 export const API = new Fetch(
   BACKEND_URL,
   {

@@ -3,30 +3,27 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { Button, message } from "antd";
-import { BACKEND_URL } from "../api";
+import { BACKEND_URL, APIClient } from "../api";
+import { noSSRWithLoadingDynamic } from "../utils/dynamic.import";
 
 import "antd/dist/antd.css";
 
-export default function Posts({}) {
+export default noSSRWithLoadingDynamic(Auth);
+
+function Auth({}) {
   const router = useRouter();
   const { code } = router.query;
 
   useEffect(() => {
     if (code) {
+      console.log(code);
       auth();
     }
   }, [code]);
 
-  function auth() {
-    return fetch(`${BACKEND_URL}/auth?code=${code}`, { method: "get" })
-      .then((res) => {
-        res.text().then((body) => {
-          console.log(body);
-        });
-      })
-      .catch((error) => {
-        message.error(error.message);
-      });
+  async function auth() {
+    const result = await APIClient.get(`auth`, { code });
+    console.log(result);
   }
 
   return <>{code}</>;
