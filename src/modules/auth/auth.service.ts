@@ -33,23 +33,24 @@ export class AuthService {
   async auth(code) {
     const { tokens } = await oauth2Client.getToken(code);
     const userAuth = jwt.decode(tokens.id_token);
-    let { email } = userAuth;
-    if (!email) {
+    if (!userAuth.email) {
       throw { status: 401 };
     }
 
-    let user = await this.userService.upsertByEmail({ email: userAuth.email });
-    let user_gen_token = {
+    const user = await this.userService.upsertByEmail({
+      email: userAuth.email,
+    });
+    const user_gen_token = {
       email: user.email,
       exp: (Date.now() + 8 * 60 * 60 * 1000) / 1000,
     };
 
-    let userToken = jwt.sign(user_gen_token, "hash_token");
+    const userToken = jwt.sign(user_gen_token, "hash_token");
     return userToken;
   }
 
   async me(token) {
-    let userAuth = jwt.verify(token, "hash_token");
+    const userAuth = jwt.verify(token, "hash_token");
     return { email: userAuth.email };
   }
 }

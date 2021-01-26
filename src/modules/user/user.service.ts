@@ -1,5 +1,3 @@
-import { v4 } from "uuid";
-import slugify from "slugify";
 import { Injectable, BadRequestException } from "@nestjs/common";
 import { User, UserDocument } from "./user.schema";
 import { InjectModel } from "@nestjs/mongoose";

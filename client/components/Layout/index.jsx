@@ -1,23 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Router, { useRouter } from "next/router";
-
-import {
-  Layout,
-  Menu,
-  Icon,
-  Breadcrumb,
-  Popover,
-  message,
-  List,
-  Drawer,
-  PageHeader,
-  Tag,
-  Dropdown,
-  Modal,
-  Upload,
-  Button,
-} from "antd";
+import Router from "next/router";
+import { Menu, message, Drawer, PageHeader, Button } from "antd";
 import {
   RightCircleOutlined,
   SearchOutlined,

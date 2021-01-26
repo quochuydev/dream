@@ -1,17 +1,5 @@
 import { UserService } from "./user.service";
-import {
-  BadRequestException,
-  Body,
-  Param,
-  Controller,
-  Get,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Query,
-  UseInterceptors,
-  Res,
-} from "@nestjs/common";
+import { Param, Controller, Get, Query } from "@nestjs/common";
 
 @Controller("/api/users")
 export class UserController {
