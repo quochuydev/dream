@@ -54,9 +54,9 @@ function LeftMenu() {
     {
       is_open: true,
       key: "tag",
-      name: "tag",
+      name: "Tag",
       icon: <RightCircleOutlined />,
-      path: "tag",
+      path: "#",
     },
   ];
 
@@ -69,10 +69,10 @@ function LeftMenu() {
       menuItems.push(
         <Menu.Item key={menu.key} style={{ paddingLeft: 0 }}>
           <Link href={menu.path}>
-            <>
+            <div>
               {menu.icon}
               <span>{menu.name}</span>
-            </>
+            </div>
           </Link>
         </Menu.Item>
       );

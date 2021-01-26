@@ -42,9 +42,10 @@ export default function Posts({}) {
               </Link>
               {" | "}
               <Link href={`/blogs/${e._id}`}>
-                <a>post: {e.title}</a>
+                <a>
+                  post: {e.title} {e.created_at}
+                </a>
               </Link>
-              {/* <div dangerouslySetInnerHTML={{ __html: e.body }}></div> */}
             </li>
           ))}
         </ul>
