@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { Spin } from "antd";
 
-import { API, APIClient } from "../api";
+import { API, APIClient } from "../../api";
 
 import "antd/dist/antd.css";
 import "./style.css";
