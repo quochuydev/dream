@@ -22,7 +22,7 @@ export default function Posts({}) {
   }
 
   function loginGoogle() {
-    return fetch(`/login-google`, { method: "POST" })
+    return fetch(`${BACKEND_URL}/login-google`, { method: "POST" })
       .then((res) => {
         res.text().then((body) => {
           window.location.href = body;

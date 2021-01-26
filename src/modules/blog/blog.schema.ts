@@ -8,7 +8,7 @@ export type BlogDocument = Blog & Document;
 export class Blog {
   @Prop()
   title: string;
-
+  5;
   @Prop()
   body: string;
 }
