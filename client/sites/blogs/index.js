@@ -42,7 +42,7 @@ export default function Posts({}) {
           <Button
             onClick={() => {
               localStorage.clear();
-              Router.push("/blogs");
+              Router.push("/");
             }}
           >
             logout

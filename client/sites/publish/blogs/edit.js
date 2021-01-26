@@ -67,16 +67,13 @@ export default function Post({}) {
         );
         message.success("Update blog");
       } else {
-        const result = await BlogService.create(
-          { id },
-          {
-            title: value.title,
-            body: value.body,
-            tags,
-          }
-        );
+        const result = await BlogService.create({
+          title: value.title,
+          body: value.body,
+          tags,
+        });
         message.success("Create blog");
-        Router.push(`/blogs/${result._id}`);
+        Router.push(`/publish/blogs/edit/${result._id}`);
       }
     } catch (error) {
       message.error(error.message);
@@ -115,6 +112,8 @@ export default function Post({}) {
             Submit
           </Button>
         </Form.Item>
+
+        <Link href={`/blogs/${id}`}>Check</Link>
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
         </Form.Item>

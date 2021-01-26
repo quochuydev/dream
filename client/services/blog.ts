@@ -13,7 +13,7 @@ export default {
     });
     return result;
   },
-  detail: async function update(id) {
+  detail: async function detail(id) {
     return await API.get(`/api/blogs/${id}`);
   },
   update: async function update(query, data) {

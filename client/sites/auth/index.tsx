@@ -28,7 +28,7 @@ export default function Auth({}) {
     } catch (error) {
       console.log(error);
     }
-    Router.push("/blogs");
+    Router.push("/");
   }
 
   return (
