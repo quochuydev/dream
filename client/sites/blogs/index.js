@@ -23,46 +23,9 @@ export default function Posts({}) {
     setBlogs(result.blogs);
   }
 
-  function loginGoogle() {
-    return fetch(`${BACKEND_URL}/login-google`, { method: "POST" })
-      .then((res) => {
-        res.text().then((body) => {
-          window.location.href = body;
-        });
-      })
-      .catch((error) => {
-        message.error(error.message);
-      });
-  }
-
   return (
     <>
       <Layout>
-        {localStorage.getItem("me") ? (
-          <>
-            <p>{localStorage.getItem("me")}</p>
-            <Button
-              onClick={() => {
-                localStorage.clear();
-                Router.push("/");
-              }}
-            >
-              logout
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button
-              onClick={() => {
-                loginGoogle();
-              }}
-            >
-              login
-            </Button>
-          </>
-        )}
-
-        <br />
         <Button
           onClick={() => {
             fetchBlogs();

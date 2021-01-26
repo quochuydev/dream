@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import Router, { useRouter } from "next/router";
+
 import {
   Layout,
   Menu,
@@ -16,13 +18,18 @@ import {
   Upload,
   Button,
 } from "antd";
-import { RightCircleOutlined } from "@ant-design/icons";
+import {
+  RightCircleOutlined,
+  SearchOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
 
 import "./style.css";
 import "antd/dist/antd.css";
+import { APIClient, BACKEND_URL } from "../../../client/api";
 
 export default function LayoutComponent({ ...props }) {
-  const [isShowDrawer, setIsShowDrawer] = useState(true);
+  const [showDrawer, setShowDrawer] = useState(false);
 
   return (
     <>
@@ -30,21 +37,30 @@ export default function LayoutComponent({ ...props }) {
         placement={"left"}
         closable={false}
         onClose={() => {
-          setIsShowDrawer(false);
+          setShowDrawer(false);
         }}
-        visible={isShowDrawer}
+        visible={showDrawer}
         bodyStyle={{ padding: 0 }}
       >
         <LeftMenu display={true} />
       </Drawer>
-      <Button
-        onClick={() => {
-          setIsShowDrawer(true);
-        }}
+
+      <PageHeader
+        style={{ padding: 5 }}
+        title={
+          <>
+            <MenuOutlined
+              onClick={() => {
+                setShowDrawer(true);
+              }}
+            />
+            {" Home"}
+          </>
+        }
+        extra={[<SearchOutlined />]}
       >
-        Open
-      </Button>
-      {props.children}
+        {props.children}
+      </PageHeader>
     </>
   );
 }
@@ -79,11 +95,48 @@ function LeftMenu() {
     }
   }
 
+  async function loginGoogle() {
+    try {
+      const result = await APIClient.post("/login-google");
+      window.location.href = result;
+    } catch (error) {
+      message.error(error.message);
+    }
+  }
+
   return (
     <div style={{ display: "block" }}>
+      {localStorage.getItem("me") ? (
+        <p>{localStorage.getItem("me")}</p>
+      ) : (
+        <>
+          <Button
+            onClick={() => {
+              loginGoogle();
+            }}
+          >
+            login
+          </Button>
+        </>
+      )}
       <Menu theme="light" mode="inline">
         {menuItems}
       </Menu>
+      {localStorage.getItem("me") && (
+        <a
+          style={{
+            display: "block",
+            position: "fixed",
+            bottom: 0,
+          }}
+          onClick={() => {
+            localStorage.clear();
+            Router.push("/");
+          }}
+        >
+          logout
+        </a>
+      )}
     </div>
   );
 }
