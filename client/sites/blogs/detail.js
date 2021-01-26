@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { API } from "../../../client/api";
 import { BlogService } from "../../services";
+import { Layout } from "../../components";
 
 import "antd/dist/antd.css";
 
@@ -35,7 +36,7 @@ export default function Post({}) {
   }
 
   return (
-    <>
+    <Layout>
       <Link href={`/blogs`}>List</Link>
       <h1>{data.title}</h1>
       <h1>{data.created_at}</h1>
@@ -43,6 +44,6 @@ export default function Post({}) {
         className="ck-content"
         dangerouslySetInnerHTML={{ __html: data.body }}
       ></div>
-    </>
+    </Layout>
   );
 }

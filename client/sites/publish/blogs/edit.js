@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
-import Head from "next/head";
 import Link from "next/link";
-import Select from "react-select";
 import _ from "lodash";
-
+import { EyeOutlined } from "@ant-design/icons";
 import { Input, Button, Modal, Upload } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
-import UploadAdapter from "../../../utils/upload-adapter";
 
+import UploadAdapter from "../../../utils/upload-adapter";
 import { API, BACKEND_URL } from "../../../../client/api";
 import { BlogService } from "../../../services";
 import SearchSelect from "../../../components/SearchSelect";
+import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";
 
@@ -98,7 +97,7 @@ export default function Post({}) {
   };
 
   return (
-    <>
+    <Layout>
       <div onClick={() => Router.back()}>Go Back</div>
       <Link href={`/blogs`}>List</Link>
 
@@ -114,7 +113,9 @@ export default function Post({}) {
           </Button>
         </Form.Item>
 
-        <Link href={`/blogs/${id}`}>Check</Link>
+        <Link href={`/blogs/${id}`}>
+          <EyeOutlined />
+        </Link>
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
         </Form.Item>
@@ -164,6 +165,6 @@ export default function Post({}) {
           <Button>Choose File</Button>
         </Upload>
       </Modal>
-    </>
+    </Layout>
   );
 }

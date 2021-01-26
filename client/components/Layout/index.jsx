@@ -57,7 +57,7 @@ export default function LayoutComponent({ ...props }) {
             {" Home"}
           </>
         }
-        extra={[<SearchOutlined />]}
+        extra={[<SearchOutlined key={1} />]}
       >
         {props.children}
       </PageHeader>
