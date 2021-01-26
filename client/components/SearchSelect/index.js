@@ -5,6 +5,7 @@ import _ from "lodash";
 import { Menu, message, Drawer, PageHeader, Button } from "antd";
 import {
   RightCircleOutlined,
+  LeftCircleOutlined,
   SearchOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
@@ -12,52 +13,71 @@ import {
 import "./style.css";
 import "antd/dist/antd.css";
 
-export default function SearchSelect({ ...props }) {
-  const [tags, setTags] = React.useState([]);
-
-  const [values, setValues] = useState([]);
+export default function SearchSelect({ total, ...props }) {
+  const [selected, setSelected] = React.useState([]);
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    setValues(props.values);
+    if (props.values) {
+      const newOptions = props.values.map((e) =>
+        Object({ value: e._id, label: e.title })
+      );
+      setOptions(newOptions);
+    }
   }, [props.values]);
 
   useEffect(() => {
-    console.log(values);
-  }, [values]);
+    if (props.selected) {
+      setSelected(props.selected);
+    }
+  }, [props.selected]);
+
+  function search(key) {
+    props.search(key);
+  }
 
   const Menu = (props) => {
     const { innerRef, innerProps, children, selectProps } = props;
     return (
       <div ref={innerRef} {...innerProps}>
-        <div>ADD {selectProps.inputValue}</div>
+        <div>
+          {total} ADD {selectProps.inputValue}
+        </div>
         {children}
-        <div>-+</div>
+        <div>
+          <Button>
+            <LeftCircleOutlined />
+          </Button>
+          <Button>
+            <RightCircleOutlined />
+          </Button>
+        </div>
       </div>
     );
   };
   const idTag = `react-select-tags`;
 
   return (
-    <Select
-      inputId={idTag}
-      options={[
-        { value: 1, label: "1" },
-        { value: 2, label: "2" },
-      ]}
-      value={tags}
-      isMulti={true}
-      components={{ Menu }}
-      onChange={(value) => {
-        if (!value) {
-          value = [];
-        }
-        setTags(value);
-      }}
-      onInputChange={(e) => {
-        if (e) {
+    <>
+      <Select
+        inputId={idTag}
+        options={options}
+        value={selected}
+        isMulti={true}
+        components={{ Menu }}
+        onChange={(value) => {
+          console.log(value);
+          if (!value) {
+            value = [];
+          }
+          setSelected(value);
+        }}
+        onInputChange={(e) => {
           console.log(e);
-        }
-      }}
-    />
+          search(e);
+        }}
+      />
+      {/* {JSON.stringify(options)} */}
+    </>
   );
 }

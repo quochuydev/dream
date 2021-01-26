@@ -119,6 +119,7 @@ export default function Post({}) {
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
         </Form.Item>
+
         <SearchSelect />
         <Form.Item
           name="body"

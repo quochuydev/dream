@@ -8,7 +8,7 @@ export class BlogController {
 
   @Get()
   async list(@Query() query) {
-    return { blogs: await this.blogService.list(query) };
+    return this.blogService.paginate(query);
   }
 
   @Get("/:id")

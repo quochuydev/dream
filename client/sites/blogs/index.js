@@ -14,6 +14,7 @@ export default function Posts({}) {
 
   const [query, setQuery] = React.useState(initQuery);
   const [blogs, setBlogs] = React.useState([]);
+  const [total, setTotal] = React.useState(0);
 
   React.useEffect(() => {
     fetchBlogs();
@@ -22,6 +23,7 @@ export default function Posts({}) {
   async function fetchBlogs() {
     const result = await API.get("/api/blogs", query);
     setBlogs(result.blogs);
+    setTotal(result.total);
   }
 
   return (
@@ -39,10 +41,22 @@ export default function Posts({}) {
             setQuery({ ...initQuery, limit: 10 });
           }}
         >
-          Apply
+          Apply 10
         </Button>
         <Link href={`/publish/blogs/create`}>New</Link>
-        <SearchSelect values={blogs} />
+        <SearchSelect
+          selected={[
+            {
+              value: "600955e72584da4daf6268e5",
+              label: "948.3338166100934",
+            },
+          ]}
+          total={total}
+          values={blogs}
+          search={(q) => {
+            setQuery({ ...query, q });
+          }}
+        />
         <ul>
           {blogs.map((e) => (
             <li key={e._id}>
