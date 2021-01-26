@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { Spin } from "antd";
 
-import { APIClient } from "../api";
+import { API, APIClient } from "../api";
 
 import "antd/dist/antd.css";
 import "./style.css";
@@ -19,10 +19,10 @@ export default function Auth({}) {
 
   async function auth() {
     try {
-      const accessToken = await APIClient.get(`/api/auth`, { code });
+      const accessToken = await APIClient.post(`/auth`, { code });
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
-        const user = await APIClient.get(`/api/me`, { token: accessToken });
+        const user = await API.get(`/auth/me`);
         localStorage.setItem("me", user.email);
       }
     } catch (error) {

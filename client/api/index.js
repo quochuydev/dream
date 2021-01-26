@@ -38,7 +38,6 @@ export const APIFormData = new Fetch(
 );
 
 function setHeader(config) {
-  localStorage.setItem("accessToken", "accessToken");
   config.headers["accessToken"] = localStorage.getItem("accessToken");
 }
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, Put, Query } from "@nestjs/common";
+import { Controller, Get, Post, Body, Headers, Query } from "@nestjs/common";
 import { AuthService } from "./auth.service";
 
 @Controller()
@@ -10,13 +10,13 @@ export class AuthController {
     return this.authService.buildLink();
   }
 
-  @Get("/api/auth")
-  async auth(@Query("code") code: string) {
+  @Post("/auth")
+  async auth(@Body("code") code: string) {
     return this.authService.auth(code);
   }
 
-  @Get("/api/me")
-  async me(@Query("token") token: string) {
-    return this.authService.me(token);
+  @Get("/auth/me")
+  async me(@Headers("accessToken") accessToken: string) {
+    return this.authService.me(accessToken);
   }
 }
