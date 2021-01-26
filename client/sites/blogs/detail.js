@@ -39,7 +39,7 @@ export default function Post({}) {
     <Layout>
       <Link href={`/blogs`}>List</Link>
       <h1>{data.title}</h1>
-      <h1>{data.created_at}</h1>
+      <p>{data.created_at}</p>
       <div
         className="ck-content"
         dangerouslySetInnerHTML={{ __html: data.body }}
