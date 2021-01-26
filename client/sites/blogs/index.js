@@ -4,6 +4,7 @@ import { Button, message } from "antd";
 import Router from "next/router";
 
 import { API, BACKEND_URL } from "../../../client/api";
+import { Layout } from "../../components";
 
 import "antd/dist/antd.css";
 
@@ -36,54 +37,55 @@ export default function Posts({}) {
 
   return (
     <>
-      {localStorage.getItem("me") ? (
-        <>
-          <p>{localStorage.getItem("me")}</p>
-          <Button
-            onClick={() => {
-              localStorage.clear();
-              Router.push("/");
-            }}
-          >
-            logout
-          </Button>
-        </>
-      ) : (
-        <>
-          <Button
-            onClick={() => {
-              loginGoogle();
-            }}
-          >
-            login
-          </Button>
-        </>
-      )}
+      <Layout>
+        {localStorage.getItem("me") ? (
+          <>
+            <p>{localStorage.getItem("me")}</p>
+            <Button
+              onClick={() => {
+                localStorage.clear();
+                Router.push("/");
+              }}
+            >
+              logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              onClick={() => {
+                loginGoogle();
+              }}
+            >
+              login
+            </Button>
+          </>
+        )}
 
-      <br />
-      <br />
-      <Button
-        onClick={() => {
-          fetchBlogs();
-        }}
-      >
-        Apply
-      </Button>
-      <Link href={`/publish/blogs/create`}>New</Link>
-      <ul>
-        {blogs.map((e) => (
-          <li key={e._id}>
-            <Link href={`/publish/blogs/edit/${e._id}`}>
-              <a>edit</a>
-            </Link>
-            {" | "}
-            <Link href={`/blogs/${e._id}`}>
-              <a>post: {e.title}</a>
-            </Link>
-            {/* <div dangerouslySetInnerHTML={{ __html: e.body }}></div> */}
-          </li>
-        ))}
-      </ul>
+        <br />
+        <Button
+          onClick={() => {
+            fetchBlogs();
+          }}
+        >
+          Apply
+        </Button>
+        <Link href={`/publish/blogs/create`}>New</Link>
+        <ul>
+          {blogs.map((e) => (
+            <li key={e._id}>
+              <Link href={`/publish/blogs/edit/${e._id}`}>
+                <a>edit</a>
+              </Link>
+              {" | "}
+              <Link href={`/blogs/${e._id}`}>
+                <a>post: {e.title}</a>
+              </Link>
+              {/* <div dangerouslySetInnerHTML={{ __html: e.body }}></div> */}
+            </li>
+          ))}
+        </ul>
+      </Layout>
     </>
   );
 }

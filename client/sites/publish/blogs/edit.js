@@ -99,6 +99,7 @@ export default function Post({}) {
 
   return (
     <>
+      <div onClick={() => Router.back()}>Go Back</div>
       <Link href={`/blogs`}>List</Link>
 
       <Form form={form} onFinish={onFinish}>
