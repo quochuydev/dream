@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, Put } from "@nestjs/common";
+import { Controller, Get, Post, Param, Body, Put, Query } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 import { BlogDto } from "./blog.dto";
 
@@ -7,8 +7,8 @@ export class BlogController {
   constructor(private blogService: BlogService) {}
 
   @Get()
-  async list() {
-    return { blogs: await this.blogService.list() };
+  async list(@Query() query) {
+    return { blogs: await this.blogService.list(query) };
   }
 
   @Get("/:id")

@@ -8,8 +8,12 @@ import { Blog, BlogDocument } from "./blog.schema";
 export class BlogService {
   constructor(@InjectModel(Blog.name) private blogModel: Model<BlogDocument>) {}
 
-  async list(): Promise<any> {
-    return await this.blogModel.find().exec();
+  async list(query: { limit: number; page: number }): Promise<any> {
+    const criteria = {};
+    const page = Number(query.page);
+    const limit = Number(query.limit);
+    const skip = Math.ceil(limit * (page - 1));
+    return await this.blogModel.find(criteria).skip(skip).limit(limit).exec();
   }
 
   async create(data: any): Promise<any> {

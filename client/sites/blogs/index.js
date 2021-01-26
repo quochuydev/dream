@@ -5,6 +5,7 @@ import Router from "next/router";
 
 import { API, BACKEND_URL } from "../../../client/api";
 import { Layout } from "../../components";
+import SearchSelect from "../../components/SearchSelect";
 
 import "antd/dist/antd.css";
 
@@ -28,12 +29,20 @@ export default function Posts({}) {
       <Layout>
         <Button
           onClick={() => {
-            fetchBlogs();
+            setQuery(initQuery);
+          }}
+        >
+          Apply
+        </Button>
+        <Button
+          onClick={() => {
+            setQuery({ ...initQuery, limit: 10 });
           }}
         >
           Apply
         </Button>
         <Link href={`/publish/blogs/create`}>New</Link>
+        <SearchSelect values={blogs} />
         <ul>
           {blogs.map((e) => (
             <li key={e._id}>

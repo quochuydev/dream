@@ -2,10 +2,28 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import _ from "lodash";
 
+import { Menu, message, Drawer, PageHeader, Button } from "antd";
+import {
+  RightCircleOutlined,
+  SearchOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
+
+import "./style.css";
 import "antd/dist/antd.css";
 
-export default function SearchSelect({}) {
+export default function SearchSelect({ ...props }) {
   const [tags, setTags] = React.useState([]);
+
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    setValues(props.values);
+  }, [props.values]);
+
+  useEffect(() => {
+    console.log(values);
+  }, [values]);
 
   const Menu = (props) => {
     const { innerRef, innerProps, children, selectProps } = props;
