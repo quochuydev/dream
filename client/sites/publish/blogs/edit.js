@@ -113,9 +113,12 @@ export default function Post({}) {
           </Button>
         </Form.Item>
 
-        <Link href={`/blogs/${id}`}>
-          <EyeOutlined />
-        </Link>
+        {id && (
+          <Link href={`/blogs/${id}`}>
+            <EyeOutlined />
+          </Link>
+        )}
+
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
         </Form.Item>

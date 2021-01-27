@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import _ from "lodash";
 
-import { Menu, message, Drawer, PageHeader, Button } from "antd";
+import { message, Drawer, PageHeader, Button } from "antd";
 import {
   RightCircleOutlined,
   LeftCircleOutlined,
@@ -13,18 +13,18 @@ import {
 import "./style.css";
 import "antd/dist/antd.css";
 
-export default function SearchSelect({ total, ...props }) {
+export default function SearchSelect({ values, ...props }) {
   const [selected, setSelected] = React.useState([]);
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    if (props.values) {
-      const newOptions = props.values.map((e) =>
+    if (values) {
+      const newOptions = values.map((e) =>
         Object({ value: e._id, label: e.title })
       );
       setOptions(newOptions);
     }
-  }, [props.values]);
+  }, [values]);
 
   useEffect(() => {
     if (props.selected) {
@@ -32,52 +32,71 @@ export default function SearchSelect({ total, ...props }) {
     }
   }, [props.selected]);
 
-  function search(key) {
-    props.search(key);
-  }
-
-  const Menu = (props) => {
-    const { innerRef, innerProps, children, selectProps } = props;
-    return (
-      <div ref={innerRef} {...innerProps}>
-        <div>
-          {total} ADD {selectProps.inputValue}
-        </div>
-        {children}
-        <div>
-          <Button>
-            <LeftCircleOutlined />
-          </Button>
-          <Button>
-            <RightCircleOutlined />
-          </Button>
-        </div>
-      </div>
-    );
-  };
-  const idTag = `react-select-tags`;
-
   return (
     <>
       <Select
-        inputId={idTag}
+        {...props}
+        inputId={`react-select-${props.id}`}
         options={options}
         value={selected}
         isMulti={true}
         components={{ Menu }}
         onChange={(value) => {
-          console.log(value);
           if (!value) {
             value = [];
           }
-          setSelected(value);
+          props.handleValue(value);
         }}
-        onInputChange={(e) => {
-          console.log(e);
-          search(e);
+        onInputChange={(q) => {
+          props.search({ q });
         }}
       />
-      {/* {JSON.stringify(options)} */}
     </>
+  );
+}
+
+function Menu(props) {
+  const { innerRef, innerProps, children, selectProps } = props;
+  const totalPage = Math.ceil(selectProps.total / selectProps.limit);
+
+  return (
+    <div ref={innerRef} {...innerProps}>
+      <div>
+        ADD {selectProps.inputValue} {selectProps.total}
+      </div>
+      {!selectProps.total && <div>ADD</div>}
+      {children}
+      <div>
+        <Button>
+          <LeftCircleOutlined
+            onClick={() => {
+              if (props.selectProps.search && props.selectProps.page - 1 >= 1) {
+                props.selectProps.search({
+                  page: props.selectProps.page - 1,
+                });
+              }
+            }}
+          />
+        </Button>
+        <span>
+          {props.selectProps.page}/{totalPage}
+        </span>
+        <Button>
+          <RightCircleOutlined
+            className="cursor-pointer"
+            onClick={() => {
+              if (
+                props.selectProps.search &&
+                props.selectProps.page < totalPage
+              ) {
+                props.selectProps.search({
+                  page: props.selectProps.page + 1,
+                });
+              }
+            }}
+          />
+        </Button>
+      </div>
+    </div>
   );
 }

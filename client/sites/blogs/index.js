@@ -15,6 +15,7 @@ export default function Posts({}) {
   const [query, setQuery] = React.useState(initQuery);
   const [blogs, setBlogs] = React.useState([]);
   const [total, setTotal] = React.useState(0);
+  const [selected, setSelected] = React.useState([]);
 
   React.useEffect(() => {
     fetchBlogs();
@@ -45,16 +46,15 @@ export default function Posts({}) {
         </Button>
         <Link href={`/publish/blogs/create`}>New</Link>
         <SearchSelect
-          selected={[
-            {
-              value: "600955e72584da4daf6268e5",
-              label: "948.3338166100934",
-            },
-          ]}
+          id={"tags"}
+          limit={query.limit}
+          page={query.page}
+          selected={selected}
           total={total}
           values={blogs}
-          search={(q) => {
-            setQuery({ ...query, q });
+          handleValue={setSelected}
+          search={(value) => {
+            setQuery({ ...query, ...value });
           }}
         />
         <ul>
