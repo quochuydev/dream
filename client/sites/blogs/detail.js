@@ -40,6 +40,7 @@ export default function Post({}) {
       <Link href={`/blogs`}>List</Link>
       <h1>{data.title}</h1>
       <p>{data.created_at}</p>
+      {data.tags.map(e => <p key={e.value}>{e.label}</p>)}
       <div
         className="ck-content"
         dangerouslySetInnerHTML={{ __html: data.body }}

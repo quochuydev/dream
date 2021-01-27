@@ -17,14 +17,14 @@ import TagSelect from "./TagSelect";
 import "antd/dist/antd.css";
 
 export default function Post({}) {
-  const [isModalVisible, setIsModalVisible] = React.useState(false);
-  const [form] = Form.useForm();
-  const [data, setData] = useState({ title: "", body: "" });
   const router = useRouter();
   const { id } = router.query;
-  const [tags, setTags] = React.useState([]);
-  const [fileList, setFileList] = React.useState([]);
-  const [selected, setSelected] = React.useState([]);
+  const [form] = Form.useForm();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [data, setData] = useState({ title: "", body: "" });
+  const [tags, setTags] = useState([]);
+  const [fileList, setFileList] = useState([]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -56,14 +56,13 @@ export default function Post({}) {
 
   const onFinish = async (value) => {
     try {
-      console.log(selected);
       if (id) {
         await BlogService.update(
           { id },
           {
             title: value.title,
             body: value.body,
-            tags: selected,
+            tags,
           }
         );
         message.success("Update blog");
@@ -71,7 +70,7 @@ export default function Post({}) {
         const result = await BlogService.create({
           title: value.title,
           body: value.body,
-          tags: selected,
+          tags,
         });
         message.success("Create blog");
         Router.push(`/publish/blogs/edit/${result._id}`);
@@ -128,7 +127,7 @@ export default function Post({}) {
           <Input placeholder="Basic usage" />
         </Form.Item>
 
-        <TagSelect selected={selected} setSelected={setSelected} />
+        <TagSelect selected={tags} setSelected={setTags} />
 
         <Form.Item
           name="body"
