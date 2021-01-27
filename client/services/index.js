@@ -1,3 +1,4 @@
 import BlogService from "./blog";
+import TagService from "./tag";
 
-export { BlogService };
+export { BlogService, TagService };

@@ -56,6 +56,10 @@ export default function Posts({}) {
           search={(value) => {
             setQuery({ ...query, ...value });
           }}
+          add={(value) => {
+            console.log(value);
+            //
+          }}
         />
         <ul>
           {blogs.map((e) => (

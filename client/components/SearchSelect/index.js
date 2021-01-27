@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import _ from "lodash";
 
-import { message, Drawer, PageHeader, Button } from "antd";
+import { message, Drawer, PageHeader, Button, Tag } from "antd";
 import {
   RightCircleOutlined,
   LeftCircleOutlined,
@@ -62,40 +62,63 @@ function Menu(props) {
   return (
     <div ref={innerRef} {...innerProps}>
       <div>
-        ADD {selectProps.inputValue} {selectProps.total}
-      </div>
-      {!selectProps.total && <div>ADD</div>}
-      {children}
-      <div>
         <Button
           onClick={() => {
-            if (props.selectProps.search && props.selectProps.page - 1 >= 1) {
-              props.selectProps.search({
-                page: props.selectProps.page - 1,
-              });
+            if (selectProps.add) {
+              selectProps.add(selectProps.inputValue);
             }
           }}
         >
-          <LeftCircleOutlined />
+          ADD
         </Button>
-        <span>
-          {props.selectProps.page}/{totalPage}
-        </span>
-        <Button
-          onClick={() => {
-            if (
-              props.selectProps.search &&
-              props.selectProps.page < totalPage
-            ) {
-              props.selectProps.search({
-                page: props.selectProps.page + 1,
-              });
-            }
-          }}
-        >
-          <RightCircleOutlined className="cursor-pointer" />
-        </Button>
+        <span> {selectProps.inputValue}</span>
       </div>
+      {!selectProps.total && (
+        <div>
+          <Button
+            onClick={() => {
+              if (selectProps.add) {
+                selectProps.add(selectProps.inputValue);
+              }
+            }}
+          >
+            ADD
+          </Button>
+          <Tag color="cyan" style={{ fontSize: 15, marginLeft: 5 }}>
+            {selectProps.inputValue}
+          </Tag>
+        </div>
+      )}
+      {!!selectProps.total && (
+        <div>
+          {children}
+          <Button
+            onClick={() => {
+              if (selectProps.search && selectProps.page - 1 >= 1) {
+                selectProps.search({
+                  page: selectProps.page - 1,
+                });
+              }
+            }}
+          >
+            <LeftCircleOutlined />
+          </Button>
+          <span>
+            {selectProps.page}/{totalPage}
+          </span>
+          <Button
+            onClick={() => {
+              if (selectProps.search && selectProps.page < totalPage) {
+                selectProps.search({
+                  page: selectProps.page + 1,
+                });
+              }
+            }}
+          >
+            <RightCircleOutlined className="cursor-pointer" />
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
