@@ -20,7 +20,6 @@ export default function Post({blog, ...props}) {
 
   useEffect(() => {
     if (id) {
-      console.log(id)
       getBlog(id);
     }
   }, []);

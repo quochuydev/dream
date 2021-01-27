@@ -2,7 +2,7 @@ import { noSSRWithLoadingDynamic } from "../../utils/dynamic.import";
 import { BlogService } from "../../services";
 
 export async function getStaticPaths() {
-  const result = await BlogService.publish.list({ page: 1, limit: 20 })
+  const result = await BlogService.publish.list()
   const paths = result.items.map(e => Object({ params: { id: e._id } }));
 
   return {
