@@ -10,7 +10,6 @@ export default function TagSelect({ ...props }) {
   const [query, setQuery] = React.useState(initQuery);
   const [tags, setTags] = React.useState([]);
   const [total, setTotal] = React.useState(0);
-  const [selected, setSelected] = React.useState([]);
 
   React.useEffect(() => {
     fetchData();
@@ -41,6 +40,7 @@ export default function TagSelect({ ...props }) {
       }}
       add={async (name) => {
         await createTag({ name });
+        setQuery({ ...query });
       }}
     />
   );

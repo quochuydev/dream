@@ -16,10 +16,10 @@ export default function Blogs({ posts, ...props}) {
     setBlogs(posts);
   }, []);
 
-  // useEffect(() => {
-  //   console.log('fetchBlogs')
-  //   fetchBlogs();
-  // }, [query]);
+  useEffect(() => {
+    console.log('fetchBlogs')
+    fetchBlogs();
+  }, [query]);
 
   async function fetchBlogs() {
     const result = await BlogService.publish.list(query);
