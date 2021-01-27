@@ -15,6 +15,7 @@ export class BaseService {
       criteria[keyword] = { $regex: filter.q };
     }
 
+    console.log(JSON.stringify(criteria))
     result.total = await this.model.count(criteria);
     if (!result.total) {
       return result;
