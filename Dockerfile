@@ -1,5 +1,5 @@
 FROM node:latest
-WORKDIR /source
-COPY . /source
+WORKDIR /src
+COPY . /src
 RUN npm run build
 EXPOSE 3000

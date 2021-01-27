@@ -3,14 +3,13 @@ import Link from "next/link";
 import Router from "next/router";
 import { Menu, message, Drawer, PageHeader, Button } from "antd";
 import {
-  RightCircleOutlined,
   SearchOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
 
 import "./style.css";
 import "antd/dist/antd.css";
-import { APIClient, BACKEND_URL } from "../../../client/api";
+import { APIClient } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
 
 export default function LayoutComponent({ ...props }) {

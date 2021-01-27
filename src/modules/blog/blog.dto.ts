@@ -19,5 +19,5 @@ export class BlogDto {
 
   @IsOptional()
   @IsArray()
-  tags: string;
+  tags: any;
 }
