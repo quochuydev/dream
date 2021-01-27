@@ -67,34 +67,33 @@ function Menu(props) {
       {!selectProps.total && <div>ADD</div>}
       {children}
       <div>
-        <Button>
-          <LeftCircleOutlined
-            onClick={() => {
-              if (props.selectProps.search && props.selectProps.page - 1 >= 1) {
-                props.selectProps.search({
-                  page: props.selectProps.page - 1,
-                });
-              }
-            }}
-          />
+        <Button
+          onClick={() => {
+            if (props.selectProps.search && props.selectProps.page - 1 >= 1) {
+              props.selectProps.search({
+                page: props.selectProps.page - 1,
+              });
+            }
+          }}
+        >
+          <LeftCircleOutlined />
         </Button>
         <span>
           {props.selectProps.page}/{totalPage}
         </span>
-        <Button>
-          <RightCircleOutlined
-            className="cursor-pointer"
-            onClick={() => {
-              if (
-                props.selectProps.search &&
-                props.selectProps.page < totalPage
-              ) {
-                props.selectProps.search({
-                  page: props.selectProps.page + 1,
-                });
-              }
-            }}
-          />
+        <Button
+          onClick={() => {
+            if (
+              props.selectProps.search &&
+              props.selectProps.page < totalPage
+            ) {
+              props.selectProps.search({
+                page: props.selectProps.page + 1,
+              });
+            }
+          }}
+        >
+          <RightCircleOutlined className="cursor-pointer" />
         </Button>
       </div>
     </div>

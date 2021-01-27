@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import _ from "lodash";
-import { EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined, LeftCircleOutlined } from "@ant-design/icons";
 import { Input, Button, Modal, Upload } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -98,7 +98,10 @@ export default function Post({}) {
 
   return (
     <Layout>
-      <div onClick={() => Router.back()}>Go Back</div>
+      <Button onClick={() => Router.back()}>
+        <LeftCircleOutlined />
+      </Button>
+      <br />
       <Link href={`/blogs`}>List</Link>
 
       <Form form={form} onFinish={onFinish}>
