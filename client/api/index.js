@@ -40,16 +40,8 @@ export const APIFormData = new Fetch(
 function getToken() {
   const token = localStorage.getItem("accessToken");
   if (!token) {
-    window.location.href = "/";
     return;
   }
-}
-
-function getHeader(option = {}) {
-  let base = {
-    accesstoken: getToken(),
-  };
-  return _.assign({}, base, option);
 }
 
 function setHeader(config) {
