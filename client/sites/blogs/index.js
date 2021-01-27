@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button, message } from "antd";
 
@@ -7,14 +7,19 @@ import { BlogService } from "../../services";
 
 import "antd/dist/antd.css";
 
-export default function Blogs({...props}) {
+export default function Blogs({ posts, ...props}) {
   const initQuery = { page: 1, limit: 20 };
-  const [query, setQuery] = React.useState(initQuery);
-  const [blogs, setBlogs] = React.useState([]);
+  const [query, setQuery] = useState(initQuery);
+  const [blogs, setBlogs] = useState([]);
 
-  React.useEffect(() => {
-    fetchBlogs();
-  }, [query]);
+  useEffect(() => {
+    setBlogs(posts);
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('fetchBlogs')
+  //   fetchBlogs();
+  // }, [query]);
 
   async function fetchBlogs() {
     const result = await BlogService.publish.list(query);

@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import { API } from "../../../client/api";
 import { BlogService } from "../../services";
 import { Layout } from "../../components";
 
 import "antd/dist/antd.css";
 
-export default function Post({}) {
+export default function Post({blog, ...props}) {
   const initData = {
     title: "",
     body: "",
@@ -21,12 +20,13 @@ export default function Post({}) {
 
   useEffect(() => {
     if (id) {
+      console.log(id)
       getBlog(id);
     }
   }, []);
 
   async function getBlog(id) {
-    const blog = await BlogService.publish.detail(id);
+    // const blog = await BlogService.publish.detail(id);
     setData(blog);
   }
 
