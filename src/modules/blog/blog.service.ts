@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import { StringDecoder } from "string_decoder";
 
 import { Blog, BlogDocument } from "./blog.schema";
 
@@ -50,12 +51,27 @@ export class BlogService {
         $set: {
           title: data.title,
           body: data.body,
+          updated_at: new Date(),
         },
       },
       { lean: true, new: true }
     );
     return blog;
   }
+
+  async remove(id) {
+    const blog = await this.blogModel.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          deleted_at: new Date(),
+        },
+      },
+      { lean: true, new: true }
+    );
+    return blog;
+  }
+
   get(id: string): any {
     return this.blogModel.findOne({ _id: id });
   }

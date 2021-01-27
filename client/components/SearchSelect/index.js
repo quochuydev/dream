@@ -63,9 +63,9 @@ function Menu(props) {
     <div ref={innerRef} {...innerProps}>
       <div>
         <Button
-          onClick={() => {
+          onClick={async () => {
             if (selectProps.add) {
-              selectProps.add(selectProps.inputValue);
+              await selectProps.add(selectProps.inputValue);
             }
           }}
         >

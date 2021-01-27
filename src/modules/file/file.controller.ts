@@ -1,14 +1,10 @@
 import { FileService } from "./file.service";
 import {
   BadRequestException,
-  Body,
   Param,
   Controller,
   Get,
-  HttpCode,
-  HttpStatus,
   Post,
-  Query,
   UploadedFile,
   UseInterceptors,
   Res,

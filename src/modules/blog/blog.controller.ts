@@ -17,12 +17,12 @@ export class BlogController {
   }
 
   @Post()
-  async createBlog(@Body() data: BlogDto) {
+  async create(@Body() data: BlogDto) {
     return await this.blogService.create(data);
   }
 
   @Put("/:id")
-  async updateBlog(@Param("id") id: string, @Body() data: BlogDto) {
+  async update(@Param("id") id: string, @Body() data: BlogDto) {
     return await this.blogService.update(id, data);
   }
 }
