@@ -30,6 +30,15 @@ export default function SearchSelect({ values, ...props }) {
     }
   }, [props.selected]);
 
+  const _search = async (q) => {
+    if (props.search) {
+      await props.search({ q, page: 1 });
+    }
+    return;
+  };
+
+  const search = _.debounce(_search, 500);
+
   return (
     <>
       <Select
@@ -45,10 +54,8 @@ export default function SearchSelect({ values, ...props }) {
           }
           props.handleValue(value);
         }}
-        onInputChange={(q) => {
-          if (props.search) {
-            props.search({ q });
-          }
+        onInputChange={(value) => {
+          search(value);
         }}
       />
     </>

@@ -5,13 +5,14 @@ import { Model } from "mongoose";
 export class BaseService {
   constructor(private model: Model<any>) {}
 
-  async paginate(query): Promise<any> {
+  async paginate(query, options: any = {}): Promise<any> {
     const result = { total: 0, items: [] };
     const { limit, skip, filter } = this.parseQuery(query);
 
     const criteria: any = {};
     if (filter.q) {
-      criteria.title = { $regex: filter.q };
+      const keyword = options.keyword || "name";
+      criteria[keyword] = { $regex: filter.q };
     }
 
     result.total = await this.model.count(criteria);

@@ -17,7 +17,7 @@ export class BlogController {
 
   @Get()
   async list(@Query() query) {
-    return this.blogService.paginate(query);
+    return this.blogService.paginate(query, { keyword: "title" });
   }
 
   @Get("/:id")

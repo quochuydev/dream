@@ -1,11 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { Button, message } from "antd";
-import Router from "next/router";
 
-import { API, BACKEND_URL } from "../../../client/api";
 import { Layout } from "../../components";
-import SearchSelect from "../../components/SearchSelect";
 import { BlogService } from "../../services";
 
 import "antd/dist/antd.css";
@@ -46,23 +43,6 @@ export default function Posts({}) {
           Apply 10
         </Button>
         <Link href={`/publish/blogs/create`}>New</Link>
-        <SearchSelect
-          id={"tags"}
-          limit={query.limit}
-          page={query.page}
-          selected={selected}
-          total={total}
-          values={blogs}
-          labelKey={"title"}
-          handleValue={setSelected}
-          search={(value) => {
-            setQuery({ ...query, ...value });
-          }}
-          add={(value) => {
-            console.log(value);
-            //
-          }}
-        />
         <ul>
           {blogs.map((e) => (
             <li key={e._id}>
