@@ -8,7 +8,7 @@ export type BlogDocument = Blog & Document;
 export class Blog {
   @Prop()
   title: string;
-  5;
+
   @Prop()
   body: string;
 }
@@ -16,5 +16,13 @@ export class Blog {
 export const BlogSchema = new mongoose.Schema({
   title: { type: String, default: null },
   body: { type: String, default: "" },
-  tags: { type: Array, default: [] },
+  tags: {
+    type: [
+      {
+        value: { type: String, default: null },
+        label: { type: String, default: null },
+      },
+    ],
+    default: [],
+  },
 });

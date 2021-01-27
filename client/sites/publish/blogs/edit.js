@@ -56,13 +56,14 @@ export default function Post({}) {
 
   const onFinish = async (value) => {
     try {
+      console.log(selected);
       if (id) {
         await BlogService.update(
           { id },
           {
             title: value.title,
             body: value.body,
-            tags,
+            tags: selected,
           }
         );
         message.success("Update blog");
@@ -70,7 +71,7 @@ export default function Post({}) {
         const result = await BlogService.create({
           title: value.title,
           body: value.body,
-          tags,
+          tags: selected,
         });
         message.success("Create blog");
         Router.push(`/publish/blogs/edit/${result._id}`);
@@ -127,7 +128,7 @@ export default function Post({}) {
           <Input placeholder="Basic usage" />
         </Form.Item>
 
-        <TagSelect />
+        <TagSelect selected={selected} setSelected={setSelected} />
 
         <Form.Item
           name="body"

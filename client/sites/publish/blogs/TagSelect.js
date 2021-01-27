@@ -4,7 +4,7 @@ import { TagService } from "../../../services";
 
 import "antd/dist/antd.css";
 
-export default function TagSelect({}) {
+export default function TagSelect({ ...props }) {
   const initQuery = { page: 1, limit: 20 };
 
   const [query, setQuery] = React.useState(initQuery);
@@ -32,10 +32,10 @@ export default function TagSelect({}) {
       id={"tags"}
       limit={query.limit}
       page={query.page}
-      selected={selected}
+      selected={props.selected}
       total={total}
       values={tags}
-      handleValue={setSelected}
+      handleValue={props.setSelected}
       search={(value) => {
         setQuery({ ...query, ...value });
       }}

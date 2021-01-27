@@ -38,6 +38,7 @@ export class BlogService extends BaseService {
         $set: {
           title: data.title,
           body: data.body,
+          tags: data.tags,
           updated_at: new Date(),
         },
       },
