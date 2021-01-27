@@ -11,17 +11,6 @@ export class BlogService extends BaseService {
     super(blogModel);
   }
 
-  async list(query): Promise<any> {
-    const criteria: any = {};
-    if (query.q) {
-      criteria.title = { $regex: query.q };
-    }
-    const page = Number(query.page);
-    const limit = Number(query.limit);
-    const skip = Math.ceil(limit * (page - 1));
-    return await this.blogModel.find(criteria).skip(skip).limit(limit).exec();
-  }
-
   async create(data: any): Promise<any> {
     const newBlog = new this.blogModel({
       title: data.title,

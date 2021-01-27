@@ -17,7 +17,6 @@ export default function Blogs({ posts, ...props}) {
   }, []);
 
   useEffect(() => {
-    console.log('fetchBlogs')
     fetchBlogs();
   }, [query]);
 

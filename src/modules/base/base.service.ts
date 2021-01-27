@@ -6,8 +6,8 @@ export class BaseService {
   constructor(private model: Model<any>) {}
 
   async paginate(query, options: any = {}): Promise<any> {
-    const result = { total: 0, items: [] };
-    const { limit, skip, filter } = this.parseQuery(query);
+    const { page, limit, skip, filter } = this.parseQuery(query);
+    const result = { total: 0, limit, page, skip, items: [] };
 
     const criteria: any = {};
     if (filter.q) {
