@@ -30,4 +30,9 @@ export default {
       tags: data.tags,
     });
   },
+
+  remove: async function remove(id) {
+    const result = await API.delete(`/api/blogs/${id}`);
+    return result;
+  },
 };

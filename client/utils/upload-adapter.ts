@@ -26,10 +26,8 @@ export default class UploadAdapter {
         method: "post",
         data,
         headers: getHeader(),
-        // withCredentials: true,
       })
         .then((res) => {
-          console.log(res);
           var resData = res.data;
           resData.default = resData.url;
           resolve(resData);

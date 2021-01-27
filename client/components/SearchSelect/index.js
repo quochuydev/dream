@@ -2,25 +2,23 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import _ from "lodash";
 
-import { message, Drawer, PageHeader, Button, Tag } from "antd";
-import {
-  RightCircleOutlined,
-  LeftCircleOutlined,
-  SearchOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import { Button, Tag } from "antd";
+import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 
 import "./style.css";
 import "antd/dist/antd.css";
 
 export default function SearchSelect({ values, ...props }) {
+  const valueKey = props.valueKey || "_id";
+  const labelKey = props.labelKey || "name";
+
   const [selected, setSelected] = React.useState([]);
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
     if (values) {
       const newOptions = values.map((e) =>
-        Object({ value: e._id, label: e.title })
+        Object({ value: e[valueKey], label: e[labelKey] })
       );
       setOptions(newOptions);
     }
@@ -48,7 +46,9 @@ export default function SearchSelect({ values, ...props }) {
           props.handleValue(value);
         }}
         onInputChange={(q) => {
-          props.search({ q });
+          if (props.search) {
+            props.search({ q });
+          }
         }}
       />
     </>
@@ -61,18 +61,6 @@ function Menu(props) {
 
   return (
     <div ref={innerRef} {...innerProps}>
-      <div>
-        <Button
-          onClick={async () => {
-            if (selectProps.add) {
-              await selectProps.add(selectProps.inputValue);
-            }
-          }}
-        >
-          ADD
-        </Button>
-        <span> {selectProps.inputValue}</span>
-      </div>
       {!selectProps.total && !!selectProps.inputValue && (
         <div>
           <Button

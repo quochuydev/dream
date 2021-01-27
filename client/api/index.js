@@ -37,26 +37,31 @@ export const APIFormData = new Fetch(
   { befores: [setHeaderFD], errors: [] }
 );
 
-function setHeader(config) {
-  config.headers["accessToken"] = localStorage.getItem("accessToken");
-}
-
-function setHeaderFD(config) {
-  const accessToken = localStorage.getItem("accessToken");
-  if (!accessToken && config.noNeedToken) {
-    localStorage.clear();
-    window.location.href = LOGIN_ROUTE;
+function getToken() {
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    window.location.href = "/";
     return;
   }
-  const headers = new Headers();
-  headers.append("Authorization", `Bearer ${accessToken}`);
-  config.headers = headers;
-  return config;
 }
 
 function getHeader(option = {}) {
   let base = {
-    accesstoken: "accessToken",
+    accesstoken: getToken(),
   };
   return _.assign({}, base, option);
+}
+
+function setHeader(config) {
+  config.headers["accessToken"] = getToken();
+}
+
+function setHeaderFD(config) {
+  const accessToken = getToken();
+
+  const headers = new Headers();
+  headers.append("Authorization", `Bearer ${accessToken}`);
+
+  config.headers = headers;
+  return config;
 }

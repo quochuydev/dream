@@ -31,6 +31,18 @@ export class BaseService {
     return this.model.findById(id);
   }
 
+  async remove(id) {
+    return await this.model.findOneAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          deleted_at: new Date(),
+        },
+      },
+      { lean: true, new: true }
+    );
+  }
+
   parseQuery(
     body,
     option = { writeLog: true, maxLimit: 500 },

@@ -53,6 +53,7 @@ export default function Posts({}) {
           selected={selected}
           total={total}
           values={blogs}
+          labelKey={"title"}
           handleValue={setSelected}
           search={(value) => {
             setQuery({ ...query, ...value });

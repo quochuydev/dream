@@ -45,17 +45,4 @@ export class BlogService extends BaseService {
     );
     return blog;
   }
-
-  async remove(id) {
-    const blog = await this.blogModel.findOneAndUpdate(
-      { _id: id },
-      {
-        $set: {
-          deleted_at: new Date(),
-        },
-      },
-      { lean: true, new: true }
-    );
-    return blog;
-  }
 }

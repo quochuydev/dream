@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button, message } from "antd";
 
 import { API } from "../../../../client/api";
+import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";
 
@@ -17,7 +18,7 @@ export default function Posts({}) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await API.get("/api/blogs", query);
+    const result = await BlogService.list(query);
     setBlogs(result.blogs);
   }
 
@@ -28,11 +29,10 @@ export default function Posts({}) {
         {blogs.map((e) => (
           <li key={e._id}>
             <Button
-              onClick={() => {
-                API.delete(`/api/blogs/${e._id}`).then((res) => {
-                  setQuery(initQuery);
-                  message.success("Delete success.");
-                });
+              onClick={async () => {
+                await BlogService.remove(e._id);
+                setQuery(initQuery);
+                message.success("Delete success.");
               }}
             >
               Remove

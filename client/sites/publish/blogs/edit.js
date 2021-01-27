@@ -13,6 +13,7 @@ import { API, BACKEND_URL } from "../../../../client/api";
 import { BlogService } from "../../../services";
 import SearchSelect from "../../../components/SearchSelect";
 import { Layout } from "../../../components";
+import TagSelect from "./TagSelect";
 
 import "antd/dist/antd.css";
 
@@ -24,6 +25,7 @@ export default function Post({}) {
   const { id } = router.query;
   const [tags, setTags] = React.useState([]);
   const [fileList, setFileList] = React.useState([]);
+  const [selected, setSelected] = React.useState([]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -126,7 +128,8 @@ export default function Post({}) {
           <Input placeholder="Basic usage" />
         </Form.Item>
 
-        <SearchSelect />
+        <TagSelect />
+
         <Form.Item
           name="body"
           valuePropName="data"
