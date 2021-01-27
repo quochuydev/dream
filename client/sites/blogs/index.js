@@ -33,14 +33,7 @@ export default function Posts({}) {
             setQuery(initQuery);
           }}
         >
-          Apply
-        </Button>
-        <Button
-          onClick={() => {
-            setQuery({ ...initQuery, limit: 10 });
-          }}
-        >
-          Apply 10
+          Apply filter
         </Button>
         <Link href={`/publish/blogs/create`}>New</Link>
         <ul>
