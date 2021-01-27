@@ -37,7 +37,7 @@ export const APIFormData = new Fetch(
   { befores: [setHeaderFD], errors: [] }
 );
 
-function getToken() {
+export function getToken() {
   const token = localStorage.getItem("accessToken");
   return token;
 }

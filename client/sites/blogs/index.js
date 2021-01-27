@@ -7,12 +7,10 @@ import { BlogService } from "../../services";
 
 import "antd/dist/antd.css";
 
-export default function Blogs({}) {
+export default function Blogs({...props}) {
   const initQuery = { page: 1, limit: 20 };
-
   const [query, setQuery] = React.useState(initQuery);
   const [blogs, setBlogs] = React.useState([]);
-  const [total, setTotal] = React.useState(0);
 
   React.useEffect(() => {
     fetchBlogs();
@@ -21,7 +19,6 @@ export default function Blogs({}) {
   async function fetchBlogs() {
     const result = await BlogService.publish.list(query);
     setBlogs(result.items);
-    setTotal(result.total);
   }
 
   return (

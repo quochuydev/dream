@@ -27,12 +27,7 @@ export default function Post({}) {
 
   async function getBlog(id) {
     const blog = await BlogService.publish.detail(id);
-    setData({
-      title: blog.title,
-      body: blog.body,
-      tags: blog.tags,
-      created_at: blog.created_at,
-    });
+    setData(blog);
   }
 
   return (

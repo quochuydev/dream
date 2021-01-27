@@ -9,7 +9,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
 
 import UploadAdapter from "../../../utils/upload-adapter";
-import { API, BACKEND_URL } from "../../../../client/api";
+import { API, BACKEND_URL, getToken } from "../../../../client/api";
 import { BlogService } from "../../../services";
 import { Layout } from "../../../components";
 import TagSelect from "./TagSelect";
@@ -82,7 +82,7 @@ export default function Post({}) {
 
   function getHeader(option = {}) {
     let base = {
-      accesstoken: "accessToken",
+      accesstoken: getToken(),
     };
     return _.assign({}, base, option);
   }
@@ -168,7 +168,7 @@ export default function Post({}) {
           fileList={fileList}
           {...uploadSetting}
         >
-          <Button>Choose File</Button>
+          <p>Choose File</p>
         </Upload>
       </Modal>
     </Layout>
