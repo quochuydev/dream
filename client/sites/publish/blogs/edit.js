@@ -104,24 +104,21 @@ export default function Post({}) {
       </Button>
       <br />
       <Link href={`/blogs`}>List</Link>
-
+      <Button type="primary" onClick={showModal} className="hide">
+        Upload
+      </Button>
+      <br />
+      {id && (
+        <Link href={`/blogs/${id}`}>
+          <EyeOutlined />
+        </Link>
+      )}
       <Form form={form} onFinish={onFinish}>
-        <Form.Item>
-          <Button type="primary" onClick={showModal}>
-            Upload
-          </Button>
-        </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
-
-        {id && (
-          <Link href={`/blogs/${id}`}>
-            <EyeOutlined />
-          </Link>
-        )}
 
         <Form.Item name="title" label="Title">
           <Input placeholder="Basic usage" />
