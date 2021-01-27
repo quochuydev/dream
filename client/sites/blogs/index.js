@@ -6,6 +6,7 @@ import Router from "next/router";
 import { API, BACKEND_URL } from "../../../client/api";
 import { Layout } from "../../components";
 import SearchSelect from "../../components/SearchSelect";
+import { BlogService } from "../../services";
 
 import "antd/dist/antd.css";
 
@@ -22,7 +23,7 @@ export default function Posts({}) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await API.get("/api/blogs", query);
+    const result = await BlogService.list(query);
     setBlogs(result.blogs);
     setTotal(result.total);
   }
