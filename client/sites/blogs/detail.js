@@ -26,7 +26,7 @@ export default function Post({}) {
   }, []);
 
   async function getBlog(id) {
-    const blog = await BlogService.detail(id);
+    const blog = await BlogService.publish.detail(id);
     setData({
       title: blog.title,
       body: blog.body,

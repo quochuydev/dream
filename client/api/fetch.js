@@ -21,6 +21,8 @@ export default class Fetch {
 
   buildRequest(url, method, body) {
     return new Promise((resolve, reject) => {
+      try {
+        
       for (const before of this.handle.before) {
         before(this.config)
       }
@@ -78,6 +80,9 @@ export default class Fetch {
         .catch((err) => {
           reject(err);
         });
+      } catch (error) {
+        reject(error);
+      }
     });
   }
 

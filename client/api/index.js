@@ -39,9 +39,6 @@ export const APIFormData = new Fetch(
 
 function getToken() {
   const token = localStorage.getItem("accessToken");
-  if (!token) {
-    throw new Error('401')
-  }
   return token;
 }
 
