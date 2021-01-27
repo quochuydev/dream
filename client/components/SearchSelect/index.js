@@ -73,7 +73,7 @@ function Menu(props) {
         </Button>
         <span> {selectProps.inputValue}</span>
       </div>
-      {!selectProps.total && (
+      {!selectProps.total && !!selectProps.inputValue && (
         <div>
           <Button
             onClick={() => {
