@@ -64,34 +64,35 @@ export default function SearchSelect({ values, ...props }) {
 
 function Menu(props) {
   const { innerRef, innerProps, children, selectProps } = props;
-  const totalPage = Math.ceil(selectProps.total / selectProps.limit);
+  const { total, page, limit, inputValue, add, search } = selectProps;
+  const totalPage = Math.ceil(total / limit);
 
   return (
     <div ref={innerRef} {...innerProps}>
-      {!selectProps.total && !!selectProps.inputValue && (
+      {!total && !!inputValue && (
         <div>
           <Button
             onClick={() => {
-              if (selectProps.add) {
-                selectProps.add(selectProps.inputValue);
+              if (add) {
+                add(inputValue);
               }
             }}
           >
             ADD
           </Button>
           <Tag color="cyan" style={{ fontSize: 15, marginLeft: 5 }}>
-            {selectProps.inputValue}
+            {inputValue}
           </Tag>
         </div>
       )}
-      {!!selectProps.total && (
+      {!!total && (
         <div>
           {children}
           <Button
             onClick={() => {
-              if (selectProps.search && selectProps.page - 1 >= 1) {
-                selectProps.search({
-                  page: selectProps.page - 1,
+              if (search && page - 1 >= 1) {
+                search({
+                  page: page - 1,
                 });
               }
             }}
@@ -99,13 +100,13 @@ function Menu(props) {
             <LeftCircleOutlined />
           </Button>
           <span>
-            {selectProps.page}/{totalPage}
+            {page}/{totalPage}
           </span>
           <Button
             onClick={() => {
-              if (selectProps.search && selectProps.page < totalPage) {
-                selectProps.search({
-                  page: selectProps.page + 1,
+              if (search && page < totalPage) {
+                search({
+                  page: page + 1,
                 });
               }
             }}
