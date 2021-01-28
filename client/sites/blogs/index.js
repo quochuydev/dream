@@ -34,32 +34,41 @@ export default function Blogs({ initBlogs, ...props }) {
   }
 
   return (
-    <>
-      <Layout>
-        <Button
-          onClick={() => {
-            setQuery(initQuery);
-          }}
-        >
-          Apply filter
-        </Button>
-        <Link href={`/publish/blogs/create`}>New</Link>
-        <ul>
-          {blogs.map((e) => (
-            <li key={e._id}>
-              <Link href={`/publish/blogs/edit/${e._id}`}>
-                <a>edit</a>
-              </Link>
-              {" | "}
-              <Link href={`/blogs/${e._id}`}>
-                <a>
-                  post: {e.title} {e.created_at}
-                </a>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </Layout>
-    </>
+    <Layout>
+      <Button
+        onClick={() => {
+          setQuery(initQuery);
+        }}
+      >
+        Apply filter
+      </Button>
+      <Link href={`/publish/blogs/create`}>New</Link>
+      <ul className="p-none">
+        {blogs.map((e, i) => (
+          <li key={e._id}>
+            <span>{i + 1}. </span>
+            <Link href={`/publish/blogs/edit/${e._id}`}>
+              <a>edit</a>
+            </Link>
+            {" | "}
+            <a
+              onClick={async () => {
+                await BlogService.remove(e._id);
+                message.success("Delete success.");
+                setQuery(initQuery);
+              }}
+            >
+              Remove
+            </a>
+            {" | "}
+            <Link href={`/blogs/${e._id}`}>
+              <a>
+                post: {e.title} {e.created_at}
+              </a>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Layout>
   );
 }

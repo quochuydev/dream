@@ -11,6 +11,15 @@ export class Blog {
 
   @Prop()
   body: string;
+
+  @Prop()
+  created_at: Date;
+
+  @Prop()
+  updated_at: Date;
+
+  @Prop()
+  deleted_at: Date;
 }
 
 export const BlogSchema = new mongoose.Schema({
@@ -25,4 +34,7 @@ export const BlogSchema = new mongoose.Schema({
     ],
     default: [],
   },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
+  deleted_at: { type: Date, default: null },
 });

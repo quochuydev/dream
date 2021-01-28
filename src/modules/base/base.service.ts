@@ -10,6 +10,11 @@ export class BaseService {
     const result = { total: 0, limit, page, skip, items: [] };
 
     const criteria: any = {};
+
+    if (filter.all != true) {
+      criteria.deleted_at = { $in: [null] };
+    }
+
     if (filter.q) {
       const keyword = options.keyword || "name";
       criteria[keyword] = { $regex: filter.q };
@@ -38,15 +43,17 @@ export class BaseService {
   }
 
   async remove(id) {
-    return await this.model.findOneAndUpdate(
+    const blog = await this.model.findOneAndUpdate(
       { _id: id },
       {
         $set: {
           deleted_at: new Date(),
         },
       },
-      { lean: true, new: true }
+      { lean: true, new: true, upsert: true }
     );
+
+    return blog;
   }
 
   parseQuery(
