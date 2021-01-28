@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Tag } from "antd";
 
 import { BlogService } from "../../services";
 import { Layout } from "../../components";
@@ -30,7 +31,9 @@ export default function Post({ blog, ...props }) {
       <h1>{data.title}</h1>
       <p>{data.created_at}</p>
       {data.tags.map((e) => (
-        <p key={e.value}>{e.label}</p>
+        <Tag key={e.value} color="cyan" style={{ marginLeft: 5 }}>
+          {e.label}
+        </Tag>
       ))}
       <div
         className="ck-content"
