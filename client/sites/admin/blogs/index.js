@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button, message } from "antd";
 
 import { API } from "../../../api";
+import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";
 
@@ -17,8 +18,8 @@ export default function Posts({}) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await API.get("/api/blogs");
-    setBlogs(result.blogs);
+    const result = await BlogService.publish.list();
+    setBlogs(result.items);
   }
 
   return (
