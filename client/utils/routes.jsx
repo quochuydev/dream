@@ -5,10 +5,10 @@ import { PATHS } from "../common/constants";
 const MENU_DATA = [
   {
     is_open: true,
-    key: "tag",
-    name: "Tag",
+    key: "blog",
+    name: "Blog",
     icon: <RightCircleOutlined />,
-    path: "#",
+    path: "/blogs",
   },
 ];
 
