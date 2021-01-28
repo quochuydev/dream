@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import { Menu, message, Drawer, PageHeader, Button } from "antd";
-import {
-  SearchOutlined,
-  MenuOutlined,
-} from "@ant-design/icons";
+import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
 
 import "./style.css";
 import "antd/dist/antd.css";
@@ -38,7 +35,14 @@ export default function LayoutComponent({ ...props }) {
                 setShowDrawer(true);
               }}
             />
-            {" Home"}
+            <span
+              className="cursor-pointer"
+              onClick={() => {
+                Router.push("/");
+              }}
+            >
+              {" Home"}
+            </span>
           </>
         }
         extra={[<SearchOutlined key={1} />]}
