@@ -51,6 +51,12 @@ export default function Blogs({ initBlogs, ...props }) {
               <a>edit</a>
             </Link>
             {" | "}
+            <Link href={`/blogs/${e._id}`}>
+              <a>post: {e.title}</a>
+            </Link>
+            {" | "}
+            <span> {e.created_at}</span>
+            {" | "}
             <a
               onClick={async () => {
                 await BlogService.remove(e._id);
@@ -58,14 +64,8 @@ export default function Blogs({ initBlogs, ...props }) {
                 setQuery(initQuery);
               }}
             >
-              Remove
+              remove
             </a>
-            {" | "}
-            <Link href={`/blogs/${e._id}`}>
-              <a>
-                post: {e.title} {e.created_at}
-              </a>
-            </Link>
           </li>
         ))}
       </ul>
