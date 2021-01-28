@@ -45,12 +45,56 @@ export default function LayoutComponent({ ...props }) {
             </span>
           </>
         }
-        extra={[<SearchOutlined key={1} />]}
+        extra={[
+          <div style={{ display: "block" }} key={0}>
+            {localStorage.getItem("me") ? (
+              <>
+                <p style={{ fontSize: 14 }}>
+                  {localStorage.getItem("me")}
+                  <a
+                    style={{
+                      marginLeft: 5,
+                      // display: "block",
+                      // position: "fixed",
+                      // bottom: 0,
+                    }}
+                    onClick={() => {
+                      localStorage.clear();
+                      Router.push("/");
+                    }}
+                  >
+                    logout
+                  </a>
+                </p>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    loginGoogle();
+                  }}
+                >
+                  login
+                </Button>
+              </>
+            )}
+          </div>,
+          <SearchOutlined key={1} className="hide" />,
+        ]}
       >
         {props.children}
       </PageHeader>
     </>
   );
+}
+
+async function loginGoogle() {
+  try {
+    const result = await APIClient.post("/login-google");
+    window.location.href = result;
+  } catch (error) {
+    message.error(error.message);
+  }
 }
 
 function LeftMenu() {
@@ -70,15 +114,6 @@ function LeftMenu() {
           </Link>
         </Menu.Item>
       );
-    }
-  }
-
-  async function loginGoogle() {
-    try {
-      const result = await APIClient.post("/login-google");
-      window.location.href = result;
-    } catch (error) {
-      message.error(error.message);
     }
   }
 
