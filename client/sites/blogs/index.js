@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button, message } from "antd";
 
@@ -7,16 +7,24 @@ import { BlogService } from "../../services";
 
 import "antd/dist/antd.css";
 
-export default function Blogs({ posts, ...props}) {
+export default function Blogs({ initBlogs, ...props }) {
   const initQuery = { page: 1, limit: 20 };
   const [query, setQuery] = useState(initQuery);
   const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
-    setBlogs(posts);
-  }, []);
+  function useDidUpdateEffect(fn, inputs) {
+    const didMountRef = useRef(false);
+    useEffect(() => {
+      if (didMountRef.current) fn();
+      else didMountRef.current = true;
+    }, inputs);
+  }
 
   useEffect(() => {
+    setBlogs(initBlogs);
+  }, []);
+
+  useDidUpdateEffect(() => {
     fetchBlogs();
   }, [query]);
 

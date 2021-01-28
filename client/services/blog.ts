@@ -6,12 +6,11 @@ export default {
       return await APIClient.get("/api/blogs", query);
     },
 
-    detail: async function(id) {
+    detail: async function (id) {
       return await APIClient.get(`/api/blogs/${id}`);
     },
+  },
 
-  }, 
-  
   list: async function (query) {
     const result = await API.get("/api/blogs", query);
     return {

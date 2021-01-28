@@ -7,7 +7,7 @@ import { Layout } from "../../components";
 
 import "antd/dist/antd.css";
 
-export default function Post({blog, ...props}) {
+export default function Post({ blog, ...props }) {
   const initData = {
     title: "",
     body: "",
@@ -19,22 +19,19 @@ export default function Post({blog, ...props}) {
   const { id } = router.query;
 
   useEffect(() => {
-    if (id) {
-      getBlog(id);
+    if (blog) {
+      setData(blog);
     }
-  }, []);
-
-  async function getBlog(id) {
-    // const blog = await BlogService.publish.detail(id);
-    setData(blog);
-  }
+  }, [blog]);
 
   return (
     <Layout>
       <Link href={`/blogs`}>List</Link>
       <h1>{data.title}</h1>
       <p>{data.created_at}</p>
-      {data.tags.map(e => <p key={e.value}>{e.label}</p>)}
+      {data.tags.map((e) => (
+        <p key={e.value}>{e.label}</p>
+      ))}
       <div
         className="ck-content"
         dangerouslySetInnerHTML={{ __html: data.body }}

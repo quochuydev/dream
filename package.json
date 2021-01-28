@@ -14,7 +14,7 @@
     "dev:server": "nest start --watch",
     "dev:next": "cd client && next",
     "dev:web": "cross-env NODE_ENV=development ts-node -P tsconfig.build.json src/dev.server",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"**/*.ts\"",
     "postinstall": "tsc --sourceMap false",
     "start": "node dist/main.js",
     "dev": "nest start",
