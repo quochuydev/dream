@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, BadRequestException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { BaseService } from "../base/base.service";
@@ -12,8 +12,13 @@ export class BlogService extends BaseService {
   }
 
   async create(data: any): Promise<any> {
+    if (!data.title) {
+      throw new BadRequestException("Missing title");
+    }
+
     const newBlog = new this.blogModel({
       title: data.title,
+      slug: toSlug(data.titile),
       body: data.body,
       tags: data.tags,
     });
@@ -36,4 +41,15 @@ export class BlogService extends BaseService {
     );
     return blog;
   }
+}
+
+function toSlug(text) {
+  return (
+    text
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, "") +
+    "-" +
+    Date.now()
+  );
 }

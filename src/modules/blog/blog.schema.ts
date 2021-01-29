@@ -10,6 +10,9 @@ export class Blog {
   title: string;
 
   @Prop()
+  slug: string;
+
+  @Prop()
   body: string;
 
   @Prop()
@@ -24,6 +27,8 @@ export class Blog {
 
 export const BlogSchema = new mongoose.Schema({
   title: { type: String, default: null },
+  slug: { type: String, default: null },
+
   body: { type: String, default: "" },
   tags: {
     type: [
