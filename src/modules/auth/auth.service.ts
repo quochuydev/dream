@@ -3,6 +3,7 @@ import { google } from "googleapis";
 import jwt from "jsonwebtoken";
 
 import { UserService } from "../user/user.service";
+import { TokenService } from "../../providers/token/token.service";
 
 const google_app = {
   clientId: process.env.CLIENT_ID,
@@ -24,7 +25,10 @@ const url = oauth2Client.generateAuthUrl({
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly tokenService: TokenService
+  ) {}
 
   async buildLink() {
     return url;
@@ -41,16 +45,22 @@ export class AuthService {
       email: userAuth.email,
     });
     const user_gen_token = {
+      sub: user.id,
       email: user.email,
-      exp: (Date.now() + 8 * 60 * 60 * 1000) / 1000,
     };
 
-    const userToken = jwt.sign(user_gen_token, "hash_token");
+    const userToken = this.tokenService.signJwt(
+      "ACCESS_TOKEN",
+      user_gen_token,
+      "2m"
+    );
     return userToken;
   }
 
-  async me(token) {
-    const userAuth = jwt.verify(token, "hash_token");
-    return { email: userAuth.email };
+  async me(userId) {
+    const user = await this.userService.findOne({
+      _id: userId,
+    });
+    return { email: user.email };
   }
 }

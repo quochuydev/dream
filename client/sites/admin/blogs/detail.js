@@ -18,7 +18,7 @@ export default function Post({}) {
   const [data, setData] = useState({ title: "", body: "" });
   const router = useRouter();
   const { id } = router.query;
-  const [multi, setMulti] = React.useState([]);
+  const [tags, setTags] = React.useState([]);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -41,7 +41,7 @@ export default function Post({}) {
   async function getBlog(id) {
     const result = await BlogService.detail(id);
     setData({ title: result.title, body: result.body || "" });
-    setMulti(result.tags);
+    setTags(result.tags);
   }
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Post({}) {
         {
           title: value.title,
           body: value.body,
-          tags: multi,
+          tags,
         }
       );
       message.success("Update blog");
@@ -63,7 +63,7 @@ export default function Post({}) {
       await BlogService.create({
         title: value.title,
         body: value.body,
-        tags: multi,
+        tags,
       });
       message.success("Create blog");
     }

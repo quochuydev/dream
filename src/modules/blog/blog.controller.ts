@@ -7,9 +7,12 @@ import {
   Put,
   Query,
   Delete,
+  UseGuards,
 } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 import { BlogDto } from "./blog.dto";
+import { JwtGuard } from "../auth/jwt.guard";
+import { AuthUser } from "../../decorators";
 
 @Controller("/api/blogs")
 export class BlogController {
@@ -22,6 +25,12 @@ export class BlogController {
 
   @Get("/:id")
   async detail(@Param("id") id: string) {
+    return await this.blogService.get(id);
+  }
+
+  @Get("/:id/edit")
+  @UseGuards(JwtGuard)
+  async edit(@Param("id") id: string) {
     return await this.blogService.get(id);
   }
 

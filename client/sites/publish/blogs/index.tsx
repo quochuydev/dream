@@ -2,12 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { Button, message } from "antd";
 
-import { API } from "../../../../client/api";
 import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";
 
-export default function Posts({}) {
+export default function Blogs({}) {
   const initQuery = { page: 1, limit: 20 };
 
   const [query, setQuery] = React.useState(initQuery);

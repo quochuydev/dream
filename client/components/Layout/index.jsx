@@ -11,6 +11,9 @@ import { MENU_DATA } from "../../utils/routes";
 
 export default function LayoutComponent({ ...props }) {
   const [showDrawer, setShowDrawer] = useState(false);
+  function getMe() {
+    return localStorage.getItem("me");
+  }
 
   return (
     <>
@@ -47,10 +50,10 @@ export default function LayoutComponent({ ...props }) {
         }
         extra={[
           <div style={{ display: "block" }} key={0}>
-            {localStorage.getItem("me") ? (
+            {getMe() ? (
               <>
                 <p style={{ fontSize: 14 }}>
-                  {localStorage.getItem("me")}
+                  {getMe()}
                   <a
                     style={{
                       marginLeft: 5,
@@ -119,8 +122,8 @@ function LeftMenu() {
 
   return (
     <div style={{ display: "block" }}>
-      {localStorage.getItem("me") ? (
-        <p>{localStorage.getItem("me")}</p>
+      {getMe() ? (
+        <p>{getMe()}</p>
       ) : (
         <>
           <Button
@@ -135,7 +138,7 @@ function LeftMenu() {
       <Menu theme="light" mode="inline">
         {menuItems}
       </Menu>
-      {localStorage.getItem("me") && (
+      {getMe() && (
         <a
           style={{
             display: "block",

@@ -1,4 +1,11 @@
 import { API, APIClient } from "../api";
+import Router from "next/router";
+
+function handleError() {
+  localStorage.clear();
+  Router.push(`/401`);
+  return;
+}
 
 export default {
   publish: {
@@ -28,9 +35,13 @@ export default {
     return result;
   },
 
-  detail: async function detail(id) {
-    const result = await API.get(`/api/blogs/${id}`);
-    return result;
+  detail: async function detail(id, options?) {
+    try {
+      const result = await API.get(`/api/blogs/${id}/edit`, options);
+      return result;
+    } catch (error) {
+      handleError();
+    }
   },
 
   update: async function update(query, data) {

@@ -1,7 +1,8 @@
 import React from "react";
 import Router from "next/router";
+import { CookiesProvider } from "react-cookie";
 
-import Loading from '../components/Loading'
+import Loading from "../components/Loading";
 
 import "../styles/global.css";
 import "../styles/ckeditor.css";
@@ -24,14 +25,12 @@ export default function App({ Component, pageProps }) {
       Router.events.off("routeChangeError", end);
     };
   }, []);
-  
+
   return (
     <>
-    {loading ? (
-      <Loading/>
-    ) : (
-      <Component {...pageProps} />
-    )}
-  </>
+      <CookiesProvider>
+        {loading ? <Loading /> : <Component {...pageProps} />}
+      </CookiesProvider>
+    </>
   );
 }

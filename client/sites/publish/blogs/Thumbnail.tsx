@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Modal, Upload } from "antd";
-import { BACKEND_URL, getToken } from "../../../../client/api";
+import { BACKEND_URL, getHeader } from "../../../../client/api";
 import _ from "lodash";
 
 import "antd/dist/antd.css";
@@ -20,13 +20,6 @@ export default function Thumbnail({ ...props }) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  function getHeader(option = {}) {
-    let base = {
-      accesstoken: getToken(),
-    };
-    return _.assign({}, base, option);
-  }
 
   const uploadSetting = {
     action: `${BACKEND_URL}/api/files`,

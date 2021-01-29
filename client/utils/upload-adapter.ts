@@ -1,13 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
-import { BACKEND_URL } from "../api";
-
-function getHeader(option = {}) {
-  let base = {
-    accesstoken: "accessToken",
-  };
-  return _.assign({}, base, option);
-}
+import { BACKEND_URL, getToken, getHeader } from "../api";
 
 export default class UploadAdapter {
   loader: any;

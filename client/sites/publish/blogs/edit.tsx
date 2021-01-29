@@ -8,7 +8,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import UploadAdapter from "../../../utils/upload-adapter";
-import { BACKEND_URL } from "../../../../client/api";
+import { BACKEND_URL, getToken } from "../../../api";
 import { BlogService } from "../../../services";
 import { Layout } from "../../../components";
 import TagSelect from "./TagSelect";
@@ -16,7 +16,7 @@ import Thumbnail from "./Thumbnail";
 
 import "antd/dist/antd.css";
 
-export default function Post({}) {
+export default function Blog({}) {
   const router = useRouter();
   const { id } = router.query;
   const [form] = Form.useForm();
@@ -31,8 +31,10 @@ export default function Post({}) {
 
   async function getBlog(id) {
     const result = await BlogService.detail(id);
-    setData({ title: result.title, body: result.body || "" });
-    setTags(result.tags);
+    if (result) {
+      setData({ title: result.title, body: result.body || "" });
+      setTags(result.tags);
+    }
   }
 
   useEffect(() => {
@@ -112,7 +114,6 @@ export default function Post({}) {
               ckfinder: {
                 uploadUrl: `${BACKEND_URL}/api/files`,
                 headers: {
-                  accesstoken: "accessToken",
                   Authorization: "Bearer accessToken",
                 },
               },

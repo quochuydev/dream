@@ -28,8 +28,8 @@ export class Blog {
 export const BlogSchema = new mongoose.Schema({
   title: { type: String, default: null },
   slug: { type: String, default: null },
-
   body: { type: String, default: "" },
+
   tags: {
     type: [
       {
@@ -39,6 +39,8 @@ export const BlogSchema = new mongoose.Schema({
     ],
     default: [],
   },
+
+  userId: { type: String, default: null },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   deleted_at: { type: Date, default: null },

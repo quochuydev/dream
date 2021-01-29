@@ -20,6 +20,5 @@ import { SSRModule } from "./server";
     ...(process.env.NODE_ENV == "production" ? [SSRModule.forRoot()] : []),
   ],
   controllers: [],
-  providers: [],
 })
 export class AppModule {}

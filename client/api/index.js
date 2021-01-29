@@ -7,6 +7,19 @@ export const BACKEND_URL =
     ? process.env.BACKEND_URL
     : "http://localhost:8000";
 
+import APIFactory from "./call";
+export const API = APIFactory({ baseUrl: BACKEND_URL });
+// export const API = new Fetch(
+//   BACKEND_URL,
+//   {
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//     },
+//   },
+//   { before: [setHeader] }
+// );
+
 export const APIClient = new Fetch(
   BACKEND_URL,
   {
@@ -18,40 +31,32 @@ export const APIClient = new Fetch(
   { before: [] }
 );
 
-export const API = new Fetch(
-  BACKEND_URL,
-  {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  },
-  { before: [setHeader] }
-);
-
 export const APIFormData = new Fetch(
   process.env.BACKEND_URL,
   {
     headers: {},
   },
-  { befores: [setHeaderFD], errors: [] }
+  { befores: [setConfigFormData], errors: [] }
 );
+
+function setConfigFormData(config) {
+  const accessToken = getToken();
+  const headers = new Headers();
+  headers.append("Authorization", `Bearer ${accessToken}`);
+
+  config.headers = headers;
+  config.notStringifyBody = true;
+  return config;
+}
 
 export function getToken() {
   const token = localStorage.getItem("accessToken");
   return token;
 }
 
-function setHeader(config) {
-  config.headers["accessToken"] = getToken();
-}
-
-function setHeaderFD(config) {
-  const accessToken = getToken();
-
-  const headers = new Headers();
-  headers.append("Authorization", `Bearer ${accessToken}`);
-
-  config.headers = headers;
-  return config;
+export function getHeader(option = {}) {
+  let base = {
+    accesstoken: getToken(),
+  };
+  return _.assign({}, base, option);
 }
