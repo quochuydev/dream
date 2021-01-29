@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import _ from "lodash";
+import { Form, message, Input, Button } from "antd";
 import { EyeOutlined, LeftCircleOutlined } from "@ant-design/icons";
-import { Input, Button } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Form, message } from "antd";
 
 import UploadAdapter from "../../../utils/upload-adapter";
 import { BACKEND_URL } from "../../../../client/api";

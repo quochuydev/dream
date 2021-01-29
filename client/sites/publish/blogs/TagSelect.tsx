@@ -1,4 +1,5 @@
 import React from "react";
+
 import SearchSelect from "../../../components/SearchSelect";
 import { TagService } from "../../../services";
 
@@ -22,8 +23,8 @@ export default function TagSelect({ ...props }) {
   }
 
   async function createTag(data) {
-    const result = await TagService.create(data);
-    console.log(result);
+    await TagService.create(data);
+    setQuery({ ...query });
   }
 
   return (
@@ -40,7 +41,6 @@ export default function TagSelect({ ...props }) {
       }}
       add={async (name) => {
         await createTag({ name });
-        setQuery({ ...query });
       }}
     />
   );
