@@ -59,9 +59,13 @@ export default function Blogs({ initBlogs, ...props }) {
             {" | "}
             <a
               onClick={async () => {
-                await BlogService.remove(e._id);
-                message.success("Delete success.");
-                setQuery(initQuery);
+                try {
+                  await BlogService.remove(e._id);
+                  message.success("Delete success.");
+                  setQuery(initQuery); 
+                } catch (error) {
+                  message.error(error.message);
+                }
               }}
             >
               remove

@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { google } from "googleapis";
-import jwt from "jsonwebtoken";
+import { decode } from "jsonwebtoken";
 
 import { UserService } from "../user/user.service";
 import { TokenService } from "../../providers/token/token.service";
@@ -36,7 +36,7 @@ export class AuthService {
 
   async auth(code) {
     const { tokens } = await oauth2Client.getToken(code);
-    const userAuth = jwt.decode(tokens.id_token);
+    const userAuth = decode(tokens.id_token);
     if (!userAuth.email) {
       throw { status: 401 };
     }
@@ -45,7 +45,7 @@ export class AuthService {
       email: userAuth.email,
     });
     const user_gen_token = {
-      sub: user.id,
+      sub: user._id,
       email: user.email,
     };
 
@@ -61,6 +61,6 @@ export class AuthService {
     const user = await this.userService.findOne({
       _id: userId,
     });
-    return { email: user.email };
+    return { _id: user._id, email: user.email };
   }
 }

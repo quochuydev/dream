@@ -1,6 +1,7 @@
 import _ from "lodash";
 import fetch from "isomorphic-fetch";
 import { getToken } from "./index";
+import Router from "next/router";
 
 const APIFactory = ({ baseUrl }) => {
   const API = {
@@ -23,7 +24,20 @@ const APIFactory = ({ baseUrl }) => {
 
   return API;
 
-  function call(endpoint, config = {}, method) {
+  async function call(endpoint, config = {}, method) {
+    try {
+      const result =  await _call(endpoint, config = {}, method)
+      return result;
+    } catch (error) {
+      if(error.statusCode === 401){
+        localStorage.clear();
+        Router.push(`/401`);
+      }
+      throw error;
+    }
+  }
+
+  function _call(endpoint, config = {}, method) {
     return new Promise((resolve, reject) => {
       const url = makeUrl(endpoint, config);
       const headers = {
@@ -51,12 +65,7 @@ const APIFactory = ({ baseUrl }) => {
           }
           const data = await response[type]();
           if (!response.ok) {
-            const error = {};
-            error.data = data;
-            error.code = response.status;
-            error.message = data.message;
-            error.isError = true;
-            throw error;
+            throw data;
           }
           return data;
         })

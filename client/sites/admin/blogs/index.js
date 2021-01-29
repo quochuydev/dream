@@ -33,6 +33,8 @@ export default function Posts({}) {
                 API.delete(`/api/blogs/${e._id}`).then((res) => {
                   setQuery(initQuery);
                   message.success("Delete success.");
+                }).catch(err =>{
+                  message.error(err.message);
                 });
               }}
             >
