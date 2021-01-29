@@ -11,7 +11,7 @@ export class BaseService {
 
     const criteria: any = {};
 
-    if (filter.all != true) {
+    if (filter.all != 'true') {
       criteria.deleted_at = { $in: [null] };
     }
 

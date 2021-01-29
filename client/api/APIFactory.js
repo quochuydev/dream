@@ -26,7 +26,7 @@ const APIFactory = ({ baseUrl }) => {
 
   async function call(endpoint, config = {}, method) {
     try {
-      const result =  await _call(endpoint, config = {}, method)
+      const result =  await _call(endpoint, config, method)
       return result;
     } catch (error) {
       if(error.statusCode === 401){
@@ -40,6 +40,7 @@ const APIFactory = ({ baseUrl }) => {
   function _call(endpoint, config = {}, method) {
     return new Promise((resolve, reject) => {
       const url = makeUrl(endpoint, config);
+      console.log(config)
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",

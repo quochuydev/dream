@@ -12,11 +12,8 @@ export default {
   },
 
   list: async function (query) {
-    const result = await API.get("/api/blogs", query);
-    return {
-      total: result.total,
-      blogs: result.items,
-    };
+    const result = await API.get("/api/blogs", { query });
+    return result;
   },
 
   create: async function (data) {
@@ -29,20 +26,14 @@ export default {
   },
 
   detail: async function detail(id) {
-    const result = await API.get(`/api/blogs/${id}/edit`);
-    return result;
+    return await API.get(`/api/blogs/${id}/edit`);
   },
 
-  update: async function update(query, data) {
-    return await API.put(`/api/blogs/${query.id}`, {
-      title: data.title,
-      body: data.body,
-      tags: data.tags,
-    });
+  update: async function update(query, body) {
+    return await API.put(`/api/blogs/${query.id}`, { body });
   },
 
   remove: async function remove(id) {
-    const result = await API.delete(`/api/blogs/${id}`);
-    return result;
+    return await API.delete(`/api/blogs/${id}`);
   },
 };

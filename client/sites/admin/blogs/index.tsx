@@ -1,12 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { Input, Form, Button } from "antd";
+import React from "react";
+import Link from "next/link";
+import { Button, message, Table } from "antd";
 
+import { API } from "../../../api";
+import { BlogService } from "../../../services";
 import ImageCrop from "./image-crop";
 
-export default function ({ ...props }) {
+import "antd/dist/antd.css";
+
+export default function Blogs({}) {
+  const initQuery = { all: true, page: 1, limit: 20 };
+
+  const [query, setQuery] = React.useState(initQuery);
+  const [blogs, setBlogs] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchBlogs();
+  }, [query]);
+
+  async function fetchBlogs() {
+    const result = await BlogService.list(query);
+    setBlogs(result.items);
+  }
+
+  const columns = [{
+    key: 'id',
+    title: 'id',
+    dataIndex: '_id',
+  },
+  {
+    key: 'created_at',
+    title: 'created_at',
+    render:(value) => {
+    return <div>{value.created_at}</div>
+    },
+  },
+  {
+    key: 'deleted_at',
+    title: 'deleted_at',
+    render:(value) => {
+    return <div>{value.deleted_at} <Button onClick={async ()=>{
+      const result = await BlogService.update({id: value._id}, { deleted_at: null })
+      message.success(result.message)
+      setQuery({...query})
+    }}>publist</Button></div>
+    },
+  }
+]
+
   return (
-    <div>
+    <>
+      <Link href={`/blogs/create`}>New</Link>
+      <Table rowKey="_id" columns={columns} dataSource={blogs}/>
+      <ul>
+        {blogs.map((e) => (
+          <li key={e._id}>
+            <Button
+              onClick={() => {
+                API.delete(`/api/blogs/${e._id}`).then((res) => {
+                  setQuery(initQuery);
+                  message.success("Delete success.");
+                }).catch(err =>{
+                  message.error(err.message);
+                });
+              }}
+            >
+              Remove
+            </Button>
+            <Link href={`/blogs/edit/${e._id}`}>
+              <a>post: {e.title}</a>
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: e.body }}></div>
+          </li>
+        ))}
+      </ul>
       <ImageCrop />
-    </div>
+    </>
   );
 }

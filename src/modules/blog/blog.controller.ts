@@ -42,7 +42,7 @@ export class BlogController {
 
   @Put("/:id")
   @UseGuards(JwtGuard)
-  async update(@Param("id") id: string, @Body() data: BlogDto) {
+  async update(@Param("id") id: string, @Body() data: any) {
     return await this.blogService.update(id, data);
   }
 

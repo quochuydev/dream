@@ -57,6 +57,7 @@
     "react": "^0.0.0-8e5adfbd7",
     "react-cookie": "^4.0.3",
     "react-dom": "^0.0.0-8e5adfbd7",
+    "react-image-crop": "^8.6.6",
     "react-select": "^3.2.0",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
