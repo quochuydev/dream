@@ -35,16 +35,19 @@ export class BlogController {
   }
 
   @Post()
+  @UseGuards(JwtGuard)
   async create(@Body() data: BlogDto) {
     return await this.blogService.create(data);
   }
 
   @Put("/:id")
+  @UseGuards(JwtGuard)
   async update(@Param("id") id: string, @Body() data: BlogDto) {
     return await this.blogService.update(id, data);
   }
 
   @Delete("/:id")
+  @UseGuards(JwtGuard)
   async remove(@Param("id") id: string) {
     return await this.blogService.remove(id);
   }
