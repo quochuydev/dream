@@ -3,16 +3,17 @@ import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import _ from "lodash";
 import { EyeOutlined, LeftCircleOutlined } from "@ant-design/icons";
-import { Input, Button, Modal, Upload } from "antd";
+import { Input, Button } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
 
 import UploadAdapter from "../../../utils/upload-adapter";
-import { API, BACKEND_URL, getToken } from "../../../../client/api";
+import { BACKEND_URL } from "../../../../client/api";
 import { BlogService } from "../../../services";
 import { Layout } from "../../../components";
 import TagSelect from "./TagSelect";
+import Thumbnail from "./Thumbnail";
 
 import "antd/dist/antd.css";
 
@@ -20,23 +21,8 @@ export default function Post({}) {
   const router = useRouter();
   const { id } = router.query;
   const [form] = Form.useForm();
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const [data, setData] = useState({ title: "", body: "" });
   const [tags, setTags] = useState([]);
-  const [fileList, setFileList] = useState([]);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   useEffect(() => {
     if (id) {
@@ -80,23 +66,6 @@ export default function Post({}) {
     }
   };
 
-  function getHeader(option = {}) {
-    let base = {
-      accesstoken: getToken(),
-    };
-    return _.assign({}, base, option);
-  }
-
-  const uploadSetting = {
-    action: `${BACKEND_URL}/api/files`,
-    headers: getHeader(),
-    accept: ".jpg, .png",
-    onPreview: (e) => console.log(e),
-    onChange: (e) => {
-      setFileList(e.fileList);
-    },
-  };
-
   return (
     <Layout>
       <Button onClick={() => Router.back()}>
@@ -104,9 +73,6 @@ export default function Post({}) {
       </Button>
       <br />
       <Link href={`/blogs`}>List</Link>
-      <Button type="primary" onClick={showModal} className="hide">
-        Upload
-      </Button>
       <br />
       {id && (
         <Link href={`/blogs/${id}`}>
@@ -155,22 +121,7 @@ export default function Post({}) {
           />
         </Form.Item>
       </Form>
-      <Modal
-        title="Basic Modal"
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <Upload
-          name="upload"
-          listType="picture-card"
-          className="avatar-uploader"
-          fileList={fileList}
-          {...uploadSetting}
-        >
-          <p>Choose File</p>
-        </Upload>
-      </Modal>
+      <Thumbnail className="hide" />
     </Layout>
   );
 }
