@@ -9,11 +9,12 @@ import "antd/dist/antd.css";
 import { APIClient } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
 
+function getMe() {
+  return localStorage.getItem("me");
+}
+
 export default function LayoutComponent({ ...props }) {
   const [showDrawer, setShowDrawer] = useState(false);
-  function getMe() {
-    return localStorage.getItem("me");
-  }
 
   return (
     <>

@@ -52,7 +52,7 @@ export class AuthService {
     const userToken = this.tokenService.signJwt(
       "ACCESS_TOKEN",
       user_gen_token,
-      "2m"
+      "30d"
     );
     return userToken;
   }
