@@ -7,18 +7,8 @@ export const BACKEND_URL =
     ? process.env.BACKEND_URL
     : "http://localhost:8000";
 
-import APIFactory from "./call";
+import APIFactory from "./APIFactory";
 export const API = APIFactory({ baseUrl: BACKEND_URL });
-// export const API = new Fetch(
-//   BACKEND_URL,
-//   {
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//     },
-//   },
-//   { before: [setHeader] }
-// );
 
 export const APIClient = new Fetch(
   BACKEND_URL,
