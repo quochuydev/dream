@@ -10,9 +10,9 @@ async function remoteMongoJoin({ source, dest }) {
   dest.limit = dest.limit || 100000;
   dest.join = dest.join || _joinData;
 
-  let keys = [];
+  const keys = [];
 
-  for (let i in source.items) {
+  for (const i in source.items) {
     let item = source.items[i];
     if (typeof item.toObject === "function") {
       item = item.toObject();
@@ -30,7 +30,7 @@ async function remoteMongoJoin({ source, dest }) {
     return;
   }
 
-  let filter = dest.filter(keys);
+  const filter = dest.filter(keys);
 
   if (typeof dest.find === "function") {
     dest.items = await dest.find(filter, { keys, source, dest });
@@ -58,7 +58,7 @@ async function remoteMongoJoin({ source, dest }) {
 }
 
 function _joinData({ source, dest }) {
-  for (let s_item of source.items) {
+  for (const s_item of source.items) {
     let d_item = dest.items.find(
       (item) => item[dest.key] == s_item[source.key]
     );
@@ -72,7 +72,7 @@ function _joinData({ source, dest }) {
 }
 
 function _assignDefault({ source, dest }) {
-  for (let s_item of source.items) {
+  for (const s_item of source.items) {
     source.assign(s_item, dest.default_value);
   }
 }

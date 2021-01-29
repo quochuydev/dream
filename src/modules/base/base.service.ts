@@ -64,7 +64,7 @@ export class BaseService {
     let { page = 1, limit = 20 } = { ...defaults, ...body };
     page = Number(page);
     limit = Math.min(Number(limit), option.maxLimit);
-    let skip = (page - 1) * limit;
+    const skip = (page - 1) * limit;
 
     delete body.limit;
     delete body.page;
