@@ -2,9 +2,9 @@ import React from "react";
 import Link from "next/link";
 import { Button, message, Table } from "antd";
 
-import { API } from "../../../api";
 import { BlogService } from "../../../services";
 import ImageCrop from "./image-crop";
+import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";
 
@@ -49,32 +49,10 @@ export default function Blogs({}) {
 ]
 
   return (
-    <>
-      <Link href={`/blogs/create`}>New</Link>
-      <Table rowKey="_id" columns={columns} dataSource={blogs}/>
-      <ul>
-        {blogs.map((e) => (
-          <li key={e._id}>
-            <Button
-              onClick={() => {
-                API.delete(`/api/blogs/${e._id}`).then((res) => {
-                  setQuery(initQuery);
-                  message.success("Delete success.");
-                }).catch(err =>{
-                  message.error(err.message);
-                });
-              }}
-            >
-              Remove
-            </Button>
-            <Link href={`/blogs/edit/${e._id}`}>
-              <a>post: {e.title}</a>
-            </Link>
-            <div dangerouslySetInnerHTML={{ __html: e.body }}></div>
-          </li>
-        ))}
-      </ul>
+    <Layout>
+      <Link href={`/publish/blogs/create`}>New</Link>
+      <Table rowKey="_id" columns={columns} dataSource={blogs} pagination={false}/>
       <ImageCrop />
-    </>
+    </Layout>
   );
 }
