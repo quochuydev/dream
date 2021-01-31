@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import _ from "lodash";
-import { Form, message, Input, Button } from "antd";
-import { EyeOutlined, LeftCircleOutlined } from "@ant-design/icons";
+import { Form, message, Input, Button, Row, Col } from "antd";
+import { EyeOutlined, DeleteOutlined, SaveOutlined } from "@ant-design/icons";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
@@ -48,6 +48,7 @@ export default function Blog({}) {
           { id },
           {
             title: value.title,
+            slug: value.slug,
             body: value.body,
             tags,
           }
@@ -68,58 +69,75 @@ export default function Blog({}) {
   };
 
   return (
-    <Layout>
-      <Button onClick={() => Router.back()}>
-        <LeftCircleOutlined />
-      </Button>
-      <br />
-      <Link href={`/blogs`}>List</Link>
-      <br />
-      {id && (
-        <Link href={`/blogs/${id}`}>
-          <EyeOutlined />
-        </Link>
-      )}
+    <Layout sub={[{ name: 'Blogs', to: '/blogs' }, { name: 'test test' }]}>
       <Form form={form} onFinish={onFinish}>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
+        <Row gutter={8}>
+          <Col span={24}>
+            {id && (
+              <Link href={`/blogs/${id}`}>
+                <Button icon={<EyeOutlined />}>
+                  Preview
+                </Button>
+              </Link>
+            )}
+              <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+                Save
+              </Button>
+          </Col>
 
-        <Form.Item name="title" label="Title">
-          <Input placeholder="Basic usage" />
-        </Form.Item>
+          <Col span={16}>
+            <p>Title</p>
+            <Form.Item name="title">
+              <Input size="large" placeholder="Title..." />
+            </Form.Item>
 
-        <TagSelect selected={tags} setSelected={setTags} />
+            <p>Description:</p>
+            <Form.Item
+              name="body"
+              valuePropName="data"
+              getValueFromEvent={(event, editor) => {
+                const data = editor.getData();
+                return data;
+              }}
+            >
+              <CKEditor
+                editor={ClassicEditor}
+                onReady={(editor) => {
+                  editor.plugins.get(
+                    "FileRepository"
+                  ).createUploadAdapter = function (loader) {
+                    return new UploadAdapter(loader);
+                  };
+                }}
+                config={{
+                  ckfinder: {
+                    uploadUrl: `${BACKEND_URL}/api/files`,
+                    headers: {
+                      Authorization: `Bearer ${getToken()}`,
+                    },
+                  },
+                }}
+              />
+            </Form.Item>
 
-        <Form.Item
-          name="body"
-          valuePropName="data"
-          getValueFromEvent={(event, editor) => {
-            const data = editor.getData();
-            return data;
-          }}
-        >
-          <CKEditor
-            editor={ClassicEditor}
-            onReady={(editor) => {
-              editor.plugins.get(
-                "FileRepository"
-              ).createUploadAdapter = function (loader) {
-                return new UploadAdapter(loader);
-              };
-            }}
-            config={{
-              ckfinder: {
-                uploadUrl: `${BACKEND_URL}/api/files`,
-                headers: {
-                  Authorization: "Bearer accessToken",
-                },
-              },
-            }}
-          />
-        </Form.Item>
+          </Col>
+          <Col span={8}>
+            <p>Tags:</p>
+            <TagSelect selected={tags} setSelected={setTags} />
+          </Col>
+
+          <Col span={24}>
+            <hr />
+            {id && <Button icon={<DeleteOutlined />} type="danger"
+              onClick={async () => {
+                await BlogService.remove(id);
+                message.success("Delete success.");
+              }}
+            >
+              Remove
+            </Button>}
+          </Col>
+        </Row>
       </Form>
       <Thumbnail className="hide" />
     </Layout>

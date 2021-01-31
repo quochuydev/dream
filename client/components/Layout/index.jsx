@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
 import { Menu, message, Drawer, PageHeader, Button } from "antd";
-import { SearchOutlined, MenuOutlined } from "@ant-design/icons";
+import { SearchOutlined, MenuOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 import "./style.css";
 import "antd/dist/antd.css";
+
 import { APIClient } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
 
@@ -15,6 +16,9 @@ function getMe() {
 
 export default function LayoutComponent({ ...props }) {
   const [showDrawer, setShowDrawer] = useState(false);
+  const subTitle = <><Link href={'/blogs'}>Blogs</Link> 
+  <span> <CaretRightOutlined /> </span> 
+  edit</>
 
   return (
     <>
@@ -49,6 +53,7 @@ export default function LayoutComponent({ ...props }) {
             </span>
           </>
         }
+        subTitle={subTitle}
         extra={[
           <div style={{ display: "block" }} key={0}>
             {getMe() ? (
