@@ -41,23 +41,19 @@ const APIFactory = ({ baseUrl }) => {
     return new Promise((resolve, reject) => {
       const url = makeUrl(endpoint, config);
       const token = getToken();
-      if(!token) {
-        throw { statusCode: 401}
-      }
-
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
+        Authorization: `Bearer ${token}`,
       };
 
       const options = {
         method,
+        headers
       };
       if (config.body) {
         options.body = JSON.stringify(config.body);
       }
-      options.headers = headers;
 
       const newRequest = new Request(url, options);
       fetch(newRequest)

@@ -41,6 +41,9 @@ function setConfigFormData(config) {
 
 export function getToken() {
   const token = localStorage.getItem("accessToken");
+  if(!token) {
+    return '';
+  }
   return token;
 }
 

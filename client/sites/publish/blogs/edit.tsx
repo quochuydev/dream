@@ -69,8 +69,8 @@ export default function Blog({}) {
 
   return (
     <Layout sub={[{ name: 'Blogs', to: '/blogs' }, { name: 'test test' }]}>
-      <Row gutter={8}>
-        <Form form={form} onFinish={onFinish}>
+      <Form form={form} onFinish={onFinish}>
+        <Row gutter={8}>
           <Col span={24}>
             {id && (
               <Link href={`/blogs/${id}`}>
@@ -79,9 +79,9 @@ export default function Blog({}) {
                 </Button>
               </Link>
             )}
-              <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
-                Save
-              </Button>
+            <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+              Save
+            </Button>
           </Col>
 
           <Col span={16}>
@@ -124,19 +124,20 @@ export default function Blog({}) {
             <p>Tags:</p>
             <TagSelect selected={tags} setSelected={setTags} />
           </Col>
-        </Form>
-        <Col span={24}>
-          <hr />
-          {id && <Button icon={<DeleteOutlined />} type="danger"
-            onClick={async () => {
-              await BlogService.remove(id);
-              message.success("Delete success.");
-            }}
-          >
-            Remove
-          </Button>}
-        </Col>
-      </Row>
+          <Col span={24}>
+            <hr />
+            {id && <Button icon={<DeleteOutlined />} type="danger"
+              onClick={async () => {
+                await BlogService.remove(id);
+                message.success("Delete success.");
+              }}
+            >
+              Remove
+            </Button>}
+          </Col>
+        </Row>
+      </Form>
+
       <Thumbnail className="hide" />
     </Layout>
   );
