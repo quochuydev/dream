@@ -40,7 +40,6 @@ const APIFactory = ({ baseUrl }) => {
   function _call(endpoint, config = {}, method) {
     return new Promise((resolve, reject) => {
       const url = makeUrl(endpoint, config);
-      console.log(config)
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -65,6 +64,7 @@ const APIFactory = ({ baseUrl }) => {
             type = checkResponseContentType(contentType);
           }
           const data = await response[type]();
+          console.log(method, url, response.status)
           if (!response.ok) {
             throw data;
           }

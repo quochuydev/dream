@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button, message, Table } from "antd";
 
@@ -8,13 +8,13 @@ import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";
 
-export default function Blogs({}) {
+export default function Blogs({ ...props }) {
   const initQuery = { all: true, page: 1, limit: 20 };
 
-  const [query, setQuery] = React.useState(initQuery);
-  const [blogs, setBlogs] = React.useState([]);
+  const [query, setQuery] = useState(initQuery);
+  const [blogs, setBlogs] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchBlogs();
   }, [query]);
 
@@ -36,14 +36,27 @@ export default function Blogs({}) {
     },
   },
   {
+    key: 'updated_at',
+    title: 'updated_at',
+    dataIndex: 'updated_at',
+  },
+  {
     key: 'deleted_at',
     title: 'deleted_at',
     render:(value) => {
-    return <div>{value.deleted_at} <Button onClick={async ()=>{
+    return <div>
+      {value.deleted_at} 
+      {!value.deleted_at && <Button onClick={async ()=>{
+      const result = await BlogService.remove(value._id)
+      message.success(result.message)
+      setQuery({...query})
+    }}>remove</Button>}
+      {!!value.deleted_at && <Button onClick={async ()=>{
       const result = await BlogService.update({id: value._id}, { deleted_at: null })
       message.success(result.message)
       setQuery({...query})
-    }}>publist</Button></div>
+    }}>publist</Button>}
+    </div>
     },
   }
 ]
@@ -51,6 +64,8 @@ export default function Blogs({}) {
   return (
     <Layout>
       <Link href={`/publish/blogs/create`}>New</Link>
+      {' | '}
+      <Link href={`/blogs`}>List</Link>
       <Table rowKey="_id" columns={columns} dataSource={blogs} pagination={false}/>
       <ImageCrop />
     </Layout>
