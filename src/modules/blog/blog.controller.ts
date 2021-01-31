@@ -19,8 +19,13 @@ export class BlogController {
   constructor(private blogService: BlogService) {}
 
   @Get()
-  // @UseGuards(JwtGuard)
   async list(@Query() query) {
+    return this.blogService.paginate(query, { keyword: "title" });
+  }
+
+  @Get('/u')
+  @UseGuards(JwtGuard)
+  async uList(@Query() query) {
     return this.blogService.paginate(query, { keyword: "title" });
   }
 
@@ -29,7 +34,7 @@ export class BlogController {
     return await this.blogService.get(id);
   }
 
-  @Get("/:id/edit")
+  @Get("/u/:id")
   @UseGuards(JwtGuard)
   async edit(@Param("id") id: string) {
     return await this.blogService.get(id);

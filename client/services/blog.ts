@@ -26,7 +26,7 @@ export default {
   },
 
   detail: async function detail(id) {
-    return await API.get(`/api/blogs/${id}/edit`);
+    return await API.get(`/api/blogs/u/${id}`);
   },
 
   update: async function update(query, body) {
