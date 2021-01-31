@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button, message, Table } from "antd";
 
 import { BlogService } from "../../../services";
-import ImageCrop from "./image-crop";
+import ImageCrop from "../../../components/ImageCrop";
 import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";

@@ -1,4 +1,3 @@
-import { FileService } from "./file.service";
 import {
   BadRequestException,
   Param,
@@ -13,12 +12,14 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from "multer";
 import { extname } from "path";
 
+import { FileService } from "./file.service";
+
 @Controller("/api/files")
 export class FileController {
   constructor(private fileService: FileService) {}
 
   @Get("/:id")
-  async serveAvatar(@Param("id") id, @Res() res): Promise<any> {
+  get(@Param("id") id, @Res() res) {
     res.sendFile(id, { root: "files" });
   }
 
