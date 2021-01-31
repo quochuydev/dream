@@ -42,7 +42,7 @@ export class BlogController {
 
   @Post()
   @UseGuards(JwtGuard)
-  async create(@Body() data: BlogDto, @AuthUser('_id') user_id: string) {
+  async create(@Body() data: BlogDto, @AuthUser('id') user_id: string) {
     return await this.blogService.create({ ...data, user_id });
   }
 

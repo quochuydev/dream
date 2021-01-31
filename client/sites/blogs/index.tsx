@@ -70,6 +70,8 @@ export default function Blogs({ initBlogs, ...props }) {
             >
               remove
             </a>
+            {" | "}
+            <span>{e.user_id}</span>
           </li>
         ))}
       </ul>

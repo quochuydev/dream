@@ -17,10 +17,11 @@ export default {
   },
 
   create: async function (data) {
-    const result = await API.post("/api/blogs", {
-      title: data.title,
-      body: data.body,
-      tags: data.tags,
+    const result = await API.post("/api/blogs", { body: {
+        title: data.title,
+        body: data.body,
+        tags: data.tags,
+      }
     });
     return result;
   },
