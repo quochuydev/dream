@@ -65,6 +65,10 @@ export default function Blogs({ ...props }) {
     <Layout>
       <Link href={`/publish/blogs/create`}>New</Link>
       {' | '}
+      <a onClick={() => {
+        setQuery({...query})
+      }}>Load</a>
+      {' | '}
       <Link href={`/blogs`}>List</Link>
       <Table rowKey="_id" columns={columns} dataSource={blogs} pagination={false}/>
       <ImageCrop />

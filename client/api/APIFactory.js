@@ -40,10 +40,15 @@ const APIFactory = ({ baseUrl }) => {
   function _call(endpoint, config = {}, method) {
     return new Promise((resolve, reject) => {
       const url = makeUrl(endpoint, config);
+      const token = getToken();
+      if(!token) {
+        throw { statusCode: 401}
+      }
+
       const headers = {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getToken(),
+        Authorization: "Bearer " + token,
       };
 
       const options = {

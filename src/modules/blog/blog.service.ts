@@ -18,9 +18,10 @@ export class BlogService extends BaseService {
 
     const newBlog = new this.blogModel({
       title: data.title,
-      slug: toSlug(data.titile),
+      slug: toSlug(data.title),
       body: data.body,
       tags: data.tags,
+      user_id: data.user_id,
     });
     const blog = await newBlog.save();
     return blog;

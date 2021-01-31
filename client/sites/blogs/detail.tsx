@@ -7,8 +7,6 @@ import { Layout } from "../../components";
 import "antd/dist/antd.css";
 
 export default function Post({ blog }) {
-  console.log(localStorage.getItem('accessToken'))
-
   return (
     <Layout>
       <Link href={`/blogs`}>List</Link>

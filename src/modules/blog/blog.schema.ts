@@ -16,6 +16,9 @@ export class Blog {
   body: string;
 
   @Prop()
+  user_id: string;
+
+  @Prop()
   created_at: Date;
 
   @Prop()
@@ -40,7 +43,7 @@ export const BlogSchema = new mongoose.Schema({
     default: [],
   },
 
-  userId: { type: String, default: null },
+  user_id: { type: String, default: null },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   deleted_at: { type: Date, default: null },

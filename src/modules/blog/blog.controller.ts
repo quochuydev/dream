@@ -19,6 +19,7 @@ export class BlogController {
   constructor(private blogService: BlogService) {}
 
   @Get()
+  // @UseGuards(JwtGuard)
   async list(@Query() query) {
     return this.blogService.paginate(query, { keyword: "title" });
   }
@@ -36,8 +37,8 @@ export class BlogController {
 
   @Post()
   @UseGuards(JwtGuard)
-  async create(@Body() data: BlogDto) {
-    return await this.blogService.create(data);
+  async create(@Body() data: BlogDto, @AuthUser('_id') user_id: string) {
+    return await this.blogService.create({ ...data, user_id });
   }
 
   @Put("/:id")
