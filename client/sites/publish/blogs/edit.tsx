@@ -126,7 +126,7 @@ export default function Blog({}) {
           </Col>
           <Col span={24}>
             <hr />
-            {id && <Button icon={<DeleteOutlined />} type="danger"
+            {id && <Button icon={<DeleteOutlined />} type="default"
               onClick={async () => {
                 await BlogService.remove(id);
                 message.success("Delete success.");
