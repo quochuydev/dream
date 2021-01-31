@@ -19,14 +19,14 @@ export class FileController {
 
   @Get("/:id")
   async serveAvatar(@Param("id") id, @Res() res): Promise<any> {
-    res.sendFile(id, { root: "avatars" });
+    res.sendFile(id, { root: "files" });
   }
 
   @Post()
   @UseInterceptors(
     FileInterceptor("upload", {
       storage: diskStorage({
-        destination: "./avatars",
+        destination: "./files",
         filename: (req, file, cb) => {
           const randomName = Array(32)
             .fill(null)
