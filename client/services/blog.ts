@@ -12,18 +12,17 @@ export default {
   },
 
   list: async function (query) {
-    const result = await API.get("/api/blogs", { query });
-    return result;
+    return await API.get("/api/blogs", { query });
   },
 
   create: async function (data) {
-    const result = await API.post("/api/blogs", { body: {
+    return await API.post("/api/blogs", {
+      body: {
         title: data.title,
         body: data.body,
         tags: data.tags,
-      }
+      },
     });
-    return result;
   },
 
   detail: async function detail(id) {
