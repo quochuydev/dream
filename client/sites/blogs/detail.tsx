@@ -6,7 +6,7 @@ import { Layout } from "../../components";
 
 import "antd/dist/antd.css";
 
-export default function Post({ blog }) {
+export default function Blog({ blog }) {
   return (
     <Layout>
       {blog.file_id && (
