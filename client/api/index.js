@@ -8,7 +8,16 @@ export const BACKEND_URL =
     : "http://localhost:8000";
 
 import APIFactory from "./APIFactory";
-export const API = APIFactory({ baseUrl: BACKEND_URL });
+export const API = APIFactory({
+  baseUrl: BACKEND_URL,
+  setHeaders: () => {
+    return {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    };
+  },
+});
 
 export const APIClient = new Fetch(
   BACKEND_URL,
@@ -41,8 +50,8 @@ function setConfigFormData(config) {
 
 export function getToken() {
   const token = localStorage.getItem("accessToken");
-  if(!token) {
-    return '';
+  if (!token) {
+    return "";
   }
   return token;
 }

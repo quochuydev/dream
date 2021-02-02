@@ -93,6 +93,7 @@ export default function AdminBlogs({ ...props }) {
       {" | "}
       <Link href={`/blogs`}>List</Link>
       <Table
+        scroll={{ x: true }}
         rowKey="_id"
         columns={columns}
         dataSource={blogs}

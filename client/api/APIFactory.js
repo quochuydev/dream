@@ -3,7 +3,7 @@ import fetch from "isomorphic-fetch";
 import { getToken } from "./index";
 import Router from "next/router";
 
-const APIFactory = ({ baseUrl }) => {
+const APIFactory = ({ baseUrl, setHeaders }) => {
   const API = {
     get: async (endpoint, config) => {
       return await call(endpoint, config, "GET");
@@ -26,10 +26,10 @@ const APIFactory = ({ baseUrl }) => {
 
   async function call(endpoint, config = {}, method) {
     try {
-      const result =  await _call(endpoint, config, method)
+      const result = await _call(endpoint, config, method);
       return result;
     } catch (error) {
-      if(error.statusCode === 401){
+      if (error.statusCode === 401) {
         localStorage.clear();
         Router.push(`/401`);
       }
@@ -40,16 +40,9 @@ const APIFactory = ({ baseUrl }) => {
   function _call(endpoint, config = {}, method) {
     return new Promise((resolve, reject) => {
       const url = makeUrl(endpoint, config);
-      const token = getToken();
-      const headers = {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      };
-
       const options = {
         method,
-        headers
+        headers: setHeaders(),
       };
       if (config.body) {
         options.body = JSON.stringify(config.body);
@@ -65,7 +58,7 @@ const APIFactory = ({ baseUrl }) => {
             type = checkResponseContentType(contentType);
           }
           const data = await response[type]();
-          console.log(method, url, response.status)
+          console.log(method, url, response.status);
           if (!response.ok) {
             throw data;
           }
