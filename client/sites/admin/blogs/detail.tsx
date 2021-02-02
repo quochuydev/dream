@@ -71,8 +71,6 @@ export default function Post({}) {
 
   return (
     <>
-      <Link href={`/blogs`}>List</Link>
-
       <Form form={form} onFinish={onFinish}>
         <Form.Item>
           <Button type="primary" onClick={showModal}>

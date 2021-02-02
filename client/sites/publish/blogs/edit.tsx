@@ -22,7 +22,7 @@ export default function Blog({}) {
   const [form] = Form.useForm();
   const [data, setData] = useState<any>({ title: "", body: "" });
   const [tags, setTags] = useState([]);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState<any>({});
 
   useEffect(() => {
     if (id) {
