@@ -16,7 +16,7 @@ export default function Thumbnail({ selected, callback, ...props }) {
     if (selected) {
       setImage(selected);
     }
-  }, selected);
+  }, [selected]);
 
   const uploadSetting = {
     action: `${BACKEND_URL}/api/files`,
