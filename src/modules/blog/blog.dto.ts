@@ -20,4 +20,8 @@ export class BlogDto {
   @IsOptional()
   @IsArray()
   tags: any;
+
+  @IsOptional()
+  @IsString()
+  file_id: string;
 }
