@@ -87,7 +87,7 @@ export default function Blog({}) {
             </Button>
           </Col>
 
-          <Col span={18}>
+          <Col md={18} xs={24}>
             <p>Title</p>
             <Form.Item name="title">
               <Input size="large" placeholder="Title..." />
@@ -122,7 +122,7 @@ export default function Blog({}) {
               />
             </Form.Item>
           </Col>
-          <Col span={6}>
+          <Col md={6} xs={24}>
             <p>Tags:</p>
             <TagSelect
               selected={tags}
@@ -153,6 +153,9 @@ export default function Blog({}) {
                 Remove
               </Button>
             )}
+            <Button type="primary" htmlType="submit" icon={<SaveOutlined />}>
+              Save
+            </Button>
           </Col>
         </Row>
       </Form>
