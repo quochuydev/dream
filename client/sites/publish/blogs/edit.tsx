@@ -22,7 +22,7 @@ export default function Blog({}) {
   const [form] = Form.useForm();
   const [data, setData] = useState<any>({ title: "", body: "" });
   const [tags, setTags] = useState([]);
-  const [file, setFile] = useState<any>({});
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     if (id) {
@@ -52,7 +52,7 @@ export default function Blog({}) {
             title: value.title,
             body: value.body,
             tags,
-            file_id: file._id,
+            file_id: file?._id,
           }
         );
         message.success("Update blog");
@@ -61,12 +61,13 @@ export default function Blog({}) {
           title: value.title,
           body: value.body,
           tags,
-          file_id: file._id,
+          file_id: file?._id,
         });
         message.success("Create blog");
         Router.push(`/publish/blogs/edit/${result._id}`);
       }
     } catch (error) {
+      console.log(error);
       message.error(error.message);
     }
   };

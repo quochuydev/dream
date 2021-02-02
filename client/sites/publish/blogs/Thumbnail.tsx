@@ -13,7 +13,9 @@ export default function Thumbnail({ selected, callback, ...props }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setImage(selected);
+    if (selected) {
+      setImage(selected);
+    }
   }, selected);
 
   const uploadSetting = {
