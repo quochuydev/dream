@@ -148,6 +148,7 @@ export default function Blog({}) {
                 onClick={async () => {
                   await BlogService.remove(id);
                   message.success("Delete success.");
+                  Router.push("/");
                 }}
               >
                 Remove
