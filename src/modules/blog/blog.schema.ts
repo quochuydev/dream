@@ -16,10 +16,7 @@ export class Blog {
   body: string;
 
   @Prop()
-  file_id: String;
-
-  @Prop()
-  file: mongoose.Schema.Types.Mixed;
+  file_id: string;
 
   @Prop()
   user_id: string;
@@ -47,8 +44,7 @@ export const BlogSchema = new mongoose.Schema({
     ],
     default: [],
   },
-  file_id: { type: String, default: null },
-  file: { type: mongoose.Schema.Types.Mixed, default: null },
+  file_id: { type: String, default: null, ref: "File" },
 
   user_id: { type: String, default: null },
   created_at: { type: Date, default: Date.now },

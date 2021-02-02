@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Button, message } from "antd";
+import { Button, message, Avatar } from "antd";
 
 import { Layout } from "../../components";
 import { BlogService } from "../../services";
@@ -51,6 +51,7 @@ export default function Blogs({ initBlogs, ...props }) {
               <a>edit</a>
             </Link>
             {" | "}
+            <Avatar shape="square" src={e.file_id?.url} />
             <Link href={`/blogs/${e._id}`}>
               <a>post: {e.title}</a>
             </Link>
@@ -62,7 +63,7 @@ export default function Blogs({ initBlogs, ...props }) {
                 try {
                   await BlogService.remove(e._id);
                   message.success("Delete success.");
-                  setQuery(initQuery); 
+                  setQuery(initQuery);
                 } catch (error) {
                   message.error(error.message);
                 }

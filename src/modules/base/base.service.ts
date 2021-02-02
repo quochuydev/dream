@@ -5,13 +5,14 @@ import { Model } from "mongoose";
 export class BaseService {
   constructor(private model: Model<any>) {}
 
-  async paginate(query, options: any = {}): Promise<any> {
+  async paginate(query, props: any = { options: {} }): Promise<any> {
+    const { keyword, ...options } = props;
     const { page, limit, skip, filter } = this.parseQuery(query);
     const result = { total: 0, limit, page, skip, items: [] };
 
     const criteria: any = {};
 
-    if (filter.all != 'true') {
+    if (filter.all != "true") {
       criteria.deleted_at = { $in: [null] };
     }
 
@@ -31,15 +32,19 @@ export class BaseService {
     }
 
     result.items = await this.model
-      .find(criteria)
+      .find(criteria, null, options)
       .skip(skip)
       .limit(limit)
       .exec();
     return result;
   }
 
-  get(id: string): any {
-    return this.model.findById(id);
+  async get(id: string, options?) {
+    const result = await this.model.findById(id, null, {
+      lean: true,
+      ...options,
+    });
+    return result;
   }
 
   async remove(id) {

@@ -1,20 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Button, Modal, Upload } from "antd";
+import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { BACKEND_URL, getHeader } from "../../../../client/api";
 
 import "antd/dist/antd.css";
 import "./style.css";
-import { fail } from "assert";
 
 export default function Thumbnail({ selected, callback, ...props }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [fileList, setFileList] = useState([]);
   const [image, setImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(selected?.url);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setImage(selected);
+  }, selected);
 
   const uploadSetting = {
     action: `${BACKEND_URL}/api/files`,
@@ -30,7 +30,7 @@ export default function Thumbnail({ selected, callback, ...props }) {
         setLoading(false);
       }
       if (e.file.response && e.file.response.url) {
-        setImageUrl(e.file.response.url);
+        setImage(e.file.response);
         callback(e.file.response);
       }
     },
@@ -44,11 +44,10 @@ export default function Thumbnail({ selected, callback, ...props }) {
         className="avatar-uploader"
         multiple={false}
         showUploadList={false}
-        fileList={fileList}
         {...uploadSetting}
       >
-        {imageUrl ? (
-          <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+        {image && image.url ? (
+          <img src={image.url} alt="avatar" style={{ width: "100%" }} />
         ) : (
           <div>
             {loading ? <LoadingOutlined /> : <PlusOutlined />}

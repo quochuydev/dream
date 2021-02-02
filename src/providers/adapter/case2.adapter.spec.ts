@@ -80,7 +80,7 @@ describe("AppController (e2e)", () => {
       },
     });
 
-    let query = {
+    const query = {
       _id: "5d8d8b6dee26642f1099eb5f",
       shop_id: "100000001",
       updated_at_from_date: "2019-04-01T03:12:34.123Z",
@@ -91,9 +91,9 @@ describe("AppController (e2e)", () => {
       keyword: "0382989898",
       keyword2: "0382989898",
     };
-    let { page, filter, fields, skip, limit, sort } = xAdapter.parse(query);
+    const { page, filter, fields, skip, limit, sort } = xAdapter.parse(query);
 
-    let expectedFilter = {
+    const expectedFilter = {
       _id: { $ne: "5d8d8b6dee26642f1099eb5f" },
       shop_id: 100000001,
       updated_at: {

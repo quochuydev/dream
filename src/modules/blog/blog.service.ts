@@ -37,7 +37,7 @@ export class BlogService extends BaseService {
           updated_at: new Date(),
         },
       },
-      { lean: true, new: true }
+      { lean: true, new: true, populate: "file_id" }
     );
     return blog;
   }

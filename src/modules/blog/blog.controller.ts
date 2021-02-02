@@ -20,29 +20,41 @@ export class BlogController {
 
   @Get()
   async list(@Query() query) {
-    return this.blogService.paginate(query, { keyword: "title" });
+    return this.blogService.paginate(query, {
+      keyword: "title",
+      populate: "file_id",
+    });
   }
 
-  @Get('/u')
+  @Get("/u")
   @UseGuards(JwtGuard)
   async uList(@Query() query) {
-    return this.blogService.paginate(query, { keyword: "title" });
+    return this.blogService.paginate(query, {
+      keyword: "title",
+      populate: "file_id",
+    });
   }
 
   @Get("/:id")
   async detail(@Param("id") id: string) {
-    return await this.blogService.get(id);
+    return await this.blogService.get(id, {
+      populate: "file_id",
+      lean: true,
+    });
   }
 
   @Get("/u/:id")
   @UseGuards(JwtGuard)
   async edit(@Param("id") id: string) {
-    return await this.blogService.get(id);
+    return await this.blogService.get(id, {
+      populate: "file_id",
+      lean: true,
+    });
   }
 
   @Post()
   @UseGuards(JwtGuard)
-  async create(@Body() data: BlogDto, @AuthUser('id') user_id: string) {
+  async create(@Body() data: BlogDto, @AuthUser("id") user_id: string) {
     return await this.blogService.create({ ...data, user_id });
   }
 

@@ -22,7 +22,7 @@ export default function Blog({}) {
   const [form] = Form.useForm();
   const [data, setData] = useState<any>({ title: "", body: "" });
   const [tags, setTags] = useState([]);
-  const [fileId, setFileId] = useState(null);
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     if (id) {
@@ -35,7 +35,7 @@ export default function Blog({}) {
     if (result) {
       setData({ title: result.title, body: result.body || "" });
       setTags(result.tags);
-      setFileId(result.fileId);
+      setFile(result.file_id);
     }
   }
 
@@ -52,7 +52,7 @@ export default function Blog({}) {
             title: value.title,
             body: value.body,
             tags,
-            file_id: fileId,
+            file_id: file._id,
           }
         );
         message.success("Update blog");
@@ -61,7 +61,7 @@ export default function Blog({}) {
           title: value.title,
           body: value.body,
           tags,
-          fileId,
+          file_id: file._id,
         });
         message.success("Create blog");
         Router.push(`/publish/blogs/edit/${result._id}`);
@@ -132,9 +132,9 @@ export default function Blog({}) {
             <p>Photo:</p>
             <Thumbnail
               className=""
-              selected={data.file}
+              selected={file}
               callback={(e) => {
-                setFileId(e._id);
+                setFile(e);
               }}
             />
           </Col>
