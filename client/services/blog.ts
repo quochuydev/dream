@@ -21,6 +21,7 @@ export default {
         title: data.title,
         body: data.body,
         tags: data.tags,
+        file_id: data.file_id,
       },
     });
   },

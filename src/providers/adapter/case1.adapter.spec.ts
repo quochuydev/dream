@@ -4,41 +4,41 @@ const Schema = mongoose.Schema;
 import { QueryAdapter } from ".";
 
 describe("AppController (e2e)", () => {
+  const OrderSchema = new Schema({
+    shop_id: { type: Number },
+    id: { type: Number },
+    customer: {
+      id: { type: Number },
+      name: { type: String },
+      phone: { type: String },
+    },
+    line_items: [
+      {
+        id: { type: Number },
+        barcode: { type: String },
+        quantity: { type: Number },
+        type: { type: String },
+        vendor: { type: String },
+        price: { type: Number },
+      },
+    ],
+    total_prices: { type: Number },
+    created_at: { type: Date },
+    updated_at: { type: Date },
+    status: { type: String },
+    private_field: { type: Number },
+    order_number: { type: String },
+    location_id: { type: Number },
+    fulfillment_status: { type: String },
+    is_deleted: { type: Boolean },
+    tags: [String],
+  });
+
   beforeEach(async () => {
     //
   });
 
   it("/ (GET)", () => {
-    const OrderSchema = new Schema({
-      shop_id: { type: Number },
-      id: { type: Number },
-      customer: {
-        id: { type: Number },
-        name: { type: String },
-        phone: { type: String },
-      },
-      line_items: [
-        {
-          id: { type: Number },
-          barcode: { type: String },
-          quantity: { type: Number },
-          type: { type: String },
-          vendor: { type: String },
-          price: { type: Number },
-        },
-      ],
-      total_prices: { type: Number },
-      created_at: { type: Date },
-      updated_at: { type: Date },
-      status: { type: String },
-      private_field: { type: Number },
-      order_number: { type: String },
-      location_id: { type: Number },
-      fulfillment_status: { type: String },
-      is_deleted: { type: Boolean },
-      tags: [String],
-    });
-
     const xAdapter = new QueryAdapter({
       model: "Order",
       schema: OrderSchema,
