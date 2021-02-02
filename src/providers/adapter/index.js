@@ -1,10 +1,12 @@
 const _ = require("lodash");
+const mongoose = require("mongoose");
 
 class QueryAdapter {
   constructor(config) {
     this.config = config;
     this.model = config.model;
     this.schema = config.schema;
+    this.Model = mongoose.model(config.model, config.schema);
     this.required_keys = config.required_keys;
     this.blacklist = config.blacklist;
     this.whitelist = config.whitelist;
@@ -17,31 +19,47 @@ class QueryAdapter {
   }
 
   parse(query) {
-    this.query = query;
+    this.query = _.cloneDeep(query);
     return this._parse();
   }
 
   _parse() {
     const query = _.cloneDeep(this.query);
-    let { limit, page, skip, filter, keyword } = this.parseQuery(query);
+    let { limit, page, skip, filter, sort } = this.parseQuery(query);
     const fields = this.formatFields();
-    const sort = this.formatSort();
+    sort = this.formatSort(sort);
+    filter = this.skipValues(filter);
+    filter = this.formatKeyword(filter);
     filter = this.formatFilters(filter);
-    filter = this.formatKeyword(filter, keyword);
 
     return { filter, fields, page, skip, limit, sort };
   }
 
-  formatKeyword(filter, keyword) {
-    const format = this.custom.keyword(keyword);
-    filter = _.merge(filter, format);
+  formatKeyword(filter) {
+    for (const key in filter) {
+      if(this.custom[key]){
+        const format = this.custom[key](filter[key]);
+        delete filter[key];
+        filter = _.merge(filter, format);
+      }
+    }
     return filter;
   }
 
-  formatFilters(cases) {
+  skipValues(filter){
+    for (const key in filter) {
+      if(this.skippedValues.includes(filter[key])){
+        delete filter[key]
+      }
+    }
+    return filter;
+  }
+  
+  formatFilters(input) {
+    let obj = input
     let result = {};
-    for (const c in cases) {
-      const format = this.formatFilter(c, cases[c]);
+    for (const key in obj) {
+      const format = this.formatFilter(key, obj[key]);
       result = _.merge(result, format);
     }
     return result;
@@ -57,6 +75,8 @@ class QueryAdapter {
       LteOperator,
       FromDateOperator,
       ToDateOperator,
+      OrOperator,
+      AndOperator
     ];
     for (const Operator of operators) {
       const op = new Operator();
@@ -64,26 +84,27 @@ class QueryAdapter {
         return op.do(key, value);
       }
     }
-    return { [key]: value };
+
+    const op = new EqOperator({ noCut: true });
+    return op.do(key, value)
   }
 
-  formatSort() {
-    const defaultSort = { created_at: -1 };
-    const result = {};
+  format(value, cast){
+    return cast ? cast(value) : value;
+  }
 
-    if (this.query.sort) {
-      const sort = this.query.sort.split(",");
-      for (const s of sort) {
-        if (s.endsWith("_asc")) {
-          result[s.substring(0, s.length - 4)] = 1;
-        }
-        if (s.endsWith("_desc")) {
-          result[s.substring(0, s.length - 5)] = -1;
-        }
+  formatSort(defaultSort) {
+    const result = {};
+    const sort = this.query.sort ? this.query.sort.split(",") : defaultSort.split(",");
+    for (const s of sort) {
+      if (s.endsWith("_asc")) {
+        result[s.substring(0, s.length - 4)] = 1;
       }
-      return result;
+      if (s.endsWith("_desc")) {
+        result[s.substring(0, s.length - 5)] = -1;
+      }
     }
-    return defaultSort;
+    return result;
   }
 
   formatFields() {
@@ -108,7 +129,7 @@ class QueryAdapter {
     option = { writeLog: true, maxLimit: this.maxLimit },
     defaults = this.defaults
   ) {
-    let { page = 1, limit = 20, sort, fields, keyword, ...filter } = {
+    let { page = 1, limit = 20, sort, fields, ...filter } = {
       ...defaults,
       ...body,
     };
@@ -116,7 +137,7 @@ class QueryAdapter {
     limit = Math.min(Number(limit), option.maxLimit);
     const skip = (page - 1) * limit;
 
-    return { limit, page, skip, filter, sort, fields, keyword };
+    return { limit, page, skip, filter, sort, fields };
   }
 }
 
@@ -135,18 +156,26 @@ class Operator {
 }
 
 class EqOperator extends Operator {
-  constructor() {
-    super();
+  constructor(config = {}) {
+    super(config);
     this.postFix = "_eq";
     this.cut = 3;
+    this.noCut = config.noCut;
   }
 
   match(field) {
     return field.endsWith(this.postFix);
   }
 
+  format(field){
+    if(this.noCut) {
+      return field;
+    }
+    return field.substring(0, field.length - this.cut);
+  }
+
   do(field, value) {
-    return { [field.substring(0, field.length - this.cut)]: { $eq: value } };
+    return { [this.format(field)]: { $eq: value } };
   }
 }
 class LikeOperator extends Operator {
@@ -186,8 +215,8 @@ class InOperator extends Operator {
 }
 
 class NeOperator extends Operator {
-  constructor() {
-    super();
+  constructor(config) {
+    super(config);
     this.postFix = "_ne";
     this.cut = 3;
   }
@@ -273,6 +302,38 @@ class ToDateOperator extends Operator {
       [field.substring(0, field.length - this.cut)]: {
         $lte: new Date(new Date(value).setHours(23, 59, 59, 999)),
       },
+    };
+  }
+}
+class OrOperator extends Operator {
+  constructor() {
+    super();
+    this.postFix = "$or";
+  }
+
+  match(field) {
+    return field == this.postFix;
+  }
+
+  do(field, value) {
+    return {
+      [field]: value
+    };
+  }
+}
+class AndOperator extends Operator {
+  constructor() {
+    super();
+    this.postFix = "$and";
+  }
+
+  match(field) {
+    return field == this.postFix;
+  }
+
+  do(field, value) {
+    return {
+      [field]: value
     };
   }
 }

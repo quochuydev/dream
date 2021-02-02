@@ -34,12 +34,16 @@ describe("AppController (e2e)", () => {
     tags: [String],
   });
 
+  beforeEach(async () => {
+    //
+  });
+
   it("/ (GET)", () => {
     const xAdapter = new QueryAdapter({
       model: "Order",
       schema: OrderSchema,
       required_keys: ["shop_id"],
-      blacklist: [],
+      blacklist: ["private_field"],
       whitelist: ["*"],
       alias: {
         barcode: "line_items.barcode",
@@ -68,8 +72,8 @@ describe("AppController (e2e)", () => {
             $or: [{ order_number: new RegExp(value, "gi") }],
           };
         },
-        all: (value) => {
-          return { is_deleted: value == 'true' ? null : false };
+        keyword2: (value) => {
+          return { "customer.phone": new RegExp(value, "gi") };
         },
       },
     });
@@ -77,38 +81,24 @@ describe("AppController (e2e)", () => {
     const query = {
       _id: "5d8d8b6dee26642f1099eb5f",
       shop_id: "100000001",
-      updated_at_from_date: "2019-04-01T03:12:34.123Z",
-      updated_at_to_date: "2019-04-30T04:12:34.123Z",
-      "customer.id": "",
       tags: "",
       location_id_in: "1000,2000",
-      keyword: "0382989898",
-      all: "true",
+      fields: '-customer',
+      page: 2
     };
     const { page, filter, fields, skip, limit, sort } = xAdapter.parse(query);
 
     const expectedFilter = {
       _id: { $eq: "5d8d8b6dee26642f1099eb5f" },
-      shop_id: { $eq: "100000001" },
-      updated_at: {
-        $gte: new Date(
-          new Date("2019-04-01T03:15:00.000Z").setHours(0, 0, 0, 0)
-        ),
-        $lte: new Date(
-          new Date("2019-04-30T03:15:00.000Z").setHours(23, 59, 59, 999)
-        ),
-      },
+      shop_id: { $eq: 100000001 },
       location_id: { $in: [1000, 2000] },
-      $or: [
-        { order_number: new RegExp("0382989898", "gi") },
-      ],
-      is_deleted: { $eq: null },
+      is_deleted: { $eq: false },
     };
 
     assert.deepEqual(filter, expectedFilter);
-    assert.deepEqual(fields, {});
-    assert.equal(page, 1);
-    assert.equal(skip, 0);
+    assert.deepEqual(fields, { private_field: 0, customer: 0 });
+    assert.equal(page, 2);
+    assert.equal(skip, 20);
     assert.equal(limit, 20);
     assert.deepEqual(sort, { created_at: 1 });
   });

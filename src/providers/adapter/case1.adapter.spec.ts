@@ -100,8 +100,8 @@ describe("AppController (e2e)", () => {
     const { page, filter, fields, skip, limit, sort } = xAdapter.parse(query);
 
     const expectedFilter = {
-      _id: "5d8d8b6dee26642f1099eb5f",
-      shop_id: "100000001",
+      _id: { $eq: "5d8d8b6dee26642f1099eb5f" },
+      shop_id: { $eq: "100000001" },
       created_at: {
         $gte: new Date("2019-04-01T03:15:00.000Z"),
         $lte: new Date("2019-04-30T03:15:00.000Z"),
@@ -114,17 +114,16 @@ describe("AppController (e2e)", () => {
           new Date("2019-04-30T03:15:00.000Z").setHours(23, 59, 59, 999)
         ),
       },
-      "customer.id": "",
       "customer.name": { $regex: new RegExp("name", "gi") },
-      "line_items.barcode": "barcode",
+      "line_items.barcode": { $eq: "barcode" },
       status: { $in: ["SUCCESS", "FAILED"] },
-      location_id: { $in: [1000, 2000] },
+      location_id: { $in: ["1000", "2000"] },
       $or: [
         { order_number: new RegExp("0382989898", "gi") },
         { "customer.phone": new RegExp("0382989898", "gi") },
       ],
-      tags: "vip",
-      is_deleted: false,
+      tags: { $eq: "vip" },
+      is_deleted: { $eq: false },
     };
 
     assert.deepEqual(filter, expectedFilter);
