@@ -7,9 +7,6 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, message } from "antd";
 
-import { API } from "../../../api";
-import { BlogService } from "../../../services";
-
 import "antd/dist/antd.css";
 
 export default function AdminBlogEdit({}) {

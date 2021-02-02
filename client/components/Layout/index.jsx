@@ -6,6 +6,7 @@ import {
   SearchOutlined,
   MenuOutlined,
   CaretRightOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 
 import "./style.css";
@@ -19,16 +20,26 @@ function getMe() {
   return localStorage.getItem("me");
 }
 
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+};
+
 export default function LayoutComponent({ ...props }) {
   const [showDrawer, setShowDrawer] = useState(false);
+
   const subTitle = (
     <>
-      <Link href={"/blogs"}>Blogs</Link>
-      <span>
-        {" "}
-        <CaretRightOutlined />{" "}
-      </span>
-      edit
+      <Link href={"/"}>
+        <HomeOutlined />
+      </Link>
+      {props.headers &&
+        props.headers.map((e, i) => (
+          <div key={i} style={{ display: "contents" }}>
+            <CaretRightOutlined /> <Link href={e.path || "#"}>{e.name}</Link>
+          </div>
+        ))}
     </>
   );
 
@@ -60,16 +71,13 @@ export default function LayoutComponent({ ...props }) {
         subTitle={subTitle}
         extra={[
           <div style={{ display: "block" }} key={0}>
-            {getMe() ? (
+            {getMe() && !isMobile() ? (
               <>
                 <p style={{ fontSize: 14 }}>
                   {getMe()}
                   <a
                     style={{
                       marginLeft: 5,
-                      // display: "block",
-                      // position: "fixed",
-                      // bottom: 0,
                     }}
                     onClick={() => {
                       localStorage.clear();
@@ -130,7 +138,6 @@ function LeftMenu() {
       );
     }
   }
-
   return (
     <div style={{ display: "block" }}>
       {getMe() ? (

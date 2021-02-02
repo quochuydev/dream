@@ -73,7 +73,9 @@ export default function Blog({}) {
   };
 
   return (
-    <Layout sub={[{ name: "Blogs", to: "/blogs" }, { name: "test test" }]}>
+    <Layout
+      headers={[{ name: "Blogs", path: "/blogs" }, { name: "test test" }]}
+    >
       <Form form={form} onFinish={onFinish}>
         <Row gutter={8}>
           <Col span={24}>
