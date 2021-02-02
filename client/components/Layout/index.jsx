@@ -55,14 +55,6 @@ export default function LayoutComponent({ ...props }) {
                 setShowDrawer(true);
               }}
             />
-            <span
-              className="cursor-pointer"
-              onClick={() => {
-                Router.push("/");
-              }}
-            >
-              {" Home"}
-            </span>
           </>
         }
         subTitle={subTitle}
