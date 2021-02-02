@@ -39,7 +39,6 @@ export class BlogController {
   async detail(@Param("id") id: string) {
     return await this.blogService.get(id, {
       populate: "file_id",
-      lean: true,
     });
   }
 
@@ -48,7 +47,6 @@ export class BlogController {
   async edit(@Param("id") id: string) {
     return await this.blogService.get(id, {
       populate: "file_id",
-      lean: true,
     });
   }
 

@@ -51,7 +51,7 @@ export default function Blogs({ initBlogs, ...props }) {
               <a>edit</a>
             </Link>
             {" | "}
-            <Avatar shape="square" src={e.file_id?.url} />
+            {e.file_id && <Avatar shape="square" src={e.file_id?.url} />}
             <Link href={`/blogs/${e._id}`}>
               <a>post: {e.title}</a>
             </Link>

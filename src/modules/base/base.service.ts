@@ -39,9 +39,8 @@ export class BaseService {
     return result;
   }
 
-  async get(id: string, options?) {
+  async get(id: string, options = {}) {
     const result = await this.model.findById(id, null, {
-      lean: true,
       ...options,
     });
     return result;
