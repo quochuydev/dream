@@ -69,7 +69,7 @@ describe("AppController (e2e)", () => {
           };
         },
         all: (value) => {
-          return { is_deleted: value == 'true' ? null : false };
+          return { is_deleted: value == "true" ? null : false };
         },
       },
     });
@@ -99,9 +99,7 @@ describe("AppController (e2e)", () => {
         ),
       },
       location_id: { $in: [1000, 2000] },
-      $or: [
-        { order_number: new RegExp("0382989898", "gi") },
-      ],
+      $or: [{ order_number: new RegExp("0382989898", "gi") }],
       is_deleted: { $eq: null },
     };
 

@@ -83,8 +83,8 @@ describe("AppController (e2e)", () => {
       shop_id: "100000001",
       tags: "",
       location_id_in: "1000,2000",
-      fields: '-customer',
-      page: 2
+      fields: "-customer",
+      page: 2,
     };
     const { page, filter, fields, skip, limit, sort } = xAdapter.parse(query);
 

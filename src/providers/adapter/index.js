@@ -37,7 +37,7 @@ class QueryAdapter {
 
   formatKeyword(filter) {
     for (const key in filter) {
-      if(this.custom[key]){
+      if (this.custom[key]) {
         const format = this.custom[key](filter[key]);
         delete filter[key];
         filter = _.merge(filter, format);
@@ -46,17 +46,17 @@ class QueryAdapter {
     return filter;
   }
 
-  skipValues(filter){
+  skipValues(filter) {
     for (const key in filter) {
-      if(this.skippedValues.includes(filter[key])){
-        delete filter[key]
+      if (this.skippedValues.includes(filter[key])) {
+        delete filter[key];
       }
     }
     return filter;
   }
-  
+
   formatFilters(input) {
-    let obj = input
+    let obj = input;
     let result = {};
     for (const key in obj) {
       const format = this.formatFilter(key, obj[key]);
@@ -76,7 +76,7 @@ class QueryAdapter {
       FromDateOperator,
       ToDateOperator,
       OrOperator,
-      AndOperator
+      AndOperator,
     ];
     for (const Operator of operators) {
       const op = new Operator();
@@ -86,16 +86,18 @@ class QueryAdapter {
     }
 
     const op = new EqOperator({ noCut: true });
-    return op.do(key, value)
+    return op.do(key, value);
   }
 
-  format(value, cast){
+  format(value, cast) {
     return cast ? cast(value) : value;
   }
 
   formatSort(defaultSort) {
     const result = {};
-    const sort = this.query.sort ? this.query.sort.split(",") : defaultSort.split(",");
+    const sort = this.query.sort
+      ? this.query.sort.split(",")
+      : defaultSort.split(",");
     for (const s of sort) {
       if (s.endsWith("_asc")) {
         result[s.substring(0, s.length - 4)] = 1;
@@ -167,8 +169,8 @@ class EqOperator extends Operator {
     return field.endsWith(this.postFix);
   }
 
-  format(field){
-    if(this.noCut) {
+  format(field) {
+    if (this.noCut) {
       return field;
     }
     return field.substring(0, field.length - this.cut);
@@ -317,7 +319,7 @@ class OrOperator extends Operator {
 
   do(field, value) {
     return {
-      [field]: value
+      [field]: value,
     };
   }
 }
@@ -333,7 +335,7 @@ class AndOperator extends Operator {
 
   do(field, value) {
     return {
-      [field]: value
+      [field]: value,
     };
   }
 }
