@@ -1,0 +1,39 @@
+import { Prop, Schema } from "@nestjs/mongoose";
+import { Document } from "mongoose";
+import * as mongoose from "mongoose";
+
+export type FileDocument = File & Document;
+
+@Schema()
+export class File {
+  @Prop()
+  url: string;
+
+  @Prop()
+  key: string;
+
+  @Prop()
+  contentType: string;
+
+  @Prop()
+  size: number;
+
+  @Prop()
+  created_at: Date;
+
+  @Prop()
+  updated_at: Date;
+
+  @Prop()
+  deleted_at: Date;
+}
+
+export const FileSchema = new mongoose.Schema({
+  url: { type: String, default: null },
+  key: { type: String, default: null },
+  contentType: { type: String, default: null },
+  size: { type: Number, default: null },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
+  deleted_at: { type: Date, default: null },
+});

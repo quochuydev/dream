@@ -1,3 +1,7 @@
+/dist
 /node_modules
+/client/.next
 /.next
 /package-lock.json
+yarn.lock
+.env
