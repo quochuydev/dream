@@ -11,8 +11,8 @@ export class UserService {
     return this.userModel.findOne(criteria);
   }
 
-  list(query) {
-    return this.userModel.find({});
+  async list(query) {
+    return await this.userModel.find({});
   }
 
   get(id) {
