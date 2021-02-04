@@ -62,7 +62,7 @@ function Advanced() {
       const toBeRemoved = cardsLeft[cardsLeft.length - 1].name;
       const index = db.map((person) => person.name).indexOf(toBeRemoved);
       alreadyRemoved.push(toBeRemoved);
-      childRefs[index]["current"]["swipe"](dir);
+      childRefs[index].current.swipe(dir);
     }
   };
 
