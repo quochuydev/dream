@@ -5,7 +5,6 @@ import { Button, message, Avatar } from "antd";
 import { Layout } from "../../components";
 import { BlogService } from "../../services";
 
-import Advanced from "./demo";
 import "antd/dist/antd.css";
 
 export default function Blogs({ initBlogs, ...props }) {
