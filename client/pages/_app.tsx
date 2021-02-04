@@ -4,7 +4,7 @@ import { CookiesProvider } from "react-cookie";
 
 import Loading from "../components/Loading";
 
-import "../styles/global.css";
+import "./global.css";
 import "../styles/ckeditor.css";
 
 export default function App({ Component, pageProps }) {
