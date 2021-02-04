@@ -1,0 +1,10 @@
+version: '3'
+services:
+  server:
+    image: quochuydev/fragrant:latest
+    command: npm run start
+    environment:
+      - MONGODB_URL=mongodb://db:27017/dream
+      - NODE_ENV=production
+    ports:
+      - 3000:3000
