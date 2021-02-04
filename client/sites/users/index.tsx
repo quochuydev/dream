@@ -34,13 +34,6 @@ export default function Blogs({ initBlogs, ...props }) {
     setBlogs(result.items);
   }
 
-  const onSwipe = (direction) => {
-    console.log("You swiped: " + direction);
-  };
-
-  const onCardLeftScreen = (myIdentifier) => {
-    console.log(myIdentifier + " left the screen");
-  };
   return (
     <Layout>
       <Advanced />

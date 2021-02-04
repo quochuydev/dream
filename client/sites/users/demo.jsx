@@ -59,10 +59,10 @@ function Advanced() {
       (person) => !alreadyRemoved.includes(person.name)
     );
     if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1].name; // Find the card object to be removed
-      const index = db.map((person) => person.name).indexOf(toBeRemoved); // Find the index of which to make the reference to
-      alreadyRemoved.push(toBeRemoved); // Make sure the next card gets removed next time if this card do not have time to exit the screen
-      childRefs[index]["current"]["swipe"](dir); // Swipe the card!
+      const toBeRemoved = cardsLeft[cardsLeft.length - 1].name;
+      const index = db.map((person) => person.name).indexOf(toBeRemoved);
+      alreadyRemoved.push(toBeRemoved);
+      childRefs[index]["current"]["swipe"](dir);
     }
   };
 
