@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button, message, Avatar } from "antd";
-import TinderCard from 'react-tinder-card'
 
 import { Layout } from "../../components";
 import { BlogService } from "../../services";
 
-
-import Advanced from './demo'
+import Advanced from "./demo";
 import "antd/dist/antd.css";
 
 export default function Blogs({ initBlogs, ...props }) {
@@ -36,22 +34,21 @@ export default function Blogs({ initBlogs, ...props }) {
     setBlogs(result.items);
   }
 
-  
-const onSwipe = (direction) => {
-  console.log('You swiped: ' + direction)
-}
+  const onSwipe = (direction) => {
+    console.log("You swiped: " + direction);
+  };
 
-const onCardLeftScreen = (myIdentifier) => {
-  console.log(myIdentifier + ' left the screen')
-}
+  const onCardLeftScreen = (myIdentifier) => {
+    console.log(myIdentifier + " left the screen");
+  };
   return (
     <Layout>
-      <Advanced/>
+      <Advanced />
       <ul className="p-none">
         {blogs.map((e, i) => (
           <li key={e._id}>
             <span>{i + 1}. </span>
-              <a>{e._id}</a>
+            <a>{e._id}</a>
           </li>
         ))}
       </ul>
