@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import TinderCard from "react-tinder-card";
+import TinderCard from "./TinderCard";
 import "./style.css";
 
 const db = [
