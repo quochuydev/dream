@@ -6,6 +6,6 @@ module.exports = Object({
     includePaths: [path.join(__dirname, "styles")],
   },
   env: {
-    // BACKEND_URL: process.env.BACKEND_URL,
+    BACKEND_URL: process.env.BACKEND_URL,
   },
 });
