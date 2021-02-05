@@ -11,6 +11,7 @@
     "build:both": "concurrently \"npm run build:server\" \" npm run build:web \"",
     "build:server": "nest build",
     "build:web": "cd client && next build",
+    "build:heroku": "git push heroku master",
     "dev:server": "nest start --watch",
     "dev:web": "cd client && next -p 3000",
     "format": "prettier --write \"**/*.ts\"",
@@ -26,8 +27,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "build:heroku": "git push heroku master"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
