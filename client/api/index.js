@@ -2,33 +2,36 @@ import _ from "lodash";
 
 import Fetch from "./fetch";
 
-export const BACKEND_URL =
+export const baseUrl =
   process.env.NODE_ENV == "production"
     ? process.env.BACKEND_URL
     : "http://localhost:8000";
 
 import APIFactory from "./APIFactory";
 
-export const apiFatory = (config) => APIFactory({
-  baseUrl: BACKEND_URL,
-  setHeaders: () => Object({
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${config.accessToken}`,
-  }),
-});
+export const apiFatory = (config) =>
+  APIFactory({
+    baseUrl: BACKEND_URL,
+    setHeaders: () =>
+      Object({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${config.accessToken}`,
+      }),
+  });
 
 export const API = APIFactory({
   baseUrl: BACKEND_URL,
-  setHeaders: (config) => Object({
-    Accept: "application/json",
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${config.accessToken}`,
-  }),
+  setHeaders: (config) =>
+    Object({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${config.accessToken}`,
+    }),
 });
 
 export const APIClient = new Fetch(
-  BACKEND_URL,
+  baseUrl,
   {
     headers: {
       Accept: "application/json",
@@ -39,7 +42,7 @@ export const APIClient = new Fetch(
 );
 
 export const APIFormData = new Fetch(
-  process.env.BACKEND_URL,
+  baseUrl,
   {
     headers: {},
   },

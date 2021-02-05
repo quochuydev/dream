@@ -8,7 +8,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import UploadAdapter from "../../../utils/upload-adapter";
-import { BACKEND_URL, getToken } from "../../../api";
+import { baseUrl, getToken } from "../../../api";
 import { BlogService } from "../../../services";
 import { Layout } from "../../../components";
 import TagSelect from "./TagSelect";
@@ -115,7 +115,7 @@ export default function Blog({}) {
                 }}
                 config={{
                   ckfinder: {
-                    uploadUrl: `${BACKEND_URL}/api/files`,
+                    uploadUrl: `${baseUrl}/api/files`,
                     headers: {
                       Authorization: `Bearer ${getToken()}`,
                     },

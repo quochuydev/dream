@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Button, Modal, Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { BACKEND_URL, getHeader } from "../../../../client/api";
+import { baseUrl, getHeader } from "../../../../client/api";
 
 import "antd/dist/antd.css";
 import "./style.css";
@@ -28,7 +28,7 @@ export default function Thumbnail({ ...props }) {
   };
 
   const uploadSetting = {
-    action: `${BACKEND_URL}/api/files`,
+    action: `${baseUrl}/api/files`,
     headers: getHeader(),
     accept: ".jpg, .png",
     onPreview: (e) => console.log(e),

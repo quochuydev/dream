@@ -4,6 +4,7 @@ import { Injectable } from "@nestjs/common";
 import { File, FileDocument } from "./file.schema";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+const baseUrl = process.env.BACKEND_URL;
 
 @Injectable()
 export class FileService {
@@ -16,7 +17,7 @@ export class FileService {
       key,
       contentType: file.mimetype,
       size: file.size,
-      url: `${process.env.BACKEND_URL}/api/files/${file.filename}`,
+      url: `${baseUrl}/api/files/${file.filename}`,
       ...data,
     });
 
