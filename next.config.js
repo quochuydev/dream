@@ -1,7 +1,7 @@
-const withCss = require("@zeit/next-css");
+// const withCss = require("@zeit/next-css");
 
-module.exports = withCss({
+module.exports = {
   env: {
-    BACKEND_URL: process.env.BACKEND_URL,
+    BACKEND_URL: process.env.BACKEND_URL
   },
-});
+};

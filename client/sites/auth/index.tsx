@@ -8,7 +8,6 @@ import { API, APIClient } from "../../api";
 import Loading from "../../components/Loading";
 
 import "antd/dist/antd.css";
-import "./style.css";
 
 export default function Auth({}) {
   const [cookie, setCookie] = useCookies(["token"]);

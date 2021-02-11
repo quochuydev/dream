@@ -20,7 +20,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node ./dist/main",
-    "lint": "eslint './src/**/**/*.{ts,tsx}'",
+    "lint": "eslint './src/**/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -64,6 +64,7 @@
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
+    "sass": "^1.32.7",
     "slugify": "^1.4.6"
   },
   "devDependencies": {
