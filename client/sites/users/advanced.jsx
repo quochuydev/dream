@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 // import TinderCard from '../react-tinder-card/index'
 import TinderCard from './tinder'
-import './tinder.module.css'
+import './advanced.module.css'
 
 const db = [
   {
