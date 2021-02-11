@@ -63,6 +63,7 @@
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
+    "sass": "^1.32.7",
     "slugify": "^1.4.6"
   },
   "devDependencies": {
