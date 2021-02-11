@@ -7,7 +7,6 @@ import { useCookies } from "react-cookie";
 import { API, APIClient } from "../../api";
 
 import "antd/dist/antd.css";
-import "./style.css";
 
 export default function Auth({}) {
   const [cookie, setCookie] = useCookies(["token"]);
