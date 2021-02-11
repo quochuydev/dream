@@ -4,6 +4,7 @@ import { Button, message, Avatar } from "antd";
 
 import { Layout } from "../../components";
 import { BlogService } from "../../services";
+import Advanced from './advanced'
 
 import "antd/dist/antd.css";
 
