@@ -1,7 +1,5 @@
 import React, { useState, useMemo } from 'react'
-// import TinderCard from '../react-tinder-card/index'
 import TinderCard from './tinder'
-import './advanced.module.css'
 
 const db = [
   {
@@ -59,7 +57,6 @@ function Advanced () {
 
   return (
     <div>
-      <h1>React Tinder Card</h1>
       <div className='cardContainer'>
         {characters.map((character, index) =>
           <TinderCard ref={childRefs[index]} className='swipe' key={character.name} onSwipe={(dir) => swiped(dir, character.name)} onCardLeftScreen={() => outOfFrame(character.name)}>
