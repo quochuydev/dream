@@ -11,13 +11,16 @@ import {
 } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 import { BlogDto } from "./blog.dto";
-import { JwtGuard } from "../auth/jwt.guard";
 import { AuthUser } from "../../decorators";
+
+import { JwtGuard } from "../auth/jwt.guard";
+import { AuthenticatedGuard } from "../auth/authenticated.guard";
 
 @Controller("/api/blogs")
 export class BlogController {
   constructor(private blogService: BlogService) {}
 
+  @UseGuards(AuthenticatedGuard)
   @Get()
   async list(@Query() query) {
     return this.blogService.paginate(query, {
