@@ -11,18 +11,18 @@ export default function Footer({}) {
     <>
     <Row>
     <Col span={8}>
-    <h2>GIỚI THIỆU</h2>
+    <h3>GIỚI THIỆU</h3>
     <p>quochuydev@gmail.com</p>
       <p>Email liên hệ: quochuydev@gmail.com</p>
     </Col>
     <Col span={8}>
-    <h2>TỪ KHÓA NỔI BẬT</h2>
+    <h3>TỪ KHÓA NỔI BẬT</h3>
       {tags.map(tag => <Tag key={tag.value} color="cyan" style={{ marginRight: 5 }}>
           {tag.label}
         </Tag>)}
     </Col>
     <Col span={8}>
-    <h2>KẾT NỐI VỚI INVESTING</h2>
+    <h3>KẾT NỐI VỚI INVESTING</h3>
       <p>quochuydev - Việt Nam</p>
     </Col>
   </Row>

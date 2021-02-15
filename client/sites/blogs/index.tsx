@@ -79,37 +79,37 @@ export default function Blogs({ initBlogs, ...props }) {
           </li>
         ))}
       </ul>
-        <Row gutter={8}>
-          <Col span={16}>
+      <Row gutter={8}>
+        <Col span={16}>
           <List.Item.Meta
-          avatar={<Avatar shape="square" size={200} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
-          title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
-          description="Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…"
+            avatar={<Avatar shape="square" size={200} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
+            title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
+            description="Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…"
           />
           <hr />
           <List.Item.Meta
-          avatar={<Avatar shape="square" size={150} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
-          title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
-          description={<>
-          <p>{(new Date()).toISOString()}</p>
-          <p>Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…</p>
-          </>}
-          />
-          </Col>
-          <Col span={8}>
-            <List.Item.Meta
-            avatar={<Avatar shape="square" size={80} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
+            avatar={<Avatar shape="square" size={150} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
             title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
-            />
-          </Col>
-        </Row>
-  <Card
-    hoverable
-    style={{ width: 240 }}
-    cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
-  >
-    <Meta title="Europe Street beat" />
-  </Card>
+            description={<>
+              <p>{(new Date()).toISOString()}</p>
+              <p>Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…</p>
+            </>}
+          />
+        </Col>
+        <Col span={8}>
+          <List.Item.Meta
+          avatar={<Avatar shape="square" size={80} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
+          title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
+          />
+        </Col>
+      </Row>
+      <Card
+        hoverable
+        style={{ width: 240 }}
+        cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+      >
+        <Meta title="Europe Street beat" />
+      </Card>
     </Layout>
   );
 }
