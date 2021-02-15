@@ -1,4 +1,5 @@
 // const withCss = require("@zeit/next-css");
+const path = require('path')
 
 module.exports = Object({
   sassOptions: {
