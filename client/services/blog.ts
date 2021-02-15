@@ -26,8 +26,8 @@ export default {
     });
   },
 
-  detail: async function detail(id, accessToken) {
-    return await APIClient.get(`/api/blogs/u/${id}`, { accessToken });
+  detail: async function detail(id) {
+    return await APIClient.get(`/api/blogs/${id}`);
   },
 
   update: async function update(query, body) {

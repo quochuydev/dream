@@ -14,13 +14,11 @@ import { BlogDto } from "./blog.dto";
 import { AuthUser } from "../../decorators";
 
 import { JwtGuard } from "../auth/jwt.guard";
-import { AuthenticatedGuard } from "../auth/authenticated.guard";
 
 @Controller("/api/blogs")
 export class BlogController {
   constructor(private blogService: BlogService) {}
 
-  @UseGuards(AuthenticatedGuard)
   @Get()
   async list(@Query() query) {
     return this.blogService.paginate(query, {
@@ -29,25 +27,8 @@ export class BlogController {
     });
   }
 
-  @Get("/u")
-  @UseGuards(JwtGuard)
-  async uList(@Query() query) {
-    return this.blogService.paginate(query, {
-      keyword: "title",
-      populate: "file_id",
-    });
-  }
-
   @Get("/:id")
   async detail(@Param("id") id: string) {
-    return await this.blogService.get(id, {
-      populate: "file_id",
-    });
-  }
-
-  @Get("/u/:id")
-  @UseGuards(JwtGuard)
-  async edit(@Param("id") id: string) {
     return await this.blogService.get(id, {
       populate: "file_id",
     });

@@ -10,7 +10,6 @@ import {
 import { AuthService } from "./auth.service";
 import { AuthUser } from "../../decorators";
 import { JwtGuard } from "../auth/jwt.guard";
-import { LoginGuard } from "../auth/login.guard";
 
 @Controller()
 export class AuthController {
@@ -22,7 +21,6 @@ export class AuthController {
   }
 
   @Post("/auth")
-  @UseGuards(LoginGuard)
   async auth(@Body("code") code: string, @Res() res) {
     const token = await this.authService.auth(code);
     res.cookie("token", token);

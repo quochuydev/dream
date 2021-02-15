@@ -8,7 +8,7 @@ import { BlogService } from "../../services";
 import "antd/dist/antd.css";
 import "./style.css";
 
-const {Meta } =Card
+const { Meta } =Card
 
 export default function Blogs({ initBlogs, ...props }) {
   const initQuery = { page: 1, limit: 20 };

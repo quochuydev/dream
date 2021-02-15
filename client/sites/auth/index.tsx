@@ -27,12 +27,13 @@ export default function Auth({}) {
         localStorage.setItem("accessToken", accessToken);
         setCookie("accessToken", accessToken);
         const user = await API.get(`/auth/me`, { accessToken });
+        console.log(user)
         localStorage.setItem("me", user.email);
       }
     } catch (error) {
       console.log(error);
     }
-    Router.push("/");
+    Router.push("/blogs");
   }
 
   return (
