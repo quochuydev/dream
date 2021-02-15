@@ -8,6 +8,16 @@ export const BACKEND_URL =
     : "http://localhost:8000";
 
 import APIFactory from "./APIFactory";
+
+export const apiFatory = (config) => APIFactory({
+  baseUrl: BACKEND_URL,
+  setHeaders: () => Object({
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${config.accessToken}`,
+  }),
+});
+
 export const API = APIFactory({
   baseUrl: BACKEND_URL,
   setHeaders: (config) => Object({

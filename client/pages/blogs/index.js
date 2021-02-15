@@ -7,12 +7,12 @@ export async function getServerSideProps({ req }) {
   const accessToken = req.cookies['accessToken'];
   console.log('accessToken', accessToken)
 
-  const result = await BlogService.list(query, accessToken);
+  const result = await BlogService.list(query);
   let initBlogs = result.items;
 
   return {
     props: {
-      initBlogs : [],
+      initBlogs ,
     },
   };
 }

@@ -20,7 +20,9 @@ export class BlogController {
   constructor(private blogService: BlogService) {}
 
   @Get()
-  async list(@Query() query) {
+  @UseGuards(JwtGuard)
+  async list(@Query() query, @AuthUser("id") user_id: string) {
+    console.log('user_id', user_id)
     return this.blogService.paginate(query, {
       keyword: "title",
       populate: "file_id",

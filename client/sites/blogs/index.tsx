@@ -101,6 +101,10 @@ export default function Blogs({ initBlogs, ...props }) {
           avatar={<Avatar shape="square" size={80} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
           title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
           />
+          <List.Item.Meta
+          avatar={<Avatar shape="square" size={80} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
+          title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
+          />
         </Col>
       </Row>
     </Layout>

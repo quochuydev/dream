@@ -23,16 +23,16 @@ async function bootstrap() {
     })
   );
   
-  app.use(
-    session({
-      secret: 'nest cats',
-      resave: false,
-      saveUninitialized: false,
-    }),
-  );
+  // app.use(
+  //   session({
+  //     secret: 'nest cats',
+  //     resave: false,
+  //     saveUninitialized: false,
+  //   }),
+  // );
 
-  app.use(passport.initialize());
-  app.use(passport.session());
+  // app.use(passport.initialize());
+  // app.use(passport.session());
 
   await app.listen(PORT);
 }
