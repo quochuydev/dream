@@ -14,6 +14,7 @@ import "./layout.css";
 
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
+
 import { APIClient } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
 
@@ -107,7 +108,8 @@ export default function LayoutComponent({ ...props }) {
         <MainMenu />
         <div>{props.children}</div>
       </PageHeader>
-      </Footer>
+      <Footer />
+
     </>
   );
 }
