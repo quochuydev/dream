@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
-import "./layout.css";
+import "../../styles/layout.css";
 
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
