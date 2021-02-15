@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Button, message, Avatar } from "antd";
+import { Button, message, Avatar,Card,List } from "antd";
 
 import { Layout } from "../../components";
 import { BlogService } from "../../services";
 
 import "antd/dist/antd.css";
+import "./style.css";
+
+const {Meta } =Card
 
 export default function Blogs({ initBlogs, ...props }) {
   const initQuery = { page: 1, limit: 20 };
@@ -76,6 +79,11 @@ export default function Blogs({ initBlogs, ...props }) {
           </li>
         ))}
       </ul>
+      <List.Item.Meta
+          avatar={<Avatar shape="square" size={200} src={'https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png'} />}
+          title={"Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"}
+          description="Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…"
+        />
     </Layout>
   );
 }

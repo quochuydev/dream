@@ -10,13 +10,11 @@ export const BACKEND_URL =
 import APIFactory from "./APIFactory";
 export const API = APIFactory({
   baseUrl: BACKEND_URL,
-  setHeaders: () => {
-    return {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    };
-  },
+  setHeaders: (config) => Object({
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${config.accessToken}`,
+  }),
 });
 
 export const APIClient = new Fetch(

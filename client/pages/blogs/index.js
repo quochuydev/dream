@@ -2,13 +2,16 @@ import { noSSRWithLoadingDynamic } from "../../utils/dynamic.import";
 
 import { BlogService } from "../../services";
 
-export async function getServerSideProps() {
-  const initQuery = { page: 1, limit: 20 };
-  const result = await BlogService.publish.list(initQuery);
+export async function getServerSideProps({ req }) {
+  const query = { page: 1, limit: 20 };
+  const accessToken = req.cookies['accessToken'];
+
+  const result = await BlogService.list(query, accessToken);
+  let initBlogs = result.items;
 
   return {
     props: {
-      initBlogs: result.items,
+      initBlogs,
     },
   };
 }

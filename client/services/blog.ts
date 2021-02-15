@@ -3,7 +3,7 @@ import { API, APIClient } from "../api";
 export default {
   publish: {
     list: async function (query) {
-      return await APIClient.get("/api/blogs", query);
+      return await APIClient.get("/api/blogs", { query });
     },
 
     detail: async function (id) {
@@ -26,8 +26,8 @@ export default {
     });
   },
 
-  detail: async function detail(id) {
-    return await API.get(`/api/blogs/u/${id}`);
+  detail: async function detail(id, accessToken) {
+    return await APIClient.get(`/api/blogs/u/${id}`, { accessToken });
   },
 
   update: async function update(query, body) {
