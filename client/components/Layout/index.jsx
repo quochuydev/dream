@@ -10,7 +10,6 @@ import {
 } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
-import "../../styles/layout.css";
 
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
@@ -109,7 +108,6 @@ export default function LayoutComponent({ ...props }) {
         <div>{props.children}</div>
       </PageHeader>
       <Footer />
-
     </>
   );
 }

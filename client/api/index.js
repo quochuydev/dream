@@ -11,7 +11,7 @@ import APIFactory from "./APIFactory";
 
 export const apiFatory = (config) =>
   APIFactory({
-    baseUrl: BACKEND_URL,
+    baseUrl,
     setHeaders: () =>
       Object({
         Accept: "application/json",
@@ -21,7 +21,7 @@ export const apiFatory = (config) =>
   });
 
 export const API = APIFactory({
-  baseUrl: BACKEND_URL,
+  baseUrl,
   setHeaders: (config) =>
     Object({
       Accept: "application/json",
