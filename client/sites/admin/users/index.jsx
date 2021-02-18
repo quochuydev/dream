@@ -94,7 +94,7 @@ export default function AdminUsers({ ...props }) {
   ];
 
   return (
-    <Layout>
+    <Layout hideFooter={true}>
       <Link href={`/publish/users/create`}>New</Link>
       {" | "}
       <a
@@ -113,7 +113,6 @@ export default function AdminUsers({ ...props }) {
         dataSource={users}
         pagination={false}
       />
-      <ImageCrop />
     </Layout>
   );
 }

@@ -27,7 +27,7 @@ const isMobile = () => {
   );
 };
 
-export default function LayoutComponent({ ...props }) {
+export default function LayoutComponent({ hideFooter, ...props }) {
   const [showDrawer, setShowDrawer] = useState(false);
 
   const subTitle = (
@@ -107,7 +107,7 @@ export default function LayoutComponent({ ...props }) {
         <MainMenu />
         <div>{props.children}</div>
       </PageHeader>
-      <Footer />
+      {!hideFooter && <Footer />}
     </>
   );
 }
@@ -145,7 +145,6 @@ function LeftMenu() {
       {getMe() ? (
         <p>{getMe()}</p>
       ) : (
-        <>
           <Button
             onClick={() => {
               loginGoogle();
@@ -153,7 +152,6 @@ function LeftMenu() {
           >
             login
           </Button>
-        </>
       )}
       <Menu theme="light" mode="inline">
         {menuItems}

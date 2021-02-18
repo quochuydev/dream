@@ -13,7 +13,7 @@ export class UserService {
 
   async list(query) {
     const result = await this.userModel.find({});
-    console.log(result)
+    // console.log(result)
     return result
   }
 
