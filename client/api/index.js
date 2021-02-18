@@ -9,16 +9,19 @@ export const baseUrl =
 
 import APIFactory from "./APIFactory";
 
-export const apiFatory = (config) =>
-  APIFactory({
+export const apiFatory = (ctx) => {
+  const req = ctx.req;
+  const accessToken = req.cookies["accessToken"];
+  return APIFactory({
     baseUrl,
     setHeaders: () =>
       Object({
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${config.accessToken}`,
+        Authorization: `Bearer ${accessToken}`,
       }),
   });
+};
 
 export const API = APIFactory({
   baseUrl,

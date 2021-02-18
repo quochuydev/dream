@@ -7,12 +7,12 @@ export function parseCookies(req) {
 }
 
 export async function getServerSideProps({ req, params, res }) {
-    const blog = await BlogService.publish.detail(params.id);
-    return {
-      props: {
-        blog,
-      },
-    };
+  const blog = await BlogService.publish.detail(params.id);
+  return {
+    props: {
+      blog,
+    },
+  };
 }
 
 export default noSSRWithLoadingDynamic(import("../../sites/blogs/detail"));

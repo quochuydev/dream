@@ -1,18 +1,16 @@
 import { noSSRWithLoadingDynamic } from "../../utils/dynamic.import";
 
-import { BlogService } from "../../services";
+import { apiFatory } from "../../api";
 
-export async function getServerSideProps({ req }) {
+export async function getServerSideProps(ctx) {
   const query = { page: 1, limit: 20 };
-  const accessToken = req.cookies['accessToken'];
-  console.log('accessToken', accessToken)
-
-  const result = await BlogService.list(query);
-  let initBlogs = result.items;
+  const API = apiFatory(ctx);
+  const result = await API.get("/api/blogs", { query });
+  const initBlogs = result.items;
 
   return {
     props: {
-      initBlogs ,
+      initBlogs,
     },
   };
 }

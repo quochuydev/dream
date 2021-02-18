@@ -25,9 +25,9 @@ export default function Auth({}) {
       const accessToken = await APIClient.post(`/auth`, { code });
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
-        setCookie("accessToken", accessToken);
+        // setCookie("accessToken", accessToken);
         const user = await API.get(`/auth/me`, { accessToken });
-        console.log(user)
+        console.log(user);
         localStorage.setItem("me", user.email);
       }
     } catch (error) {
