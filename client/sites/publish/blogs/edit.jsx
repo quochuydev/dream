@@ -20,7 +20,7 @@ export default function Blog({}) {
   const router = useRouter();
   const { id } = router.query;
   const [form] = Form.useForm();
-  const [data, setData] = useState<any>({ title: "", body: "" });
+  const [data, setData] = useState({ title: "", body: "" });
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState(null);
 
