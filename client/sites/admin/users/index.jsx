@@ -20,7 +20,7 @@ export default function AdminUsers({ ...props }) {
 
   async function fetchUsers() {
     const result = await UserService.list(query);
-    setUsers(result.items);
+    setUsers(result.users);
   }
 
   const columns = [
@@ -28,6 +28,20 @@ export default function AdminUsers({ ...props }) {
       key: "id",
       title: "id",
       dataIndex: "_id",
+    },
+    {
+      key: "first_name",
+      title: "first_name",
+      render: (value) => {
+        return <div>{value.first_name}</div>;
+      },
+    },
+    {
+      key: "email",
+      title: "email",
+      render: (value) => {
+        return <div>{value.email}</div>;
+      },
     },
     {
       key: "created_at",
@@ -48,7 +62,7 @@ export default function AdminUsers({ ...props }) {
         return (
           <div>
             {value.deleted_at}
-            {!value.deleted_at && (
+            {/* {!value.deleted_at && (
               <Button
                 onClick={async () => {
                   const result = await UserService.remove(value._id);
@@ -72,7 +86,7 @@ export default function AdminUsers({ ...props }) {
               >
                 publist
               </Button>
-            )}
+            )} */}
           </div>
         );
       },

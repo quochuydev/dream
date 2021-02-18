@@ -11,8 +11,10 @@ export class UserService {
     return this.userModel.findOne(criteria);
   }
 
-  list(query) {
-    return this.userModel.find({});
+  async list(query) {
+    const result = await this.userModel.find({});
+    console.log(result)
+    return result
   }
 
   get(id) {

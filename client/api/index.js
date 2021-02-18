@@ -25,11 +25,11 @@ export const apiFatory = (ctx) => {
 
 export const API = APIFactory({
   baseUrl,
-  setHeaders: (config) =>
+  setHeaders: () =>
     Object({
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${config.accessToken}`,
+      Authorization: `Bearer ${getToken()}`,
     }),
 });
 

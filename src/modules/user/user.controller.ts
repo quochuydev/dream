@@ -7,7 +7,7 @@ export class UserController {
 
   @Get()
   async list(@Query() query) {
-    return { users: this.userService.list(query) };
+    return { users:await this.userService.list(query) };
   }
 
   @Get("/:id")
