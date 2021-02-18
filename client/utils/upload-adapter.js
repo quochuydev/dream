@@ -3,9 +3,7 @@ import _ from "lodash";
 import { baseUrl, getToken, getHeader } from "../api";
 
 export default class UploadAdapter {
-  loader: any;
-
-  constructor(loader: any) {
+  constructor(loader) {
     this.loader = loader;
   }
 
