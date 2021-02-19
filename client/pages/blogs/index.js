@@ -7,12 +7,13 @@ export async function getServerSideProps(ctx) {
   // if(isHasToken){
   // }
 
-  // const query = { page: 1, limit: 20 };
+  const query = { page: 1, limit: 20 };
+  
   // const API = apiFatory(ctx);
   // const result = await API.get("/api/v1/blogs", { query });
+  // const initBlogs = result.items;
   
-  const initQuery = { page: 1, limit: 20 };
-  const result = await BlogService.v1.list(initQuery);
+  const result = await BlogService.v1.list(query);
   const initBlogs = result.items;
 
   return {
