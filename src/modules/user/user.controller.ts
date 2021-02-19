@@ -9,11 +9,11 @@ export class UserController {
   @Get()
   @UseGuards(AdminGuard)
   async list(@Query() query) {
-    return { users:await this.userService.list(query) };
+    return { users: await this.userService.list(query) };
   }
 
   @Get("/:id")
   async get(@Param("id") id) {
-    return this.userService.get(id);
+    return await this.userService.get(id);
   }
 }

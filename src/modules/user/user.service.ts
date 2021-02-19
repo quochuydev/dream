@@ -13,12 +13,11 @@ export class UserService {
 
   async list(query) {
     const result = await this.userModel.find({});
-    // console.log(result)
-    return result
+    return result;
   }
 
-  get(id) {
-    return this.userModel.findById(id);
+  async get(id) {
+    return await this.userModel.findById(id);
   }
 
   async create(data) {

@@ -28,6 +28,9 @@ export class User {
   phone: string;
 
   @Prop()
+  roles: string[];
+
+  @Prop()
   created_at: Date;
 
   @Prop()
@@ -45,7 +48,7 @@ export const UserSchema = new mongoose.Schema({
   password: { type: String, default: null },
   salt: { type: String, default: null },
   phone: { type: String, default: null },
-  roles: { type: [String], default: [] },
+  roles: { type: [String], default: ['user'] },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   deleted_at: { type: Date, default: null },
