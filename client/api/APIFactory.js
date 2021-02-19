@@ -1,9 +1,9 @@
 import _ from "lodash";
 import fetch from "isomorphic-fetch";
-import { getToken } from "./index";
-import Router from "next/router";
+// import { getToken } from "./index";
+// import Router from "next/router";
 
-const APIFactory = ({ baseUrl, setHeaders, initConfig }) => {
+const APIFactory = ({ baseUrl, setHeaders }) => {
   const API = {
     get: async (endpoint, config) => {
       return await call(endpoint, config, "GET");
@@ -25,7 +25,6 @@ const APIFactory = ({ baseUrl, setHeaders, initConfig }) => {
   return API;
 
   async function call(endpoint, config = {}, method) {
-    Object.assign(config, initConfig)
     try {
       const result = await _call(endpoint, config, method);
       return result;
