@@ -18,7 +18,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "services/index.ts", "sites/publish/blogs/TagSelect.jsx", "sites/publish/blogs/Thumbnail.jsx"
   ],
   "exclude": ["node_modules"]
 }
