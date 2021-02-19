@@ -22,7 +22,6 @@ export class BlogController {
   @Get()
   @UseGuards(JwtGuard)
   async list(@Query() query, @AuthUser("id") user_id: string) {
-    console.log('user_id', user_id)
     return this.blogService.paginate(query, {
       keyword: "title",
       populate: "file_id",

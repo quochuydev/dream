@@ -31,7 +31,7 @@ export default function Blogs({ initBlogs, ...props }) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await BlogService.publish.list(query);
+    const result = await BlogService.list(query);
     setBlogs(result.items);
   }
 
