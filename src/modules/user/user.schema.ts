@@ -31,13 +31,13 @@ export class User {
   roles: string[];
 
   @Prop()
-  created_at: Date;
+  createdAt: Date;
 
   @Prop()
-  updated_at: Date;
+  updatedAt: Date;
 
   @Prop()
-  deleted_at: Date;
+  deletedAt: Date;
 }
 
 export const UserSchema = new mongoose.Schema({
@@ -49,7 +49,7 @@ export const UserSchema = new mongoose.Schema({
   salt: { type: String, default: null },
   phone: { type: String, default: null },
   roles: { type: [String], default: ['user'] },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-  deleted_at: { type: Date, default: null },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  deletedAt: { type: Date, default: null },
 });
