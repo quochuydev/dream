@@ -19,10 +19,10 @@ export class User {
   salt: string;
 
   @Prop()
-  first_name: string;
+  firstName: string;
 
   @Prop()
-  last_name: string;
+  lastName: string;
 
   @Prop()
   phone: string;
@@ -42,8 +42,8 @@ export class User {
 
 export const UserSchema = new mongoose.Schema({
   email: { type: String, default: null },
-  first_name: { type: String, default: null },
-  last_name: { type: String, default: null },
+  firstName: { type: String, default: null },
+  lastName: { type: String, default: null },
   username: { type: String, default: null },
   password: { type: String, default: null },
   salt: { type: String, default: null },

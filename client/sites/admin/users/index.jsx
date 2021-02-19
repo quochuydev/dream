@@ -30,10 +30,10 @@ export default function AdminUsers({ ...props }) {
       dataIndex: "_id",
     },
     {
-      key: "first_name",
-      title: "first_name",
+      key: "firstName",
+      title: "firstName",
       render: (value) => {
-        return <div>{value.first_name}</div>;
+        return <div>{value.firstName}</div>;
       },
     },
     {
