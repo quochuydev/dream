@@ -3,10 +3,10 @@ import _ from "lodash";
 import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { BACKEND_URL, getHeader } from "../../../../client/api";
+import { baseUrl, getHeader } from "../../../api";
 
 import "antd/dist/antd.css";
-import "./style.css";
+import "./Thumbnail.module.css";
 
 export default function Thumbnail({ selected, callback, ...props }) {
   const [image, setImage] = useState(null);
@@ -19,7 +19,7 @@ export default function Thumbnail({ selected, callback, ...props }) {
   }, [selected]);
 
   const uploadSetting = {
-    action: `${BACKEND_URL}/api/files`,
+    action: `${baseUrl}/api/files`,
     headers: getHeader(),
     accept: ".jpg, .png",
     onPreview: (e) => console.log(e),

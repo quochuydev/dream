@@ -1,11 +1,9 @@
 import axios from "axios";
 import _ from "lodash";
-import { BACKEND_URL, getToken, getHeader } from "../api";
+import { baseUrl, getToken, getHeader } from "../api";
 
 export default class UploadAdapter {
-  loader: any;
-
-  constructor(loader: any) {
+  constructor(loader) {
     this.loader = loader;
   }
 
@@ -15,7 +13,7 @@ export default class UploadAdapter {
     data.append("upload", file);
     return new Promise((resolve, reject) => {
       axios({
-        url: `${BACKEND_URL}/api/files`,
+        url: `${baseUrl}/api/files`,
         method: "post",
         data,
         headers: getHeader(),

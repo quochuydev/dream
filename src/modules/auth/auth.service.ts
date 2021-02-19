@@ -46,7 +46,9 @@ export class AuthService {
     });
     const user_gen_token = {
       sub: user._id,
+      id: user.id,
       email: user.email,
+      roles: user.roles,
     };
 
     const userToken = this.tokenService.signJwt(

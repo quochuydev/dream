@@ -1,18 +1,29 @@
 import { noSSRWithLoadingDynamic } from "../../utils/dynamic.import";
+import { apiFatory, hasToken } from "../../api";
 import { BlogService } from "../../services";
-import cookie from "cookie";
+import { V1 } from '../../api/endpoint'
 
-export function parseCookies(req) {
-  return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
-}
+export async function getServerSideProps(ctx) {
+  const blog = await getBlog(ctx);
 
-export async function getServerSideProps({ req, params, res }) {
-    const blog = await BlogService.publish.detail(params.id);
-    return {
-      props: {
-        blog,
-      },
-    };
+  return {
+    props: {
+      blog,
+    },
+  };
 }
 
 export default noSSRWithLoadingDynamic(import("../../sites/blogs/detail"));
+
+async function getBlog(ctx){
+  const isHasToken = hasToken(ctx);
+  if(isHasToken){
+    const API = apiFatory(ctx);
+    const { params } = ctx
+    const blog = await API.get(V1.BLOGS.DETAIL, { params });
+    return blog;
+  }
+  
+  const blog = await BlogService.v1.detail(ctx.params.id);
+  return blog;
+}

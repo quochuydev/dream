@@ -19,33 +19,37 @@ export class User {
   salt: string;
 
   @Prop()
-  first_name: string;
+  firstName: string;
 
   @Prop()
-  last_name: string;
+  lastName: string;
 
   @Prop()
   phone: string;
 
   @Prop()
-  created_at: Date;
+  roles: string[];
 
   @Prop()
-  updated_at: Date;
+  createdAt: Date;
 
   @Prop()
-  deleted_at: Date;
+  updatedAt: Date;
+
+  @Prop()
+  deletedAt: Date;
 }
 
 export const UserSchema = new mongoose.Schema({
   email: { type: String, default: null },
-  first_name: { type: String, default: null },
-  last_name: { type: String, default: null },
+  firstName: { type: String, default: null },
+  lastName: { type: String, default: null },
   username: { type: String, default: null },
   password: { type: String, default: null },
   salt: { type: String, default: null },
   phone: { type: String, default: null },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-  deleted_at: { type: Date, default: null },
+  roles: { type: [String], default: ['user'] },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  deletedAt: { type: Date, default: null },
 });

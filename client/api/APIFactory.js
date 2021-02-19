@@ -1,9 +1,9 @@
 import _ from "lodash";
 import fetch from "isomorphic-fetch";
-import { getToken } from "./index";
-import Router from "next/router";
+// import { getToken } from "./index";
+// import Router from "next/router";
 
-const APIFactory = ({ baseUrl, setHeaders }) => {
+const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
   const API = {
     get: async (endpoint, config) => {
       return await call(endpoint, config, "GET");
@@ -30,8 +30,8 @@ const APIFactory = ({ baseUrl, setHeaders }) => {
       return result;
     } catch (error) {
       if (error.statusCode === 401) {
-        localStorage.clear();
-        Router.push(`/401`);
+        // localStorage.clear();
+        // Router.push(`/401`);
       }
       throw error;
     }
@@ -42,10 +42,10 @@ const APIFactory = ({ baseUrl, setHeaders }) => {
       const url = makeUrl(endpoint, config);
       const options = {
         method,
-        headers: setHeaders(),
+        headers: setHeaders(config),
       };
       if (config.body) {
-        options.body = JSON.stringify(config.body);
+        options.body = options.notStringify ? config.body : JSON.stringify(config.body);
       }
 
       const newRequest = new Request(url, options);
