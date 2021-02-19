@@ -44,6 +44,11 @@ export default function AdminUsers({ ...props }) {
       },
     },
     {
+      key: "roles",
+      title: "roles",
+      dataIndex: "roles",
+    },
+    {
       key: "created_at",
       title: "created_at",
       render: (value) => {

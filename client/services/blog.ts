@@ -1,7 +1,7 @@
 import { API, APIClient } from "../api";
 
 export default {
-  publish: {
+  v1: {
     list: async function (query) {
       return await APIClient.get("/api/blogs", { query });
     },

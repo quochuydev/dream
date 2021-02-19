@@ -1,10 +1,9 @@
 import { noSSRWithLoadingDynamic } from "../utils/dynamic.import";
-
 import { BlogService } from "../services";
 
 export async function getServerSideProps() {
   const initQuery = { page: 1, limit: 20 };
-  const result = await BlogService.publish.list(initQuery);
+  const result = await BlogService.v1.list(initQuery);
 
   return {
     props: {

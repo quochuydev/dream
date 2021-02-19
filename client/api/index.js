@@ -9,9 +9,18 @@ export const baseUrl =
 
 import APIFactory from "./APIFactory";
 
-export const apiFatory = (ctx) => {
+export const getServerToken = (ctx) => {
   const req = ctx.req;
   const accessToken = req.cookies["accessToken"];
+  return accessToken;
+}
+
+export const hasToken = (ctx) => {
+  return !!getServerToken(ctx)
+}
+
+export const apiFatory = (ctx) => {
+  const accessToken = getServerToken(ctx);
   return APIFactory({
     baseUrl,
     setHeaders: () =>
