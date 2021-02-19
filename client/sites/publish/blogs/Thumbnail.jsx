@@ -3,7 +3,7 @@ import _ from "lodash";
 import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
-import { baseUrl, getHeader } from "../../../../client/api";
+import { baseUrl, getHeader } from "../../../api";
 
 import "antd/dist/antd.css";
 import "./Thumbnail.module.css";
