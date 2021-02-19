@@ -1,7 +1,5 @@
 import _ from "lodash";
 
-import Fetch from "./fetch";
-
 export const baseUrl =
   process.env.NODE_ENV == "production"
     ? process.env.BACKEND_URL
@@ -42,34 +40,25 @@ export const API = APIFactory({
     }),
 });
 
-export const APIClient = new Fetch(
+export const APIClient = APIFactory({
   baseUrl,
-  {
-    headers: {
+  setHeaders: () =>
+    Object({
       Accept: "application/json",
       "Content-Type": "application/json",
-    },
-  },
-  { before: [] }
-);
+    }),
+});
 
-export const APIFormData = new Fetch(
+export const APIFormData = APIFactory({
   baseUrl,
-  {
-    headers: {},
-  },
-  { befores: [setConfigFormData], errors: [] }
-);
-
-function setConfigFormData(config) {
-  const accessToken = getToken();
-  const headers = new Headers();
-  headers.append("Authorization", `Bearer ${accessToken}`);
-
-  config.headers = headers;
-  config.notStringifyBody = true;
-  return config;
-}
+  notStringify: true,
+  setHeaders: () => {
+    const accessToken = getToken();
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer ${accessToken}`);
+    return headers
+  }
+});
 
 export function getToken() {
   const token = localStorage.getItem("accessToken");

@@ -3,7 +3,7 @@ import fetch from "isomorphic-fetch";
 // import { getToken } from "./index";
 // import Router from "next/router";
 
-const APIFactory = ({ baseUrl, setHeaders }) => {
+const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
   const API = {
     get: async (endpoint, config) => {
       return await call(endpoint, config, "GET");
@@ -45,7 +45,7 @@ const APIFactory = ({ baseUrl, setHeaders }) => {
         headers: setHeaders(config),
       };
       if (config.body) {
-        options.body = JSON.stringify(config.body);
+        options.body = options.notStringify ? config.body : JSON.stringify(config.body);
       }
 
       const newRequest = new Request(url, options);

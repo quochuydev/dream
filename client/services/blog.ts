@@ -1,22 +1,23 @@
 import { API, APIClient } from "../api";
+import { BLOGS, V1 } from "../api/endpoint";
 
 export default {
   v1: {
     list: async function (query) {
-      return await APIClient.get("/api/blogs", { query });
+      return await APIClient.get(V1.BLOGS.LIST, { query });
     },
 
     detail: async function (id) {
-      return await APIClient.get(`/api/blogs/${id}`);
+      return await APIClient.get(`/api/v1/blogs/${id}`);
     },
   },
 
   list: async function (query) {
-    return await API.get("/api/blogs", { query });
+    return await API.get(BLOGS.LIST, { query });
   },
 
   create: async function (data) {
-    return await API.post("/api/blogs", {
+    return await API.post(BLOGS.CREATE, {
       body: {
         title: data.title,
         body: data.body,
