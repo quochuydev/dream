@@ -1,3 +1,5 @@
+
+
 import {
   Controller,
   Get,
@@ -10,13 +12,18 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { BlogService } from "./blog.service";
+import { BlogDto } from "./blog.dto";
+import { AuthUser } from "../../decorators";
 
-@Controller("/api/v1/blogs")
+import { JwtGuard, UserGuard } from "../auth/jwt.guard";
+
+@Controller("/v1/blogs")
+@UseGuards(UserGuard)
 export class BlogV1Controller {
   constructor(private blogService: BlogService) {}
 
   @Get()
-  async list(@Query() query) {
+  async list(@Query() query, @AuthUser("id") user_id: string) {
     return this.blogService.paginate(query, {
       keyword: "title",
       populate: "file_id",
@@ -28,5 +35,23 @@ export class BlogV1Controller {
     return await this.blogService.get(id, {
       populate: "file_id",
     });
+  }
+
+  @Post()
+  @UseGuards(JwtGuard)
+  async create(@Body() data: BlogDto, @AuthUser("id") user_id: string) {
+    return await this.blogService.create({ ...data, user_id });
+  }
+
+  @Put("/:id")
+  @UseGuards(JwtGuard)
+  async update(@Param("id") id: string, @Body() data: any) {
+    return await this.blogService.update(id, data);
+  }
+
+  @Delete("/:id")
+  @UseGuards(JwtGuard)
+  async remove(@Param("id") id: string) {
+    return await this.blogService.remove(id);
   }
 }

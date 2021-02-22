@@ -32,4 +32,11 @@ export class AuthController {
   async me(@AuthUser("id") userId: string) {
     return this.authService.me(userId);
   }
+
+  @Post("/auth/logout")
+  @UseGuards(JwtGuard)
+  async logout(@Res() res) {
+    res.cookie("token", null);
+    return res.send(null);
+  }
 }

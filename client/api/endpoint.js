@@ -1,5 +1,5 @@
 export const API = '/api';
-export const APIv1 = `${API}/v1`;
+export const APIv1 = `/v1`;
 
 export const BLOGS =  {
 LIST: `${API}/blogs`,

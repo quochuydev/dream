@@ -24,6 +24,6 @@ async function getBlogs(ctx){
     return result.items;
   }
   
-  const result = await BlogService.v1.list(query);
+  const result = await BlogService.list(query);
   return result.items;
 }

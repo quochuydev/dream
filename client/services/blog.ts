@@ -4,16 +4,16 @@ import { BLOGS, V1 } from "../api/endpoint";
 export default {
   v1: {
     list: async function (query) {
-      return await APIClient.get(V1.BLOGS.LIST, { query });
+      return await API.get(V1.BLOGS.LIST, { query });
     },
 
     detail: async function (id) {
-      return await APIClient.get(`/api/v1/blogs/${id}`);
+      return await APIClient.get(`/api/blogs/${id}`);
     },
   },
 
   list: async function (query) {
-    return await API.get(BLOGS.LIST, { query });
+    return await APIClient.get(BLOGS.LIST, { query });
   },
 
   create: async function (data) {

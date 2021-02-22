@@ -16,6 +16,7 @@ export class JwtGuard extends AuthGuard("jwt") {
 @Injectable()
 export class UserGuard extends AuthGuard("jwt") {
   handleRequest(err, user, info: Error) {
+    console.log(user)
     if (user && (isAdmin(user) || isUser(user))) {
       return user;
     }

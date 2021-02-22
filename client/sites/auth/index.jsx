@@ -9,8 +9,6 @@ import { API, APIClient } from "../../api";
 import "antd/dist/antd.css";
 
 export default function Auth({}) {
-  const [cookie, setCookie] = useCookies(["accessToken"]);
-
   const router = useRouter();
   const { code } = router.query;
 
@@ -22,10 +20,10 @@ export default function Auth({}) {
 
   async function auth() {
     try {
-      const accessToken = await APIClient.post(`/auth`, { code });
+      console.log(code)
+      const accessToken = await APIClient.post(`/auth`, { body: { code } });
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
-        // setCookie("accessToken", accessToken);
         const user = await API.get(`/auth/me`, { accessToken });
         console.log(user);
         localStorage.setItem("me", user.email);
