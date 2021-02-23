@@ -7,9 +7,15 @@ export const baseUrl =
 
 import APIFactory from "./APIFactory";
 
+import cookie from "cookie"
+
+export function parseCookies(req) {
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie)
+}
+
 export const getServerToken = (ctx) => {
   const req = ctx.req;
-  const accessToken = req.cookies["accessToken"];
+  const accessToken = req.cookies["token"];
   return accessToken;
 }
 

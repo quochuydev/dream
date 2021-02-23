@@ -34,9 +34,10 @@ export class AuthController {
   }
 
   @Post("/auth/logout")
-  @UseGuards(JwtGuard)
+  // @UseGuards(JwtGuard)
   async logout(@Res() res) {
     res.cookie("token", null);
-    return res.send(null);
+    console.log('token null')
+    return res.sendStatus(200);
   }
 }

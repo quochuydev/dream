@@ -8,6 +8,10 @@ import { API, APIClient } from "../../api";
 
 import "antd/dist/antd.css";
 
+function eraseCookie(name) {
+  document.cookie = name + '=; Max-Age=0'
+}
+
 export default function Auth({}) {
   useEffect(() => {
     logout()
@@ -16,6 +20,7 @@ export default function Auth({}) {
   async function logout(){
     localStorage.clear()
     await API.post(`/auth/logout`);
+    eraseCookie('token')
     Router.push("/");
     return;
   }

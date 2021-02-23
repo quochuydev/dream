@@ -44,6 +44,7 @@ export class AuthService {
     const user = await this.userService.upsertByEmail({
       email: userAuth.email,
     });
+
     const user_gen_token = {
       sub: user._id,
       id: user.id,

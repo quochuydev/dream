@@ -22,6 +22,15 @@ async function bootstrap() {
       },
     })
   );
+
+  app.use(
+    session({
+      secret: 'nest',
+      resave: false,
+      saveUninitialized: false,
+    }),
+  );
+
   
   await app.listen(PORT);
 }
