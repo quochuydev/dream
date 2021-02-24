@@ -19,8 +19,8 @@ export default function Auth({}) {
 
   async function logout(){
     localStorage.clear()
-    await API.post(`/auth/logout`);
-    eraseCookie('token')
+    await API.post(`/auth/logout`, { body: { } });
+    eraseCookie('accessToken')
     Router.push("/");
     return;
   }

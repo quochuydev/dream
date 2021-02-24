@@ -15,11 +15,13 @@ export function parseCookies(req) {
 
 export const getServerToken = (ctx) => {
   const req = ctx.req;
-  const accessToken = req.cookies["token"];
+  const accessToken = req.cookies["accessToken"];
+  console.log(accessToken)
   return accessToken;
 }
 
 export const hasToken = (ctx) => {
+  console.log(ctx.req.session)
   return !!getServerToken(ctx)
 }
 
@@ -54,6 +56,15 @@ export const APIClient = APIFactory({
       "Content-Type": "application/json",
     }),
 });
+
+export async function loginGoogle() {
+  try {
+    const result = await APIClient.post("/login-google", { body: {  } });
+    window.location.href = result;
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const APIFormData = APIFactory({
   baseUrl,

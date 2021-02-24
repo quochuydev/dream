@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import { Spin } from "antd";
 import { useCookies } from "react-cookie";
+import jsCookie from 'js-cookie';
 
 import { API, APIClient } from "../../api";
 
@@ -25,7 +26,8 @@ export default function Auth({}) {
       const accessToken = await APIClient.post(`/auth`, { body: { code } });
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
-        setCookie("token", accessToken)
+        // setCookie("accessToken", accessToken)
+        jsCookie.set('accessToken', accessToken);
         const user = await API.get(`/auth/me`, { accessToken });
         console.log(user);
         localStorage.setItem("me", user.email);
@@ -33,7 +35,7 @@ export default function Auth({}) {
     } catch (error) {
       console.log(error);
     }
-    Router.push("/blogs");
+    // Router.push("/blogs");
   }
 
   return (

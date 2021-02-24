@@ -6,7 +6,9 @@ import {
   Headers,
   Res,
   UseGuards,
+  Session
 } from "@nestjs/common";
+import * as secureSession from 'fastify-secure-session'
 import { AuthService } from "./auth.service";
 import { AuthUser } from "../../decorators";
 import { JwtGuard } from "../auth/jwt.guard";
@@ -23,9 +25,17 @@ export class AuthController {
   @Post("/auth")
   async auth(@Body("code") code: string, @Res() res) {
     const token = await this.authService.auth(code);
-    res.cookie("token", token);
+    res.cookie("accessToken", token);
     return res.send(token);
   }
+
+  // @Post("/auth")
+  // async auth(@Body("code") code: string, @Res() res, @Session() session: secureSession.Session) {
+  //   const token = await this.authService.auth(code);
+  //   // res.cookie("token", token);
+  //   session.set('token', token);
+  //   return res.send(token);
+  // }
 
   @Get("/auth/me")
   @UseGuards(JwtGuard)
@@ -36,8 +46,7 @@ export class AuthController {
   @Post("/auth/logout")
   // @UseGuards(JwtGuard)
   async logout(@Res() res) {
-    res.cookie("token", null);
-    console.log('token null')
+    res.cookie("accessToken", null);
     return res.sendStatus(200);
   }
 }

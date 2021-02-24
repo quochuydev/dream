@@ -14,7 +14,7 @@ import "antd/dist/antd.css";
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
 
-import { APIClient } from "../../../client/api";
+import { APIClient, loginGoogle } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
 
 function getMe() {
@@ -110,15 +110,6 @@ export default function LayoutComponent({ hideFooter, ...props }) {
       {!hideFooter && <Footer />}
     </>
   );
-}
-
-async function loginGoogle() {
-  try {
-    const result = await APIClient.post("/login-google");
-    window.location.href = result;
-  } catch (error) {
-    message.error(error.message);
-  }
 }
 
 function LeftMenu() {
