@@ -31,7 +31,7 @@ export default function Blog({}) {
   }, []);
 
   async function getBlog(id) {
-    const result = await BlogService.detail(id);
+    const result = await BlogService.v1.detail(id);
     if (result) {
       setData({ title: result.title, body: result.body || "" });
       setTags(result.tags);
@@ -46,7 +46,7 @@ export default function Blog({}) {
   const onFinish = async (value) => {
     try {
       if (id) {
-        await BlogService.update(
+        await BlogService.v1.update(
           { id },
           {
             title: value.title,
@@ -57,7 +57,7 @@ export default function Blog({}) {
         );
         message.success("Update blog");
       } else {
-        const result = await BlogService.create({
+        const result = await BlogService.v1.create({
           title: value.title,
           body: value.body,
           tags,
@@ -148,7 +148,7 @@ export default function Blog({}) {
                 icon={<DeleteOutlined />}
                 type="default"
                 onClick={async () => {
-                  await BlogService.remove(id);
+                  await BlogService.v1.remove(id);
                   message.success("Delete success.");
                   Router.push("/");
                 }}

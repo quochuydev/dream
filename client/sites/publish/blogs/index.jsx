@@ -17,7 +17,7 @@ export default function Blogs({}) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await BlogService.list(query);
+    const result = await BlogService.v1.list(query);
     setBlogs(result.blogs);
   }
 
@@ -29,7 +29,7 @@ export default function Blogs({}) {
           <li key={e._id}>
             <Button
               onClick={async () => {
-                await BlogService.remove(e._id);
+                await BlogService.v1.remove(e._id);
                 setQuery(initQuery);
                 message.success("Delete success.");
               }}

@@ -63,7 +63,7 @@ export default function Blogs({ initBlogs, ...props }) {
             <a
               onClick={async () => {
                 try {
-                  await BlogService.remove(e._id);
+                  await BlogService.v1.remove(e._id);
                   message.success("Delete success.");
                   setQuery(initQuery);
                 } catch (error) {
@@ -121,20 +121,27 @@ export default function Blogs({ initBlogs, ...props }) {
           />
         </Col>
         <Col span={8}>
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={80}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
-                }
-              />
-            }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-          />
+        {blogs.map((e, i) => (
+          <div key={e._id}>
+            <List.Item.Meta
+              avatar={
+                <Avatar
+                  shape="square"
+                  size={80}
+                  src={e.file_id?.url}
+                />
+              }
+              title={<Link href={`/blogs/${e._id}`}>
+                <div>
+                  <a>{e.title}</a>
+                  <p>{e.created_at}</p>
+                  <p>{e.user_id}</p>
+                </div>
+                </Link>}
+            />
+          </div>
+        ))}
+          
           <List.Item.Meta
             avatar={
               <Avatar

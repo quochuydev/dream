@@ -19,7 +19,7 @@ export default function AdminBlogs({ ...props }) {
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await BlogService.list(query);
+    const result = await BlogService.v1.list(query);
     setBlogs(result.items);
   }
 
@@ -51,7 +51,7 @@ export default function AdminBlogs({ ...props }) {
             {!value.deleted_at && (
               <Button
                 onClick={async () => {
-                  const result = await BlogService.remove(value._id);
+                  const result = await BlogService.v1.remove(value._id);
                   message.success(result.message);
                   setQuery({ ...query });
                 }}
@@ -62,7 +62,7 @@ export default function AdminBlogs({ ...props }) {
             {!!value.deleted_at && (
               <Button
                 onClick={async () => {
-                  const result = await BlogService.update(
+                  const result = await BlogService.v1.update(
                     { id: value._id },
                     { deleted_at: null }
                   );

@@ -24,6 +24,6 @@ async function getBlog(ctx){
     return blog;
   }
   
-  const blog = await BlogService.v1.detail(ctx.params.id);
+  const blog = await BlogService.detail(ctx.params.id);
   return blog;
 }
