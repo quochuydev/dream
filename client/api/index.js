@@ -16,12 +16,10 @@ export function parseCookies(req) {
 export const getServerToken = (ctx) => {
   const req = ctx.req;
   const accessToken = req.cookies["accessToken"];
-  console.log(accessToken)
   return accessToken;
 }
 
 export const hasToken = (ctx) => {
-  console.log(ctx.req.session)
   return !!getServerToken(ctx)
 }
 

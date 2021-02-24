@@ -5,7 +5,6 @@ import { isAdmin, isUser } from "./auth.common";
 @Injectable()
 export class JwtGuard extends AuthGuard("jwt") {
   handleRequest(err, user, info: Error) {
-    console.log(user)
     if (!user) {
       return null;
     }

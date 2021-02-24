@@ -19,7 +19,6 @@ async function getBlogs(ctx){
   const query = { page: 1, limit: 20 };
 
   const isHasToken = hasToken(ctx);
-  console.log(isHasToken)
   if(isHasToken){
     const API = apiFatory(ctx);
     const result = await API.get(V1.BLOGS.LIST, { query });

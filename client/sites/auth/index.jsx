@@ -22,20 +22,17 @@ export default function Auth({}) {
 
   async function auth() {
     try {
-      console.log(code)
       const accessToken = await APIClient.post(`/auth`, { body: { code } });
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
-        // setCookie("accessToken", accessToken)
         jsCookie.set('accessToken', accessToken);
         const user = await API.get(`/auth/me`, { accessToken });
-        console.log(user);
         localStorage.setItem("me", user.email);
       }
     } catch (error) {
       console.log(error);
     }
-    // Router.push("/blogs");
+    Router.push("/blogs");
   }
 
   return (
