@@ -2,9 +2,10 @@ import _ from "lodash";
 import fetch from "isomorphic-fetch";
 // import { getToken } from "./index";
 // import Router from "next/router";
+import { API, V1 } from "./endpoint";
 
 const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
-  const API = {
+  const result = {
     get: async (endpoint, config) => {
       return await call(endpoint, config, "GET");
     },
@@ -22,7 +23,9 @@ const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
     },
   };
 
-  return API;
+  Object.assign(result, { ...API, V1 });
+  console.log(result);
+  return result;
 
   async function call(endpoint, config = {}, method) {
     try {
@@ -45,7 +48,9 @@ const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
         headers: setHeaders(config),
       };
       if (config.body) {
-        options.body = options.notStringify ? config.body : JSON.stringify(config.body);
+        options.body = options.notStringify
+          ? config.body
+          : JSON.stringify(config.body);
       }
 
       const newRequest = new Request(url, options);

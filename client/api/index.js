@@ -7,21 +7,21 @@ export const baseUrl =
 
 import APIFactory from "./APIFactory";
 
-import cookie from "cookie"
+import cookie from "cookie";
 
 export function parseCookies(req) {
-  return cookie.parse(req ? req.headers.cookie || "" : document.cookie)
+  return cookie.parse(req ? req.headers.cookie || "" : document.cookie);
 }
 
 export const getServerToken = (ctx) => {
   const req = ctx.req;
   const accessToken = req.cookies["accessToken"];
   return accessToken;
-}
+};
 
 export const hasToken = (ctx) => {
-  return !!getServerToken(ctx)
-}
+  return !!getServerToken(ctx);
+};
 
 export const apiFatory = (ctx) => {
   const accessToken = getServerToken(ctx);
@@ -36,16 +36,6 @@ export const apiFatory = (ctx) => {
   });
 };
 
-export const API = APIFactory({
-  baseUrl,
-  setHeaders: () =>
-    Object({
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    }),
-});
-
 export const APIClient = APIFactory({
   baseUrl,
   setHeaders: () =>
@@ -57,12 +47,22 @@ export const APIClient = APIFactory({
 
 export async function loginGoogle() {
   try {
-    const result = await APIClient.post("/login-google", { body: {  } });
+    const result = await APIClient.post("/login-google", { body: {} });
     window.location.href = result;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
+
+export const API = APIFactory({
+  baseUrl,
+  setHeaders: () =>
+    Object({
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    }),
+});
 
 export const APIFormData = APIFactory({
   baseUrl,
@@ -71,8 +71,8 @@ export const APIFormData = APIFactory({
     const accessToken = getToken();
     const headers = new Headers();
     headers.append("Authorization", `Bearer ${accessToken}`);
-    return headers
-  }
+    return headers;
+  },
 });
 
 export function getToken() {

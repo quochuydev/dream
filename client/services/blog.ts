@@ -6,7 +6,7 @@ export default {
     list: async function (query) {
       return await API.get(V1.BLOGS.LIST, { query });
     },
-  
+
     create: async function (data) {
       return await API.post(V1.BLOGS.CREATE, {
         body: {
@@ -17,26 +17,25 @@ export default {
         },
       });
     },
-  
+
     detail: async function detail(id) {
       return await API.get(V1.BLOGS.DETAIL, { params: { id } });
     },
-  
+
     update: async function update(params, body) {
       return await API.put(V1.BLOGS.UPDATE, { body, params });
     },
-  
+
     remove: async function remove(id) {
       return await API.delete(V1.BLOGS.DELETE, { params: { id } });
     },
-
   },
 
   list: async function (query) {
-    return await APIClient.get(BLOGS.LIST, { query });
+    return await APIClient.get(API.BLOGS.LIST, { query });
   },
 
   detail: async function (id) {
-    return await APIClient.get(BLOGS.DETAIL, { params: { id } });
+    return await APIClient.get(API.BLOGS.DETAIL, { params: { id } });
   },
 };
