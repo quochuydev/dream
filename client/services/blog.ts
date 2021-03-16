@@ -1,5 +1,5 @@
-import { API, APIClient } from "../api";
-import { BLOGS, V1 } from "../api/endpoint";
+import { apiFatory, APIClient } from "../api";
+import { API, V1 } from "../api/endpoint";
 
 export default {
   v1: {

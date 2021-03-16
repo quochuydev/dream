@@ -1,7 +1,7 @@
 import { noSSRWithLoadingDynamic } from "../utils/dynamic.import";
 import { BlogService } from "../services";
-import { apiFatory, hasToken } from "../api";
-import { V1 } from "../api/endpoint";
+import { apiFatory, hasToken, APIClient } from "../api";
+import { V1, API } from "../api/endpoint";
 
 export async function getServerSideProps(ctx) {
   const initBlogs = await getBlogs(ctx);
@@ -20,11 +20,11 @@ async function getBlogs(ctx) {
 
   const isHasToken = hasToken(ctx);
   if (isHasToken) {
-    const API = apiFatory(ctx);
-    const result = await API.get(API.V1.BLOGS.LIST, { query });
+    const Api = apiFatory(ctx);
+    const result = await Api.get(V1.BLOGS.LIST, { query });
     return result.items;
   }
 
-  const result = await BlogService.list(query);
+  const result = await APIClient.get(API.BLOGS.LIST, { query });
   return result.items;
 }
