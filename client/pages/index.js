@@ -17,14 +17,7 @@ export default noSSRWithLoadingDynamic(import("../sites/blogs"));
 
 async function getBlogs(ctx) {
   const query = { page: 1, limit: 20 };
-
-  const isHasToken = hasToken(ctx);
-  if (isHasToken) {
-    const Api = apiFatory(ctx);
-    const result = await Api.get(V1.BLOGS.LIST, { query });
-    return result.items;
-  }
-
-  const result = await APIClient.get(API.BLOGS.LIST, { query });
+  const Api = apiFatory(ctx);
+  const result = await Api.get(V1.BLOGS.LIST, { query });
   return result.items;
 }

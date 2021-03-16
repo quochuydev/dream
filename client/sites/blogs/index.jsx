@@ -121,27 +121,25 @@ export default function Blogs({ initBlogs, ...props }) {
           />
         </Col>
         <Col span={8}>
-        {blogs.map((e, i) => (
-          <div key={e._id}>
-            <List.Item.Meta
-              avatar={
-                <Avatar
-                  shape="square"
-                  size={80}
-                  src={e.file_id?.url}
-                />
-              }
-              title={<Link href={`/blogs/${e._id}`}>
-                <div>
-                  <a>{e.title}</a>
-                  <p>{e.created_at}</p>
-                  <p>{e.user_id}</p>
-                </div>
-                </Link>}
-            />
-          </div>
-        ))}
-          
+          {blogs.map((e, i) => (
+            <div key={e._id}>
+              <List.Item.Meta
+                avatar={
+                  <Avatar shape="square" size={80} src={e.file_id?.url} />
+                }
+                title={
+                  <Link href={`/blogs/${e._id}`}>
+                    <div>
+                      <a>{e.title}</a>
+                      <p>{e.created_at}</p>
+                      <p>{e.user_id}</p>
+                    </div>
+                  </Link>
+                }
+              />
+            </div>
+          ))}
+
           <List.Item.Meta
             avatar={
               <Avatar

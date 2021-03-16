@@ -14,8 +14,8 @@ export function parseCookies(req) {
 }
 
 export const getServerToken = (ctx) => {
-  const req = ctx.req;
-  const accessToken = req.cookies["accessToken"];
+  const req = ctx?.req;
+  const accessToken = req?.cookies["accessToken"];
   return accessToken;
 };
 

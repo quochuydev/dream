@@ -1,6 +1,6 @@
 import { apiFatory, APIClient } from "../api";
-import { API, V1 } from "../api/endpoint";
-
+import { V1 } from "../api/endpoint";
+const API = apiFatory();
 export default {
   v1: {
     list: async function (query) {
