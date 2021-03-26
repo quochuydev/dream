@@ -1,7 +1,6 @@
 import { noSSRWithLoadingDynamic } from "../utils/dynamic.import";
-import { BlogService } from "../services";
-import { apiFatory, hasToken, APIClient } from "../api";
-import { V1, API } from "../api/endpoint";
+import { apiFatory } from "../api";
+import { V1 } from "../api/endpoint";
 
 export async function getServerSideProps(ctx) {
   const initBlogs = await getBlogs(ctx);
@@ -13,7 +12,7 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default noSSRWithLoadingDynamic(import("../sites/blogs"));
+export default noSSRWithLoadingDynamic(import("../sites/index"));
 
 async function getBlogs(ctx) {
   const query = { page: 1, limit: 20 };

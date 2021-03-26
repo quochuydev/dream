@@ -8,22 +8,6 @@
         "BACKEND_URL": {
             "description": "BACKEND_URL",
             "required": true
-        },
-        "MONGO_URI": {
-            "description": "MONGO_URI",
-            "required": true
-        },
-        "CLIENT_ID": {
-            "description": "CLIENT_ID",
-            "required": true
-        },
-        "CLIENT_SECRET": {
-            "description": "CLIENT_SECRET",
-            "required": true
-        },
-        "REDIRECT_URL": {
-            "description": "REDIRECT_URL",
-            "required": true
         }
     }
 }

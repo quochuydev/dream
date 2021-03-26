@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
-import { Menu, message, Drawer, PageHeader, Button } from "antd";
+import { Menu, message, Drawer, PageHeader, Button, Carousel } from "antd";
+import { signIn, signOut, useSession } from "next-auth/client";
+
 import {
   SearchOutlined,
   MenuOutlined,
@@ -16,6 +18,9 @@ import Footer from "../Footer";
 
 import { APIClient, loginGoogle } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
+import styles from "./layout.module.css";
+
+const { SubMenu } = Menu;
 
 function getMe() {
   return localStorage.getItem("me");
@@ -28,19 +33,43 @@ const isMobile = () => {
 };
 
 export default function LayoutComponent({ hideFooter, ...props }) {
+  const [session, loading] = useSession();
   const [showDrawer, setShowDrawer] = useState(false);
+  const [current, setCurrent] = useState(false);
+
+  function handleClick(e) {
+    setCurrent(e.key);
+  }
 
   const subTitle = (
     <>
-      <Link href={"/"}>
-        <HomeOutlined />
-      </Link>
-      {props.headers &&
-        props.headers.map((e, i) => (
-          <div key={i} style={{ display: "contents" }}>
-            <CaretRightOutlined /> <Link href={e.path || "#"}>{e.name}</Link>
-          </div>
-        ))}
+      <Menu
+        onClick={handleClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        inlineIndent={0}
+        // className={styles.menu}
+      >
+        <Menu.Item key="home">
+          <Link href={"/"}>
+            <HomeOutlined /> Home
+          </Link>
+        </Menu.Item>
+        <SubMenu
+          title={
+            <span className="submenu-title-wrapper">
+              <Icon type="setting" />
+              Products
+            </span>
+          }
+        >
+          <Menu.Item key="setting:1">T-Shirst</Menu.Item>
+          <Menu.Item key="setting:2">Jean</Menu.Item>
+        </SubMenu>
+        <Menu.Item key="about-us">
+          <Link href="/client">About us</Link>
+        </Menu.Item>
+      </Menu>
     </>
   );
 
@@ -59,7 +88,6 @@ export default function LayoutComponent({ hideFooter, ...props }) {
       </Drawer>
 
       <PageHeader
-        style={{ padding: 5 }}
         title={
           <>
             <MenuOutlined
@@ -71,35 +99,55 @@ export default function LayoutComponent({ hideFooter, ...props }) {
         }
         subTitle={subTitle}
         extra={[
-          <div style={{ display: "block" }} key={0}>
-            {getMe() && !isMobile() ? (
-              <>
-                <p style={{ fontSize: 14 }}>
-                  {getMe()}
+          <div key={0} className={styles.signedInStatus}>
+            <p
+              className={`nojs-show ${
+                !session && loading ? styles.loading : styles.loaded
+              }`}
+            >
+              {!session && (
+                <>
+                  <span className={styles.notSignedInText}>
+                    You are not signed in
+                  </span>
                   <a
-                    style={{
-                      marginLeft: 5,
-                    }}
-                    onClick={() => {
-                      localStorage.clear();
-                      Router.push("/");
+                    href={`/api/auth/signin`}
+                    className={styles.buttonPrimary}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      signIn();
                     }}
                   >
-                    logout
+                    Sign in
                   </a>
-                </p>
-              </>
-            ) : (
-              <>
-                <Button
-                  onClick={() => {
-                    loginGoogle();
-                  }}
-                >
-                  login
-                </Button>
-              </>
-            )}
+                </>
+              )}
+              {session && (
+                <>
+                  {session.user.image && (
+                    <span
+                      style={{ backgroundImage: `url(${session.user.image})` }}
+                      className={styles.avatar}
+                    />
+                  )}
+                  <span className={styles.signedInText}>
+                    <small>Signed in as</small>
+                    <br />
+                    <strong>{session.user.email || session.user.name}</strong>
+                  </span>
+                  <a
+                    href={`/api/auth/signout`}
+                    className={styles.button}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      signOut();
+                    }}
+                  >
+                    Sign out
+                  </a>
+                </>
+              )}
+            </p>
           </div>,
           <SearchOutlined key={1} className="hide" />,
         ]}
@@ -136,13 +184,13 @@ function LeftMenu() {
       {getMe() ? (
         <p>{getMe()}</p>
       ) : (
-          <Button
-            onClick={() => {
-              loginGoogle();
-            }}
-          >
-            login
-          </Button>
+        <Button
+          onClick={() => {
+            loginGoogle();
+          }}
+        >
+          login
+        </Button>
       )}
       <Menu theme="light" mode="inline">
         {menuItems}
