@@ -2,8 +2,6 @@
 const path = require("path");
 console.log(path.join(__dirname, "client/styles"));
 
-console.log(process.env.BACKEND_URL);
-
 const options = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],

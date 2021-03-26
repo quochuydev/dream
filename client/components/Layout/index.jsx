@@ -9,6 +9,8 @@ import {
   MenuOutlined,
   CaretRightOutlined,
   HomeOutlined,
+  LogoutOutlined,
+  LoginOutlined,
 } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
@@ -16,7 +18,7 @@ import "antd/dist/antd.css";
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
 
-import { APIClient, loginGoogle } from "../../../client/api";
+import { APIClient } from "../../../client/api";
 import { MENU_DATA } from "../../utils/routes";
 import styles from "./layout.module.css";
 
@@ -42,35 +44,34 @@ export default function LayoutComponent({ hideFooter, ...props }) {
   }
 
   const subTitle = (
-    <>
-      <Menu
-        onClick={handleClick}
-        selectedKeys={[current]}
-        mode="horizontal"
-        inlineIndent={0}
-        // className={styles.menu}
+    <Menu
+      onClick={handleClick}
+      selectedKeys={[current]}
+      mode="horizontal"
+      inlineIndent={0}
+      // className={styles.menu}
+    >
+      <Menu.Item key="home">
+        <Link href={"/"}>
+          {/* <HomeOutlined /> */}
+          Home
+        </Link>
+      </Menu.Item>
+      <SubMenu
+        title={
+          <span className="submenu-title-wrapper">
+            {/* <HomeOutlined /> */}
+            Products
+          </span>
+        }
       >
-        <Menu.Item key="home">
-          <Link href={"/"}>
-            <HomeOutlined /> Home
-          </Link>
-        </Menu.Item>
-        <SubMenu
-          title={
-            <span className="submenu-title-wrapper">
-              <Icon type="setting" />
-              Products
-            </span>
-          }
-        >
-          <Menu.Item key="setting:1">T-Shirst</Menu.Item>
-          <Menu.Item key="setting:2">Jean</Menu.Item>
-        </SubMenu>
-        <Menu.Item key="about-us">
-          <Link href="/client">About us</Link>
-        </Menu.Item>
-      </Menu>
-    </>
+        <Menu.Item key="setting:1">T-Shirst</Menu.Item>
+        <Menu.Item key="setting:2">Jean</Menu.Item>
+      </SubMenu>
+      <Menu.Item key="about-us">
+        <Link href="/client">About us</Link>
+      </Menu.Item>
+    </Menu>
   );
 
   return (
@@ -89,13 +90,11 @@ export default function LayoutComponent({ hideFooter, ...props }) {
 
       <PageHeader
         title={
-          <>
-            <MenuOutlined
-              onClick={() => {
-                setShowDrawer(true);
-              }}
-            />
-          </>
+          <MenuOutlined
+            onClick={() => {
+              setShowDrawer(true);
+            }}
+          />
         }
         subTitle={subTitle}
         extra={[
@@ -118,7 +117,7 @@ export default function LayoutComponent({ hideFooter, ...props }) {
                       signIn();
                     }}
                   >
-                    Sign in
+                    <LoginOutlined /> Login
                   </a>
                 </>
               )}
@@ -143,13 +142,13 @@ export default function LayoutComponent({ hideFooter, ...props }) {
                       signOut();
                     }}
                   >
-                    Sign out
+                    <LogoutOutlined /> Logout
                   </a>
                 </>
               )}
             </p>
           </div>,
-          <SearchOutlined key={1} className="hide" />,
+          // <SearchOutlined key={1} className="hide" />,
         ]}
       >
         <MainMenu />
@@ -179,37 +178,5 @@ function LeftMenu() {
       );
     }
   }
-  return (
-    <div style={{ display: "block" }}>
-      {getMe() ? (
-        <p>{getMe()}</p>
-      ) : (
-        <Button
-          onClick={() => {
-            loginGoogle();
-          }}
-        >
-          login
-        </Button>
-      )}
-      <Menu theme="light" mode="inline">
-        {menuItems}
-      </Menu>
-      {getMe() && (
-        <a
-          style={{
-            display: "block",
-            position: "fixed",
-            bottom: 0,
-          }}
-          onClick={() => {
-            localStorage.clear();
-            Router.push("/");
-          }}
-        >
-          logout
-        </a>
-      )}
-    </div>
-  );
+  return <div style={{ display: "block" }}></div>;
 }
