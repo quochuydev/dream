@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import Router from "next/router";
 import { Menu, Drawer, PageHeader, Carousel } from "antd";
 import { signIn, signOut, useSession } from "next-auth/client";
 
-import { MenuOutlined, LogoutOutlined, LoginOutlined } from "@ant-design/icons";
+import { LogoutOutlined, LoginOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 
@@ -14,10 +13,7 @@ import { MENU_DATA } from "../../utils/routes";
 import styles from "./layout.module.css";
 import Avatar from "antd/lib/avatar/avatar";
 
-export default function LayoutComponent({
-  hideFooter,
-  ...props
-}): React.ReactElement {
+export default function LayoutComponent(props): React.ReactElement {
   const [session, loading] = useSession();
   const [showDrawer, setShowDrawer] = useState(false);
 
@@ -121,7 +117,7 @@ export default function LayoutComponent({
         </Carousel>
         <div>{props.children}</div>
       </PageHeader>
-      {!hideFooter && <Footer />}
+      {!props.hideFooter && <Footer />}
     </>
   );
 }

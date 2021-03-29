@@ -7,7 +7,7 @@ import "antd/dist/antd.css";
 const { SubMenu } = Menu;
 
 export default function MainMenu({ ...props }) {
-  const [current, setCurrent] = useState(false);
+  const [current, setCurrent] = useState<any>(false);
 
   function handleClick(e) {
     setCurrent(e.key);

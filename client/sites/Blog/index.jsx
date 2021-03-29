@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Button, message, Avatar, Card, List, Row, Col } from "antd";
+import { Space } from "antd";
+import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 
 import { Layout } from "../../components";
 import { BlogService } from "../../services";
@@ -32,7 +34,26 @@ export default function Blogs({ initBlogs, ...props }) {
     const result = await BlogService.list(query);
     setBlogs(result.items);
   }
+  const listData = [];
+  for (let i = 0; i < 23; i++) {
+    listData.push({
+      href: "https://ant.design",
+      title: `ant design part ${i}`,
+      avatar:
+        "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
+      description:
+        "Ant Design, a design language for background applications, is refined by Ant UED Team.",
+      content:
+        "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
+    });
+  }
 
+  const IconText = ({ icon, text }) => (
+    <Space>
+      {React.createElement(icon)}
+      {text}
+    </Space>
+  );
   return (
     <Layout>
       <Button
@@ -43,7 +64,7 @@ export default function Blogs({ initBlogs, ...props }) {
         Apply filter
       </Button>
       <Link href={`/publish/blogs/create`}>New</Link>
-      <ul className="p-none">
+      {/* <ul className="p-none">
         {blogs.map((e, i) => (
           <li key={e._id}>
             <span>{i + 1}. </span>
@@ -75,47 +96,70 @@ export default function Blogs({ initBlogs, ...props }) {
             <span>{e.user_id}</span>
           </li>
         ))}
-      </ul>
+      </ul> */}
       <Row gutter={8}>
         <Col span={16}>
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={200}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
+          <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+              onChange: (page) => {
+                console.log(page);
+              },
+              // pageSize: 3,
+            }}
+            dataSource={blogs.map((e, i) => ({
+              href: "https://ant.design",
+              title: `${e.title}`,
+              avatar: e.file_id?.url,
+              description: `${e.body}`,
+              content: `${e.body}`,
+            }))}
+            footer={
+              <div>
+                <b>ant design</b> footer part
+              </div>
+            }
+            renderItem={(item) => (
+              <List.Item
+                key={item.title}
+                actions={[
+                  <IconText
+                    icon={StarOutlined}
+                    text="156"
+                    key="list-vertical-star-o"
+                  />,
+                  <IconText
+                    icon={LikeOutlined}
+                    text="156"
+                    key="list-vertical-like-o"
+                  />,
+                  <IconText
+                    icon={MessageOutlined}
+                    text="2"
+                    key="list-vertical-message"
+                  />,
+                ]}
+                extra={
+                  <img
+                    width={272}
+                    alt="logo"
+                    src={
+                      item.file_id?.url
+                        ? item.file_id?.url
+                        : "https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                    }
+                  />
                 }
-              />
-            }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-            description="Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…"
-          />
-          <hr />
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={150}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
-                }
-              />
-            }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-            description={
-              <>
-                <p>{new Date().toISOString()}</p>
-                <p>
-                  Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền
-                  thông nhiều với việc sao chép lại tính năng nổi…
-                </p>
-              </>
-            }
+              >
+                <List.Item.Meta
+                  avatar={<Avatar src={item.avatar} />}
+                  title={<a href={item.href}>{item.title}</a>}
+                  description={item.description}
+                />
+                {item.content}
+              </List.Item>
+            )}
           />
         </Col>
         <Col span={8}>
@@ -137,21 +181,6 @@ export default function Blogs({ initBlogs, ...props }) {
               />
             </div>
           ))}
-
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={80}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
-                }
-              />
-            }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-          />
         </Col>
       </Row>
     </Layout>
