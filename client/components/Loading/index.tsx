@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Spin } from "antd";
 
 import "antd/dist/antd.css";
+import styles from "./loading.module.css";
 
-export default function Auth({}) {
-
+export default function Loading() {
   return (
-    <>
-      <div className="spin-center">
-        <Spin />
-      </div>
-    </>
+    <div className={styles.spinCenter}>
+      <Spin />
+    </div>
   );
 }

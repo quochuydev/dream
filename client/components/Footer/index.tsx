@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { Spin, Tag, Row, Col } from "antd";
+import { Tag, Row, Col } from "antd";
 
 import "antd/dist/antd.css";
 import styles from "./footer.module.css";
 
-export default function Footer({}) {
+export default function Footer(): React.ReactElement {
   const tags = [
     { value: 1, label: "label 1" },
     { value: 2, label: "label 2" },
@@ -27,7 +27,7 @@ export default function Footer({}) {
           ))}
         </Col>
         <Col span={8}>
-          <h3>KẾT NỐI VỚI INVESTING</h3>
+          <h3>KẾT NỐI</h3>
           <p>quochuydev - Việt Nam</p>
         </Col>
       </Row>

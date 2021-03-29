@@ -5,6 +5,7 @@ import { CookiesProvider } from "react-cookie";
 import Loading from "../components/Loading";
 
 import "../styles/ckeditor.css";
+import "../styles/style.css";
 
 export default function App({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false);

@@ -1,26 +1,12 @@
 import { API, APIClient } from "../api";
 
 export default {
-  v1: {
-    list: async function (query) {
-      return await APIClient.get("/api/users", { query });
-    },
-
-    detail: async function (id) {
-      return await APIClient.get(`/api/users/${id}`);
-    },
-  },
-
   list: async function (query) {
     return await API.get("/api/users", { query });
   },
 
-  create: async function (data) {
-    return await API.post("/api/users", {
-      body: {
-        firstName: data.firstName,
-      },
-    });
+  create: async function (body) {
+    return await API.post("/api/users", { body });
   },
 
   detail: async function detail(id) {

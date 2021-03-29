@@ -9,7 +9,7 @@ import "antd/dist/antd.css";
 
 const { Meta } = Card;
 
-export default function Blogs({ initBlogs, ...props }) {
+export default function Blogs({ ...props }) {
   return (
     <Layout>
       {/* <Button

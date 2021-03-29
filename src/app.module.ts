@@ -12,7 +12,7 @@ import { RoleModule } from "./modules/role/role.module";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot(process.env.DATABASE_URL),
     AuthModule,
     FileModule,
     UserModule,

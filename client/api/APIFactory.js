@@ -23,7 +23,6 @@ const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
     },
   };
 
-  Object.assign(result, { ...API, V1 });
   return result;
 
   async function call(endpoint, config = {}, method) {
