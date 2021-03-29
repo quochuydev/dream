@@ -32,7 +32,7 @@ export default function LayoutComponent({
         visible={showDrawer}
         bodyStyle={{ padding: 0 }}
       >
-        <LeftMenu display={true} />
+        <LeftMenu />
       </Drawer>
 
       <PageHeader
