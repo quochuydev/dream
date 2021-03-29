@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { Tag, Avatar } from "antd";
 
-import { Layout } from "../../../../components";
+import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";
 
