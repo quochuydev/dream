@@ -5,7 +5,6 @@ import _ from "../../admin/components/Thumbnail/node_modules/lodash";
 import { Button, Tag } from "antd";
 import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 
-import "./SearchSelect.module.css";
 import "antd/dist/antd.css";
 
 export default function SearchSelect({ values, ...props }) {
