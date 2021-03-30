@@ -1,8 +1,5 @@
 import _ from "lodash";
 import fetch from "isomorphic-fetch";
-// import { getToken } from "./index";
-// import Router from "next/router";
-import { API, V1 } from "./endpoint";
 
 const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
   const result = {

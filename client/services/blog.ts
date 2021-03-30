@@ -1,7 +1,7 @@
-import { apiFatory, APIClient } from "../api";
+import { apiFatory } from "../api";
 import { BLOG } from "../api/endpoint";
 
-export default (ctx) => {
+export default (ctx?: any) => {
   const API = apiFatory(ctx);
   return {
     list: async function (query) {

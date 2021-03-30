@@ -11,8 +11,8 @@ import UploadAdapter from "../../../utils/upload-adapter";
 import { baseUrl, getToken } from "../../../api";
 import { BlogService } from "../../../services";
 import { Layout } from "../../../components";
-import TagSelect from "./TagSelect";
-import Thumbnail from "./Thumbnail";
+import TagSelect from "../TagSelect";
+import Thumbnail from "../Thumbnail";
 
 import "antd/dist/antd.css";
 
@@ -24,6 +24,8 @@ export default function Blog({}) {
   const [tags, setTags] = useState([]);
   const [file, setFile] = useState(null);
 
+  const blogService = BlogService();
+
   useEffect(() => {
     if (id) {
       getBlog(id);
@@ -31,7 +33,7 @@ export default function Blog({}) {
   }, []);
 
   async function getBlog(id) {
-    const result = await BlogService.v1.detail(id);
+    const result = await blogService.detail(id);
     if (result) {
       setData({ title: result.title, body: result.body || "" });
       setTags(result.tags);
@@ -46,7 +48,7 @@ export default function Blog({}) {
   const onFinish = async (value) => {
     try {
       if (id) {
-        await BlogService.v1.update(
+        await blogService.update(
           { id },
           {
             title: value.title,
@@ -57,7 +59,7 @@ export default function Blog({}) {
         );
         message.success("Update blog");
       } else {
-        const result = await BlogService.v1.create({
+        const result = await blogService.create({
           title: value.title,
           body: value.body,
           tags,
@@ -148,7 +150,7 @@ export default function Blog({}) {
                 icon={<DeleteOutlined />}
                 type="default"
                 onClick={async () => {
-                  await BlogService.v1.remove(id);
+                  await blogService.remove(id);
                   message.success("Delete success.");
                   Router.push("/");
                 }}

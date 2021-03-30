@@ -2,25 +2,25 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button, message, Table } from "antd";
 
-import { UserService } from "../../../services";
+import { BlogService } from "../../../services";
+import ImageCrop from "../../../components/ImageCrop";
 import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";
 
-export default function AdminUsers() {
-  const userService = UserService();
+export default function AdminBlogs({ ...props }) {
   const initQuery = { all: true, page: 1, limit: 20 };
 
   const [query, setQuery] = useState(initQuery);
-  const [users, setUsers] = useState([]);
+  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetchUsers();
+    fetchBlogs();
   }, [query]);
 
-  async function fetchUsers() {
-    const result = await userService.list(query);
-    setUsers(result.users);
+  async function fetchBlogs() {
+    const result = await BlogService.v1.list(query);
+    setBlogs(result.items);
   }
 
   const columns = [
@@ -30,29 +30,10 @@ export default function AdminUsers() {
       dataIndex: "_id",
     },
     {
-      key: "firstName",
-      title: "firstName",
+      key: "created_at",
+      title: "created_at",
       render: (value) => {
-        return <div>{value.firstName}</div>;
-      },
-    },
-    {
-      key: "email",
-      title: "email",
-      render: (value) => {
-        return <div>{value.email}</div>;
-      },
-    },
-    {
-      key: "roles",
-      title: "roles",
-      dataIndex: "roles",
-    },
-    {
-      key: "createdAt",
-      title: "createdAt",
-      render: (value) => {
-        return <div>{value.createdAt}</div>;
+        return <div>{value.created_at}</div>;
       },
     },
     {
@@ -70,7 +51,7 @@ export default function AdminUsers() {
             {!value.deleted_at && (
               <Button
                 onClick={async () => {
-                  const result = await userService.remove(value._id);
+                  const result = await BlogService.v1.remove(value._id);
                   message.success(result.message);
                   setQuery({ ...query });
                 }}
@@ -81,7 +62,7 @@ export default function AdminUsers() {
             {!!value.deleted_at && (
               <Button
                 onClick={async () => {
-                  const result = await userService.update(
+                  const result = await BlogService.v1.update(
                     { id: value._id },
                     { deleted_at: null }
                   );
@@ -99,8 +80,8 @@ export default function AdminUsers() {
   ];
 
   return (
-    <Layout hideFooter={true}>
-      <Link href={`/publish/users/create`}>New</Link>
+    <Layout>
+      <Link href={`/publish/blogs/create`}>New</Link>
       {" | "}
       <a
         onClick={() => {
@@ -110,14 +91,15 @@ export default function AdminUsers() {
         Load
       </a>
       {" | "}
-      <Link href={`/users`}>List</Link>
+      <Link href={`/blogs`}>List</Link>
       <Table
         scroll={{ x: true }}
         rowKey="_id"
         columns={columns}
-        dataSource={users}
+        dataSource={blogs}
         pagination={false}
       />
+      <ImageCrop />
     </Layout>
   );
 }
