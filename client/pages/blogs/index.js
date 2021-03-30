@@ -10,7 +10,7 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default noSSRWithLoadingDynamic(import("../../sites/blogs"));
+export default noSSRWithLoadingDynamic(import("../../sites/Blog/List"));
 
 async function getBlogs(ctx) {
   const query = { page: 1, limit: 20 };
