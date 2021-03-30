@@ -1,10 +1,14 @@
-version: '3'
+version: '3.1'
+
 services:
-  server:
-    image: quochuydev/fragrant:latest
-    command: npm run start
-    environment:
-      - MONGODB_URL=mongodb://db:27017/dream
-      - NODE_ENV=production
+
+  db:
+    image: postgres:11-alpine
+    container_name: postgres
+    restart: always
     ports:
-      - 3000:3000
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: dream
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
