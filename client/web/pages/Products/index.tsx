@@ -5,16 +5,19 @@ import "antd/dist/antd.css";
 
 import List from "./List";
 import Filter from "./Filter";
+import { Layout } from "../../components";
 
 export default function Index({ ...props }) {
   return (
-    <Row gutter={15}>
-      <Col span={8}>
-        <Filter />
-      </Col>
-      <Col span={16}>
-        <List />
-      </Col>
-    </Row>
+    <Layout>
+      <Row gutter={15}>
+        <Col span={8}>
+          <Filter />
+        </Col>
+        <Col span={16}>
+          <List />
+        </Col>
+      </Row>
+    </Layout>
   );
 }
