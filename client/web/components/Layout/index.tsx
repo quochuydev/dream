@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, Drawer, PageHeader, Carousel } from "antd";
+import { Menu, Drawer, PageHeader, Avatar } from "antd";
 import { signIn, signOut, useSession } from "next-auth/client";
 
 import {
   LogoutOutlined,
   LoginOutlined,
   SearchOutlined,
-  ShoppingCartOutlined,
 } from "@ant-design/icons";
-
-import "antd/dist/antd.css";
 
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
 import Banner from "../Banner";
-import { MENU_DATA } from "../../utils/routes";
+import { MENU_DATA } from "../../../utils/routes";
 
 import styles from "./index.module.css";
-import Avatar from "antd/lib/avatar/avatar";
+
+import "antd/dist/antd.css";
 
 export default function LayoutComponent(props): React.ReactElement {
   const [session, loading] = useSession();
@@ -103,7 +101,7 @@ export default function LayoutComponent(props): React.ReactElement {
         <Banner />
         <div>{props.children}</div>
       </PageHeader>
-      {!props.hideFooter && <Footer />}
+      <Footer />
     </>
   );
 }

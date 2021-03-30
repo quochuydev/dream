@@ -12,18 +12,20 @@ export default function TagSelect({ selected, setSelected, ...props }) {
   const [tags, setTags] = React.useState([]);
   const [total, setTotal] = React.useState(0);
 
+  const tagService = TagService();
+
   React.useEffect(() => {
     fetchData();
   }, [query]);
 
   async function fetchData() {
-    const result = await TagService.list(query);
+    const result = await tagService.list(query);
     setTags(result.items);
     setTotal(result.total);
   }
 
   async function createTag(data) {
-    await TagService.create(data);
+    await tagService.create(data);
     setQuery({ ...query });
   }
 
