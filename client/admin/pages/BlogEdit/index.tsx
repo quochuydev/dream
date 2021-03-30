@@ -10,7 +10,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import UploadAdapter from "../../../utils/upload-adapter";
 import { baseUrl } from "../../../api";
 import { BlogService } from "../../../services";
-import Layout from "../../../components/Layout";
+import Layout from "../../components/Layout";
 import TagSelect from "../../components/TagSelect";
 import Thumbnail from "../../components/Thumbnail";
 

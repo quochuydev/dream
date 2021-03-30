@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button, message, Table } from "antd";
 
 import { UserService } from "../../../services";
-import Layout from "../../../components/Layout";
+import Layout from "../../components/Layout";
 
 import "antd/dist/antd.css";
 
