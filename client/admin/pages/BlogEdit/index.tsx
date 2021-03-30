@@ -75,7 +75,7 @@ export default function Blog({}) {
   };
 
   return (
-    <AdminLayout
+    <Layout
       headers={[{ name: "Blogs", path: "/blogs" }, { name: "test test" }]}
     >
       <Form form={form} onFinish={onFinish}>
@@ -164,6 +164,6 @@ export default function Blog({}) {
           </Col>
         </Row>
       </Form>
-    </AdminLayout>
+    </Layout>
   );
 }
