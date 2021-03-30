@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { decode } from "jsonwebtoken";
 
 import { UserService } from "../user/user.service";
 import { TokenService } from "../../providers/token/token.service";

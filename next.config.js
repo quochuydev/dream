@@ -9,4 +9,7 @@ module.exports = Object({
     DATABASE_URL: process.env.DATABASE_URL,
     SECRET: "",
   },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    return config;
+  },
 });

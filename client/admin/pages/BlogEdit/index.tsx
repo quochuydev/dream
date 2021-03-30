@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
-import _ from "../../components/Thumbnail/node_modules/lodash";
+import _ from "lodash";
 import { Form, message, Input, Button, Row, Col } from "antd";
 import { EyeOutlined, DeleteOutlined, SaveOutlined } from "@ant-design/icons";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import UploadAdapter from "../../../utils/upload-adapter";
-import { baseUrl, getToken } from "../../../api";
+import { baseUrl } from "../../../api";
 import { BlogService } from "../../../services";
 import { AdminLayout } from "../../../components";
-import TagSelect from "../TagSelect";
-import Thumbnail from "../Thumbnail";
+import TagSelect from "../../components/TagSelect";
+import Thumbnail from "../../components/Thumbnail";
 
-import "../../components/Thumbnail/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 export default function Blog({}) {
   const router = useRouter();
@@ -119,7 +119,7 @@ export default function Blog({}) {
                   ckfinder: {
                     uploadUrl: `${baseUrl}/api/files`,
                     headers: {
-                      Authorization: `Bearer ${getToken()}`,
+                      Authorization: `Bearer ${""}`,
                     },
                   },
                 }}

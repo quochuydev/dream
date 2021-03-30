@@ -36,47 +36,20 @@ export const apiFatory = (ctx) => {
   });
 };
 
-export const APIClient = APIFactory({
-  baseUrl,
-  setHeaders: () =>
-    Object({
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    }),
-});
-
-export const API = APIFactory({
-  baseUrl,
-  setHeaders: () =>
-    Object({
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    }),
-});
-
 export const APIFormData = APIFactory({
   baseUrl,
   notStringify: true,
   setHeaders: () => {
-    const accessToken = getToken();
+    const accessToken = "";
     const headers = new Headers();
     headers.append("Authorization", `Bearer ${accessToken}`);
     return headers;
   },
 });
 
-export function getToken() {
-  const token = localStorage.getItem("accessToken");
-  if (!token) {
-    return "";
-  }
-  return token;
-}
-
 export function getHeader(option = {}) {
   let base = {
-    accesstoken: getToken(),
+    accesstoken: "",
   };
   return _.assign({}, base, option);
 }

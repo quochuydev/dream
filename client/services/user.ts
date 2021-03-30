@@ -1,7 +1,7 @@
 import { apiFatory } from "../api";
 import { USER } from "../api/endpoint";
 
-export default (ctx) => {
+export default (ctx?: any) => {
   const API = apiFatory(ctx);
 
   return {

@@ -28,8 +28,7 @@ const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {
       return result;
     } catch (error) {
       if (error.statusCode === 401) {
-        // localStorage.clear();
-        // Router.push(`/401`);
+        //
       }
       throw error;
     }

@@ -4,9 +4,9 @@ import { Upload } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 import { baseUrl, getHeader } from "../../../api";
+import styles from "./index.module.css";
 
 import "antd/dist/antd.css";
-import styles from "./index.module.css";
 
 export default function Thumbnail({ selected, callback, ...props }) {
   const [image, setImage] = useState(null);

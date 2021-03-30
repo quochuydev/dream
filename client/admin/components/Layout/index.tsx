@@ -10,13 +10,13 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 
-import "../Thumbnail/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 import styles from "./index.module.css";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
-import { MENU_DATA } from "../../utils/routes";
+import { MENU_DATA } from "../../../utils/routes";
 
 export default function LayoutComponent(props): React.ReactElement {
   const [session, loading] = useSession();
