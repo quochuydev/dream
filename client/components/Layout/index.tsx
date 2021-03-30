@@ -50,21 +50,16 @@ export default function LayoutComponent(props): React.ReactElement {
               }`}
             >
               {!session && (
-                <>
-                  <span className={styles.notSignedInText}>
-                    You are not signed in
-                  </span>
-                  <a
-                    href={`/api/auth/signin`}
-                    className={styles.buttonPrimary}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      signIn();
-                    }}
-                  >
-                    <LoginOutlined /> Login
-                  </a>
-                </>
+                <a
+                  href={`/api/auth/signin`}
+                  className={styles.buttonPrimary}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn();
+                  }}
+                >
+                  <LoginOutlined /> Login
+                </a>
               )}
               {session && (
                 <>

@@ -11,13 +11,14 @@ export default function Blogs({}) {
 
   const [query, setQuery] = React.useState(initQuery);
   const [blogs, setBlogs] = React.useState([]);
+  const blogService = BlogService();
 
   React.useEffect(() => {
     fetchBlogs();
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await BlogService.v1.list(query);
+    const result = await blogService.list(query);
     setBlogs(result.blogs);
   }
 
@@ -29,7 +30,7 @@ export default function Blogs({}) {
           <li key={e._id}>
             <Button
               onClick={async () => {
-                await BlogService.v1.remove(e._id);
+                await blogService.remove(e._id);
                 setQuery(initQuery);
                 message.success("Delete success.");
               }}

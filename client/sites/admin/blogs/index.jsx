@@ -14,12 +14,14 @@ export default function AdminBlogs({ ...props }) {
   const [query, setQuery] = useState(initQuery);
   const [blogs, setBlogs] = useState([]);
 
+  const blogService = BlogService();
+
   useEffect(() => {
     fetchBlogs();
   }, [query]);
 
   async function fetchBlogs() {
-    const result = await BlogService.v1.list(query);
+    const result = await blogService.list(query);
     setBlogs(result.items);
   }
 
@@ -51,7 +53,7 @@ export default function AdminBlogs({ ...props }) {
             {!value.deleted_at && (
               <Button
                 onClick={async () => {
-                  const result = await BlogService.v1.remove(value._id);
+                  const result = await blogService.remove(value._id);
                   message.success(result.message);
                   setQuery({ ...query });
                 }}
@@ -62,7 +64,7 @@ export default function AdminBlogs({ ...props }) {
             {!!value.deleted_at && (
               <Button
                 onClick={async () => {
-                  const result = await BlogService.v1.update(
+                  const result = await blogService.update(
                     { id: value._id },
                     { deleted_at: null }
                   );
