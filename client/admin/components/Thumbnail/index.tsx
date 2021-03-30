@@ -6,7 +6,7 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { baseUrl, getHeader } from "../../../api";
 
 import "antd/dist/antd.css";
-import "./Thumbnail.module.css";
+import styles from "./index.module.css";
 
 export default function Thumbnail({ selected, callback, ...props }) {
   const [image, setImage] = useState(null);
@@ -43,7 +43,7 @@ export default function Thumbnail({ selected, callback, ...props }) {
       <Upload
         name="upload"
         listType="picture-card"
-        className="avatar-uploader"
+        className={styles.avatarUploader}
         multiple={false}
         showUploadList={false}
         {...uploadSetting}

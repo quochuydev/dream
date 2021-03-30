@@ -1,0 +1,9 @@
+.avatarUploader > .ant-upload {
+  width: 128px;
+  height: 128px;
+}
+
+.avatarUploader > .ant-upload.ant-upload-select-picture-card {
+  width: 100%;
+  display: inline-table;
+}

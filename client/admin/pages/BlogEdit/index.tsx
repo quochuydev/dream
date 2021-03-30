@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Router, { useRouter } from "next/router";
 import Link from "next/link";
-import _ from "lodash";
+import _ from "../../components/Thumbnail/node_modules/lodash";
 import { Form, message, Input, Button, Row, Col } from "antd";
 import { EyeOutlined, DeleteOutlined, SaveOutlined } from "@ant-design/icons";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -14,7 +14,7 @@ import { AdminLayout } from "../../../components";
 import TagSelect from "../TagSelect";
 import Thumbnail from "../Thumbnail";
 
-import "antd/dist/antd.css";
+import "../../components/Thumbnail/node_modules/antd/dist/antd.css";
 
 export default function Blog({}) {
   const router = useRouter();

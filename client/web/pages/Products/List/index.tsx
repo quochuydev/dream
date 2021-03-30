@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Row, Col, Slider, Tag } from "antd";
 
-import { ProductCard } from "../../../components";
+import { ProductCard } from "../../../../components";
 
 import "antd/dist/antd.css";
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import _ from "lodash";
+import _ from "../../admin/components/Thumbnail/node_modules/lodash";
 
 import { Button, Tag } from "antd";
 import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";

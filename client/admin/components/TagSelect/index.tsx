@@ -3,7 +3,7 @@ import React from "react";
 import SearchSelect from "../../../components/SearchSelect";
 import { TagService } from "../../../services";
 
-import "antd/dist/antd.css";
+import "../Thumbnail/node_modules/antd/dist/antd.css";
 
 export default function TagSelect({ selected, setSelected, ...props }) {
   const initQuery = { page: 1, limit: 20 };
