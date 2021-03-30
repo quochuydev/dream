@@ -10,7 +10,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import UploadAdapter from "../../../utils/upload-adapter";
 import { baseUrl, getToken } from "../../../api";
 import { BlogService } from "../../../services";
-import { Layout } from "../../../components";
+import { AdminLayout } from "../../../components";
 import TagSelect from "../TagSelect";
 import Thumbnail from "../Thumbnail";
 
@@ -75,7 +75,7 @@ export default function Blog({}) {
   };
 
   return (
-    <Layout
+    <AdminLayout
       headers={[{ name: "Blogs", path: "/blogs" }, { name: "test test" }]}
     >
       <Form form={form} onFinish={onFinish}>
@@ -164,6 +164,6 @@ export default function Blog({}) {
           </Col>
         </Row>
       </Form>
-    </Layout>
+    </AdminLayout>
   );
 }
