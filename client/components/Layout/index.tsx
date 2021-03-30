@@ -16,7 +16,8 @@ import MainMenu from "../MainMenu";
 import Footer from "../Footer";
 import Banner from "../Banner";
 import { MENU_DATA } from "../../utils/routes";
-import styles from "./layout.module.css";
+
+import styles from "./index.module.css";
 import Avatar from "antd/lib/avatar/avatar";
 
 export default function LayoutComponent(props): React.ReactElement {

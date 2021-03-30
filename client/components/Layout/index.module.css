@@ -88,3 +88,7 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
+.siteLayoutBackground {
+  background: #fff;
+}

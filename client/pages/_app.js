@@ -28,19 +28,14 @@ export default function App({ Component, pageProps }) {
   }, []);
 
   return (
-    <>
-      {/* <CookiesProvider>
-        {loading ? <Loading /> : <Component {...pageProps} />}
-      </CookiesProvider> */}
-      <Provider
-        options={{
-          clientMaxAge: 0,
-          keepAlive: 0,
-        }}
-        session={pageProps.session}
-      >
-        {loading ? <Loading /> : <Component {...pageProps} />}
-      </Provider>
-    </>
+    <Provider
+      options={{
+        clientMaxAge: 0,
+        keepAlive: 0,
+      }}
+      session={pageProps.session}
+    >
+      {loading ? <Loading /> : <Component {...pageProps} />}
+    </Provider>
   );
 }

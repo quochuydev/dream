@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, Drawer, PageHeader, Carousel, Row, Col } from "antd";
+import { Menu, Drawer, PageHeader, Layout } from "antd";
 import { signIn, signOut, useSession } from "next-auth/client";
 
 import {
@@ -11,13 +11,12 @@ import {
 } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
+import styles from "./index.module.css";
 
-import MainMenu from "../MainMenu";
-import Footer from "../Footer";
-import Banner from "../Banner";
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
+
 import { MENU_DATA } from "../../utils/routes";
-import styles from "./layout.module.css";
-import Avatar from "antd/lib/avatar/avatar";
 
 export default function LayoutComponent(props): React.ReactElement {
   const [session, loading] = useSession();
@@ -89,14 +88,21 @@ export default function LayoutComponent(props): React.ReactElement {
           </div>,
         ]}
       >
-        <Row>
-          <Col span={4}>
+        <Layout>
+          <Sider width={200} className={styles.siteLayoutBackground}>
             <LeftMenu />
-          </Col>
-          <Col span={20}>
+          </Sider>
+          <Content
+            className={styles.siteLayoutBackground}
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}
+          >
             <div>{props.children}</div>
-          </Col>
-        </Row>
+          </Content>
+        </Layout>
       </PageHeader>
     </>
   );
