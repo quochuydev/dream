@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "antd";
 
-import "antd/dist/antd.css";
+import "../../../components/Base/node_modules/antd/dist/antd.css";
 
 import List from "./List";
 import Filter from "./Filter";

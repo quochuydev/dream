@@ -14,7 +14,7 @@ import { AdminLayout } from "../../../components";
 import TagSelect from "../../components/TagSelect";
 import Thumbnail from "../../components/Thumbnail";
 
-import "antd/dist/antd.css";
+import "../../../components/Base/node_modules/antd/dist/antd.css";
 
 export default function Blog({}) {
   const router = useRouter();

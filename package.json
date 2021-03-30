@@ -47,6 +47,7 @@
     "cookie": "^0.4.0",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
+    "dotenv-webpack": "^7.0.2",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "fastify-secure-session": "^2.3.1",

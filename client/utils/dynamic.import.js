@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 
 import { Loading } from "../components";
 
-import "antd/dist/antd.css";
+import "../components/Base/node_modules/antd/dist/antd.css";
 
 export const noSSRWithLoadingDynamic = (component) => {
   return dynamic(() => component, {

@@ -3,9 +3,9 @@ import Link from "next/link";
 import { Button, message, Table } from "antd";
 
 import { UserService } from "../../../services";
-import Layout from "../../components/Layout";
+import { Layout, AdminLayout } from "../../../components";
 
-import "antd/dist/antd.css";
+import "../../../components/Base/node_modules/antd/dist/antd.css";
 
 export default function AdminUsers() {
   const userService = UserService();
@@ -99,7 +99,7 @@ export default function AdminUsers() {
   ];
 
   return (
-    <Layout>
+    <AdminLayout>
       <Link href={`/publish/users/create`}>New</Link>
       {" | "}
       <a
@@ -118,6 +118,6 @@ export default function AdminUsers() {
         dataSource={users}
         pagination={false}
       />
-    </Layout>
+    </AdminLayout>
   );
 }

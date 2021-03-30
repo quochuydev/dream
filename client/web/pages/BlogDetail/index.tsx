@@ -3,7 +3,7 @@ import { Tag } from "antd";
 
 import { Layout } from "../../../components";
 
-import "antd/dist/antd.css";
+import "../../../components/Base/node_modules/antd/dist/antd.css";
 
 export default function Blog({ blog }) {
   return (

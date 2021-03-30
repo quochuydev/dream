@@ -3,7 +3,7 @@ import { Card, Row, Col, Slider, Tag } from "antd";
 
 import { ProductCard } from "../../../../components";
 
-import "antd/dist/antd.css";
+import "../../../../components/Base/node_modules/antd/dist/antd.css";
 
 export default function Index({ ...props }) {
   const products = [
