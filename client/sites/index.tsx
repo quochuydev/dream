@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Layout } from "../components";
+import { Layout } from "../web/components";
 import Product from "../web/pages/Products";
 
 import "antd/dist/antd.css";

@@ -12,7 +12,7 @@ export default function MainMenu({ ...props }) {
   function handleClick(e) {
     setCurrent(e.key);
   }
-  // MenuOutlined
+
   return (
     <Menu
       onClick={handleClick}

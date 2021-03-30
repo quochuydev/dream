@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button, message, Avatar, Card, List, Row, Col, Space } from "antd";
 import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 
-import { Layout } from "../../../components";
+import { Layout } from "../../components";
 import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";

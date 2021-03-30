@@ -1,7 +1,7 @@
 import React from "react";
 import { Tag } from "antd";
 
-import { Layout } from "../../../components";
+import { Layout } from "../../components";
 
 import "antd/dist/antd.css";
 
