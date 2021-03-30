@@ -45,15 +45,6 @@ export const APIClient = APIFactory({
     }),
 });
 
-export async function loginGoogle() {
-  try {
-    const result = await APIClient.post("/login-google", { body: {} });
-    window.location.href = result;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export const API = APIFactory({
   baseUrl,
   setHeaders: () =>
