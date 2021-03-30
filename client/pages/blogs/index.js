@@ -13,7 +13,7 @@ export async function getServerSideProps(ctx) {
 export default noSSRWithLoadingDynamic(import("../../sites/Blog/List"));
 
 async function getBlogs(ctx) {
-  const query = { page: 1, limit: 20 };
+  const query = { page: 1, limit: 5 };
   const blogService = BlogService(ctx);
   const result = await blogService.list(query);
   return result.items;

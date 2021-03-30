@@ -1,121 +1,86 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Button, message, Avatar, Card, List, Row, Col } from "antd";
+import { Button, message, Avatar, Card, List, Row, Col, Space } from "antd";
+import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 
 import { Layout } from "../../../components";
 import { BlogService } from "../../../services";
 
 import "antd/dist/antd.css";
 
-export default function Blogs({ initBlogs, ...props }) {
-  const initQuery = { page: 1, limit: 20 };
-  const [query, setQuery] = useState(initQuery);
-  const [blogs, setBlogs] = useState([]);
-
-  function useDidUpdateEffect(fn, inputs) {
-    const didMountRef = useRef(false);
-    useEffect(() => {
-      if (didMountRef.current) fn();
-      else didMountRef.current = true;
-    }, inputs);
-  }
-
-  useEffect(() => {
-    setBlogs(initBlogs);
-  }, []);
-
-  useDidUpdateEffect(() => {
-    fetchBlogs();
-  }, [query]);
-
-  async function fetchBlogs() {
-    const result = await BlogService.list(query);
-    setBlogs(result.items);
-  }
+export default function Blogs({ initBlogs: blogs, ...props }) {
+  const IconText = ({ icon, text }) => (
+    <Space>
+      {React.createElement(icon)}
+      {text}
+    </Space>
+  );
 
   return (
     <Layout>
       <Button
         onClick={() => {
-          setQuery(initQuery);
+          //
         }}
       >
         Apply filter
       </Button>
       <Link href={`/publish/blogs/create`}>New</Link>
-      <ul className="p-none">
-        {blogs.map((e, i) => (
-          <li key={e._id}>
-            <span>{i + 1}. </span>
-            <Link href={`/publish/blogs/edit/${e._id}`}>
-              <a>edit</a>
-            </Link>
-            {" | "}
-            {e.file_id && <Avatar shape="square" src={e.file_id?.url} />}
-            <Link href={`/blogs/${e._id}`}>
-              <a>post: {e.title}</a>
-            </Link>
-            {" | "}
-            <span> {e.created_at}</span>
-            {" | "}
-            <a
-              onClick={async () => {
-                try {
-                  await BlogService.v1.remove(e._id);
-                  message.success("Delete success.");
-                  setQuery(initQuery);
-                } catch (error) {
-                  message.error(error.message);
-                }
-              }}
-            >
-              remove
-            </a>
-            {" | "}
-            <span>{e.user_id}</span>
-          </li>
-        ))}
-      </ul>
       <Row gutter={8}>
         <Col span={16}>
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={200}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
-                }
-              />
+          <List
+            itemLayout="vertical"
+            size="large"
+            pagination={{
+              onChange: (page) => {
+                console.log(page);
+              },
+              // pageSize: 3,
+            }}
+            dataSource={blogs.map((e: any) => ({
+              href: "https://ant.design",
+              title: `${e.title}`,
+              avatar: e.file_id?.url,
+              description:
+                "Ant Design, a design language for background applications, is refined by Ant UED Team.",
+              content:
+                "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
+            }))}
+            footer={
+              <div>
+                <b>ant design</b> footer part
+              </div>
             }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-            description="Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền thông nhiều với việc sao chép lại tính năng nổi…"
-          />
-          <hr />
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={150}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
-                }
-              />
-            }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-            description={
-              <>
-                <p>{new Date().toISOString()}</p>
-                <p>
-                  Theo CNN, vài năm gần đây, Facebook xuất hiện trên truyền
-                  thông nhiều với việc sao chép lại tính năng nổi…
-                </p>
-              </>
-            }
+            renderItem={(item: any) => (
+              <List.Item
+                key={item.title}
+                actions={[
+                  <IconText
+                    icon={StarOutlined}
+                    text="156"
+                    key="list-vertical-star-o"
+                  />,
+                  <IconText
+                    icon={LikeOutlined}
+                    text="156"
+                    key="list-vertical-like-o"
+                  />,
+                  <IconText
+                    icon={MessageOutlined}
+                    text="2"
+                    key="list-vertical-message"
+                  />,
+                ]}
+                extra={<img width={272} alt="logo" src={item.file_id?.url} />}
+              >
+                <List.Item.Meta
+                  avatar={<Avatar src={item.file_id?.url} />}
+                  title={<a href={item.href}>{item.title}</a>}
+                  description={item.description}
+                />
+                {item.content}
+              </List.Item>
+            )}
           />
         </Col>
         <Col span={8}>
@@ -137,21 +102,6 @@ export default function Blogs({ initBlogs, ...props }) {
               />
             </div>
           ))}
-
-          <List.Item.Meta
-            avatar={
-              <Avatar
-                shape="square"
-                size={80}
-                src={
-                  "https://investing.vn/home/wp-content/uploads/2021/02/facebook-500x300.png"
-                }
-              />
-            }
-            title={
-              "Liên tục bắt chước đối thủ, Facebook đang trở thành cỗ máy ”copy” 770 tỷ USD?"
-            }
-          />
         </Col>
       </Row>
     </Layout>
