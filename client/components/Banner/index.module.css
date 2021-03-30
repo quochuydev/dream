@@ -1,0 +1,11 @@
+.contentStyle {
+  height: 320px;
+  line-height: 320px;
+  color: #fff;
+  text-align: center;
+  background: #364d79;
+}
+
+.contentStyle img {
+  width: 100%;
+}

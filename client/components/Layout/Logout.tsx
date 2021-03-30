@@ -14,7 +14,6 @@ import "antd/dist/antd.css";
 
 import MainMenu from "../MainMenu";
 import Footer from "../Footer";
-import Banner from "../Banner";
 import { MENU_DATA } from "../../utils/routes";
 import styles from "./layout.module.css";
 import Avatar from "antd/lib/avatar/avatar";
@@ -43,14 +42,14 @@ export default function LayoutComponent(props): React.ReactElement {
             shape="square"
             size="large"
             src={
-              "http://xetaigianat.com/wp-content/uploads/2020/09/116722459_122745202850084_1095321087195858261_n.png"
+              "https://bidbid-dev.s3.ap-southeast-1.amazonaws.com/0309f3f6308f-function-date%28a0-a1-a2-a3-a4-a5-a6%29-native-code-.jpg"
             }
           />
         }
         subTitle={<MainMenu />}
         extra={[
           <SearchOutlined key={0} />,
-          // <ShoppingCartOutlined key={1} />,
+          <ShoppingCartOutlined key={1} />,
           <div key={2} className={styles.signedInStatus}>
             <p
               className={`nojs-show ${
@@ -99,32 +98,29 @@ export default function LayoutComponent(props): React.ReactElement {
           </div>,
         ]}
       >
-        <Banner />
+        <Carousel autoplay>
+          <div>
+            <h3 className={styles.contentStyle}>
+              <img
+                src={
+                  "https://mir-s3-cdn-cf.behance.net/project_modules/1400/2697a7115583477.60513de14d3c8.jpg"
+                }
+              />
+            </h3>
+          </div>
+          <div>
+            <h3 className={styles.contentStyle}>
+              <img
+                src={
+                  "https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.0-9/s960x960/88357382_218508332863044_5569936219082588160_o.png?_nc_cat=103&ccb=1-3&_nc_sid=e3f864&_nc_ohc=Eg_Sz7QspkYAX84A0KY&_nc_ht=scontent.fsgn1-1.fna&_nc_tp=30&oh=0cfffebffbd87f3a63efeb810ea26fac&oe=6084CB87"
+                }
+              />
+            </h3>
+          </div>
+        </Carousel>
         <div>{props.children}</div>
       </PageHeader>
       {!props.hideFooter && <Footer />}
     </>
   );
-}
-
-function LeftMenu() {
-  const menuItems = [];
-
-  for (let i = 0; i < MENU_DATA.length; i++) {
-    const menu = MENU_DATA[i];
-
-    if (menu.is_open) {
-      menuItems.push(
-        <Menu.Item key={menu.key} style={{ paddingLeft: 0 }}>
-          <Link href={menu.path}>
-            <div>
-              {menu.icon}
-              <span>{menu.name}</span>
-            </div>
-          </Link>
-        </Menu.Item>
-      );
-    }
-  }
-  return <div style={{ display: "block" }}></div>;
 }

@@ -8,7 +8,14 @@ const MENU_DATA = [
     key: "blog",
     name: "Blog",
     icon: <RightCircleOutlined />,
-    path: "/blogs",
+    path: "/admin/blogs",
+  },
+  {
+    is_open: true,
+    key: "user",
+    name: "User",
+    icon: <RightCircleOutlined />,
+    path: "/admin/users",
   },
 ];
 

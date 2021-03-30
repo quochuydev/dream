@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, Drawer, PageHeader, Carousel } from "antd";
+import { Menu, Drawer, PageHeader, Carousel, Row, Col } from "antd";
 import { signIn, signOut, useSession } from "next-auth/client";
 
 import {
@@ -38,19 +38,9 @@ export default function LayoutComponent(props): React.ReactElement {
       </Drawer>
 
       <PageHeader
-        title={
-          <Avatar
-            shape="square"
-            size="large"
-            src={
-              "http://xetaigianat.com/wp-content/uploads/2020/09/116722459_122745202850084_1095321087195858261_n.png"
-            }
-          />
-        }
-        subTitle={<MainMenu />}
+        title={<></>}
+        subTitle={<></>}
         extra={[
-          <SearchOutlined key={0} />,
-          // <ShoppingCartOutlined key={1} />,
           <div key={2} className={styles.signedInStatus}>
             <p
               className={`nojs-show ${
@@ -99,10 +89,15 @@ export default function LayoutComponent(props): React.ReactElement {
           </div>,
         ]}
       >
-        <Banner />
-        <div>{props.children}</div>
+        <Row>
+          <Col span={4}>
+            <LeftMenu />
+          </Col>
+          <Col span={20}>
+            <div>{props.children}</div>
+          </Col>
+        </Row>
       </PageHeader>
-      {!props.hideFooter && <Footer />}
     </>
   );
 }
@@ -126,5 +121,9 @@ function LeftMenu() {
       );
     }
   }
-  return <div style={{ display: "block" }}></div>;
+  return (
+    <div style={{ display: "block" }}>
+      <Menu>{menuItems}</Menu>
+    </div>
+  );
 }

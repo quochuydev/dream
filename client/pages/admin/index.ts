@@ -12,9 +12,12 @@ export async function getServerSideProps(context) {
         permanent: false,
       },
     };
+  } else {
+    return {
+      redirect: {
+        destination: "/admin/users",
+        permanent: false,
+      },
+    };
   }
-
-  return {
-    props: { session },
-  };
 }

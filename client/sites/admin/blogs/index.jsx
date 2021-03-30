@@ -29,7 +29,11 @@ export default function AdminBlogs({ ...props }) {
     {
       key: "id",
       title: "id",
-      dataIndex: "_id",
+      render: (value) => {
+        return (
+          <Link href={`/admin/blogs/${value._id}`}>{value.created_at}</Link>
+        );
+      },
     },
     {
       key: "created_at",

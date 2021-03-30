@@ -4,11 +4,11 @@ import { Button, message, Table } from "antd";
 
 import { BlogService } from "../../../services";
 import ImageCrop from "../../../components/ImageCrop";
-import { Layout } from "../../../components";
+import { AdminLayout } from "../../../components";
 
 import "antd/dist/antd.css";
 
-export default function AdminBlogs({ ...props }) {
+export default function AdminBlog() {
   const initQuery = { all: true, page: 1, limit: 20 };
 
   const [query, setQuery] = useState(initQuery);
@@ -29,7 +29,20 @@ export default function AdminBlogs({ ...props }) {
     {
       key: "id",
       title: "id",
-      dataIndex: "_id",
+      render: (value) => {
+        return <Link href={`/admin/blogs/${value._id}`}>{value._id}</Link>;
+      },
+    },
+    {
+      key: "title",
+      title: "title",
+      render: (value) => {
+        return (
+          <Link href={`/admin/blogs/${value._id}`}>
+            <p>{value.title}</p>
+          </Link>
+        );
+      },
     },
     {
       key: "created_at",
@@ -82,7 +95,7 @@ export default function AdminBlogs({ ...props }) {
   ];
 
   return (
-    <Layout>
+    <AdminLayout>
       <Link href={`/publish/blogs/create`}>New</Link>
       {" | "}
       <a
@@ -102,6 +115,6 @@ export default function AdminBlogs({ ...props }) {
         pagination={false}
       />
       <ImageCrop />
-    </Layout>
+    </AdminLayout>
   );
 }
