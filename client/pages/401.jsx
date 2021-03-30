@@ -9,7 +9,7 @@ export default function Authetication() {
           Router.push(`/`);
         }}
       >
-        Home
+        Back to home
       </a>
     </>
   );

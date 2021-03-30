@@ -8,7 +8,7 @@ import { Layout } from "../../../components";
 
 import "antd/dist/antd.css";
 
-export default function AdminUsers({ ...props }) {
+export default function AdminUsers() {
   const initQuery = { all: true, page: 1, limit: 20 };
 
   const [query, setQuery] = useState(initQuery);

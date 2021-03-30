@@ -1,23 +1,28 @@
-import { API, APIClient } from "../api";
+import { apiFatory } from "../api";
+import { USER } from "../api/endpoint";
 
-export default {
-  list: async function (query) {
-    return await API.get("/api/users", { query });
-  },
+export default (ctx) => {
+  const API = apiFatory(ctx);
 
-  create: async function (body) {
-    return await API.post("/api/users", { body });
-  },
+  return {
+    list: async function (query) {
+      return await API.get(USER.LIST, { query });
+    },
 
-  detail: async function detail(id) {
-    return await APIClient.get(`/api/users/${id}`);
-  },
+    detail: async function detail(id) {
+      return await API.get(USER.DETAIL, { params: { id } });
+    },
 
-  update: async function update(query, body) {
-    return await API.put(`/api/users/${query.id}`, { body });
-  },
+    create: async function (body) {
+      return await API.post(USER.CREATE, { body });
+    },
 
-  remove: async function remove(id) {
-    return await API.delete(`/api/users/${id}`);
-  },
+    update: async function update(id, data) {
+      return await API.put(USER.UPDATE, { params: { id }, body: data });
+    },
+
+    remove: async function remove(id) {
+      return await API.delete(USER.DELETE, { params: { id } });
+    },
+  };
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import { CookiesProvider } from "react-cookie";
+import { Provider } from "next-auth/client";
 
 import Loading from "../components/Loading";
 
@@ -28,9 +29,18 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <CookiesProvider>
+      {/* <CookiesProvider>
         {loading ? <Loading /> : <Component {...pageProps} />}
-      </CookiesProvider>
+      </CookiesProvider> */}
+      <Provider
+        options={{
+          clientMaxAge: 0,
+          keepAlive: 0,
+        }}
+        session={pageProps.session}
+      >
+        {loading ? <Loading /> : <Component {...pageProps} />}
+      </Provider>
     </>
   );
 }
