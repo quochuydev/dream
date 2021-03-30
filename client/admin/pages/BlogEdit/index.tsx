@@ -10,11 +10,11 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import UploadAdapter from "../../../utils/upload-adapter";
 import { baseUrl } from "../../../api";
 import { BlogService } from "../../../services";
-import { AdminLayout } from "../../../components";
+import Layout from "../../../components/Layout";
 import TagSelect from "../../components/TagSelect";
 import Thumbnail from "../../components/Thumbnail";
 
-import "../../../components/Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 export default function Blog({}) {
   const router = useRouter();

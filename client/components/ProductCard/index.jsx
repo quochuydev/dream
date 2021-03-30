@@ -6,7 +6,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 
-import "../Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 const { Meta } = Card;
 

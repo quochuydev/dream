@@ -10,7 +10,7 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 
-import "../../../components/Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 import styles from "./index.module.css";
 
 const { SubMenu } = Menu;

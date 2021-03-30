@@ -6,7 +6,7 @@ import { MessageOutlined, LikeOutlined, StarOutlined } from "@ant-design/icons";
 import { Layout } from "../../../components";
 import { BlogService } from "../../../services";
 
-import "../../../components/Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 export default function Blogs({ initBlogs: blogs, ...props }) {
   const IconText = ({ icon, text }) => (

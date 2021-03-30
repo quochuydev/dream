@@ -6,7 +6,7 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { baseUrl, getHeader } from "../../../api";
 import styles from "./index.module.css";
 
-import "../../../components/Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 export default function Thumbnail({ selected, callback, ...props }) {
   const [image, setImage] = useState(null);

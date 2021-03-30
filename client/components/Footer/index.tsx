@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Tag, Row, Col } from "antd";
 
-import "../Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 import styles from "./footer.module.css";
 
 export default function Footer(): React.ReactElement {

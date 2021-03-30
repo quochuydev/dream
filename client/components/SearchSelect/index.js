@@ -6,7 +6,7 @@ import { Button, Tag } from "antd";
 import { RightCircleOutlined, LeftCircleOutlined } from "@ant-design/icons";
 
 import "./SearchSelect.module.css";
-import "../Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 export default function SearchSelect({ values, ...props }) {
   const valueKey = props.valueKey || "_id";

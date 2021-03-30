@@ -6,7 +6,7 @@ import { BlogService } from "../../../services";
 import ImageCrop from "../../../components/ImageCrop";
 import Layout from "../../components/Layout";
 
-import "../../../components/Base/node_modules/antd/dist/antd.css";
+import "antd/dist/antd.css";
 
 export default function AdminBlog() {
   const initQuery = { all: true, page: 1, limit: 20 };
