@@ -1,4 +1,4 @@
-import _ from "../admin/components/Thumbnail/node_modules/lodash";
+import _ from "lodash";
 
 export const baseUrl =
   process.env.NODE_ENV == "production"

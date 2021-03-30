@@ -1,4 +1,4 @@
-import _ from "../admin/components/Thumbnail/node_modules/lodash";
+import _ from "lodash";
 import fetch from "isomorphic-fetch";
 
 const APIFactory = ({ baseUrl, setHeaders, notStringify }) => {

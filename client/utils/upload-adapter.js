@@ -1,5 +1,5 @@
 import axios from "axios";
-import _ from "../admin/components/Thumbnail/node_modules/lodash";
+import _ from "lodash";
 import { baseUrl, getHeader } from "../api";
 
 export default class UploadAdapter {

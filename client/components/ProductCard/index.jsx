@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Avatar } from "antd";
+import { Card } from "antd";
 import { EditOutlined, SettingOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
