@@ -1,3 +1,3 @@
 import { noSSRWithLoadingDynamic } from "../utils/dynamic.import";
 
-export default noSSRWithLoadingDynamic(import("../sites/index"));
+export default noSSRWithLoadingDynamic(import("../web/pages/Products"));

@@ -7,7 +7,7 @@ import List from "./List";
 import Filter from "./Filter";
 import { Layout } from "../../components";
 
-export default function Index({ ...props }) {
+export default function Products() {
   return (
     <Layout>
       <Row gutter={15}>

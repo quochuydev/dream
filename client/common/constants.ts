@@ -1,1 +1,1 @@
-export const PATHS = [];
+export const PATHS = [{}];
