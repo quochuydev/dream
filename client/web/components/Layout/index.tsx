@@ -59,7 +59,7 @@ export default function LayoutComponent(props): React.ReactElement {
               {!session && (
                 <a
                   href={`/api/auth/signin`}
-                  className={styles.buttonPrimary}
+                  className={styles.button}
                   onClick={(e) => {
                     e.preventDefault();
                     signIn();

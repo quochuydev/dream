@@ -13,7 +13,7 @@ export default function ProductCard() {
       cover={
         <img
           alt="example"
-          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+          src="https://xetaigianat.com/wp-content/uploads/2020/10/0392VAQ09011900S-300x256.jpg"
         />
       }
       actions={[
@@ -25,7 +25,7 @@ export default function ProductCard() {
         </>,
       ]}
     >
-      <Meta title="Card title" description="This is the description" />
+      <Meta title="Card title" description="100,000đ" />
     </Card>
   );
 }

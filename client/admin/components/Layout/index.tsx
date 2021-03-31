@@ -23,88 +23,87 @@ export default function LayoutComponent(props): React.ReactElement {
   const [showDrawer, setShowDrawer] = useState(false);
 
   return (
-    <>
-      <Drawer
-        placement={"left"}
-        closable={false}
-        onClose={() => {
-          setShowDrawer(false);
-        }}
-        visible={showDrawer}
-        bodyStyle={{ padding: 0 }}
-      >
-        <LeftMenu />
-      </Drawer>
+    <Layout>
+      <Header>
+        <Drawer
+          placement={"left"}
+          closable={false}
+          onClose={() => {
+            setShowDrawer(false);
+          }}
+          visible={showDrawer}
+          bodyStyle={{ padding: 0 }}
+        >
+          <LeftMenu />
+        </Drawer>
 
-      <PageHeader
-        title={<></>}
-        subTitle={<></>}
-        extra={[
-          <div key={2} className={styles.signedInStatus}>
-            <p
-              className={`nojs-show ${
-                !session && loading ? styles.loading : styles.loaded
-              }`}
-            >
-              {!session && (
-                <a
-                  href={`/api/auth/signin`}
-                  className={styles.buttonPrimary}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signIn();
-                  }}
-                >
-                  <LoginOutlined /> Login
-                </a>
-              )}
-              {session && (
-                <div>
-                  {session.user.image && (
-                    <span
-                      style={{
-                        backgroundImage: `url(${session.user.image})`,
-                      }}
-                      className={styles.avatar}
-                    />
-                  )}
-                  <span className={styles.signedInText}>
-                    <strong>{session.user.email || session.user.name}</strong>
-                  </span>
-                  <br />
+        <PageHeader
+          title={<></>}
+          subTitle={<></>}
+          extra={[
+            <div key={2} className={styles.signedInStatus}>
+              <p
+                className={`nojs-show ${
+                  !session && loading ? styles.loading : styles.loaded
+                }`}
+              >
+                {!session && (
                   <a
-                    href={`/api/auth/signout`}
-                    className={styles.button}
+                    href={`/api/auth/signin`}
+                    className={styles.buttonPrimary}
                     onClick={(e) => {
                       e.preventDefault();
-                      signOut();
+                      signIn();
                     }}
                   >
-                    <LogoutOutlined /> Logout
+                    <LoginOutlined /> Login
                   </a>
-                </div>
-              )}
-            </p>
-          </div>,
-        ]}
+                )}
+                {session && (
+                  <div>
+                    {session.user.image && (
+                      <span
+                        style={{
+                          backgroundImage: `url(${session.user.image})`,
+                        }}
+                        className={styles.avatar}
+                      />
+                    )}
+                    <span className={styles.signedInText}>
+                      <strong>{session.user.email || session.user.name}</strong>
+                    </span>
+                    <br />
+                    <a
+                      href={`/api/auth/signout`}
+                      className={styles.button}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        signOut();
+                      }}
+                    >
+                      <LogoutOutlined /> Logout
+                    </a>
+                  </div>
+                )}
+              </p>
+            </div>,
+          ]}
+        />
+      </Header>
+      <Sider width={200} className={styles.siteLayoutBackground}>
+        <LeftMenu />
+      </Sider>
+      <Content
+        className={styles.siteLayoutBackground}
+        style={{
+          padding: 24,
+          margin: 0,
+          minHeight: 280,
+        }}
       >
-        <Layout>
-          <Sider width={200} className={styles.siteLayoutBackground}>
-            <LeftMenu />
-          </Sider>
-          <Content
-            className={styles.siteLayoutBackground}
-            style={{
-              padding: 24,
-              margin: 0,
-              minHeight: 280,
-            }}
-          >
-            <div>{props.children}</div>
-          </Content>
-        </Layout>
-      </PageHeader>
-    </>
+        <div>{props.children}</div>
+      </Content>
+    </Layout>
   );
 }
 

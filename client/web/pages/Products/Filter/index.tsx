@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Slider, Tag } from "antd";
+import { Card, Slider, Tag, List, Avatar } from "antd";
 
 import "antd/dist/antd.css";
 
@@ -8,6 +8,18 @@ export default function Index() {
     {
       value: "4",
       label: "T-Shirt",
+    },
+  ];
+
+  const data = [
+    {
+      title: "Chenglong H7 (2020) 5 chân – 21,5 tấn – Thùng mui bạt",
+      price: "1,600,000,000₫",
+    },
+    {
+      title:
+        "Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - Gắn cẩu SOOSAN SCS746L 8 tấn",
+      price: "1,770,000,000₫",
     },
   ];
 
@@ -21,8 +33,28 @@ export default function Index() {
 
   return (
     <>
-      <h1>Filter</h1>
-      <Card>
+      <Card size="small" title="Viewed">
+        <List
+          itemLayout="horizontal"
+          dataSource={data}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={
+                  <Avatar
+                    shape="square"
+                    size={60}
+                    src="https://xetaigianat.com/wp-content/uploads/2020/08/web-5-ch%C3%A2n-1-100x100.png"
+                  />
+                }
+                title={<a href="https://xetaigianat.com">{item.title}</a>}
+                description={item.price}
+              />
+            </List.Item>
+          )}
+        />
+      </Card>
+      <Card size="small" title="Filter">
         <p>Price</p>
         <Slider
           range
