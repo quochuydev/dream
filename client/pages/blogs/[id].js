@@ -9,7 +9,7 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-export default noSSRWithLoadingDynamic(import("../../sites/Blog/Detail"));
+export default noSSRWithLoadingDynamic(import("../../web/pages/BlogDetail"));
 
 async function getBlog(ctx) {
   const blogService = BlogService(ctx);
