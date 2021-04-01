@@ -1,9 +1,6 @@
 import _ from "lodash";
 
-export const baseUrl =
-  process.env.NODE_ENV == "production"
-    ? process.env.BACKEND_URL
-    : "http://localhost:8000";
+export const baseUrl = process.env.BACKEND_URL;
 
 import APIFactory from "./APIFactory";
 
