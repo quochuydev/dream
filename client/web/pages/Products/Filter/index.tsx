@@ -33,7 +33,7 @@ export default function Index() {
 
   return (
     <>
-      <Card size="small" title="Viewed">
+      <Card size="small" title={<h1>Viewed</h1>}>
         <List
           itemLayout="horizontal"
           dataSource={data}
@@ -54,7 +54,7 @@ export default function Index() {
           )}
         />
       </Card>
-      <Card size="small" title="Filter">
+      <Card size="small" title={<h1>Filter</h1>}>
         <p>Price</p>
         <Slider
           range

@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "antd";
-import { EditOutlined, SettingOutlined } from "@ant-design/icons";
+import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 
@@ -18,10 +18,10 @@ export default function ProductCard() {
       }
       actions={[
         <>
-          <SettingOutlined key="setting" /> Wishlist
+          <HeartOutlined key="setting" /> Wishlist
         </>,
         <>
-          <EditOutlined key="edit" /> Add to cart
+          <ShoppingCartOutlined key="edit" /> Add to cart
         </>,
       ]}
     >
