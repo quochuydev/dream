@@ -1,5 +1,5 @@
 .contentStyle {
-  height: 725px;
+  max-height: 725px;
   color: #fff;
   text-align: center;
   background: #364d79;

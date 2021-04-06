@@ -55,7 +55,7 @@ export default function Index() {
         />
       </Card>
       <Card size="small" title={<h1>Filter</h1>}>
-        <p>Price</p>
+        <h3>Price</h3>
         <Slider
           range
           step={10}
@@ -63,7 +63,7 @@ export default function Index() {
           onChange={onChange}
           onAfterChange={onAfterChange}
         />
-        <p>Tags</p>
+        <h3>Tags</h3>
         {tags.map((tag) => (
           <Tag key={tag.value} color="cyan" style={{ marginRight: 5 }}>
             {tag.label}

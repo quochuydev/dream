@@ -1,7 +1,5 @@
 const path = require("path");
 
-console.log('in next', process.env.DATABASE_URL);
-
 const envLocal = {
   BACKEND_URL: "http://localhost:8000",
   NEXTAUTH_URL: "http://localhost:3000",
@@ -9,7 +7,7 @@ const envLocal = {
     "423953942314-g5kp3srv5mgv4od7q9rguio724033a29.apps.googleusercontent.com",
   GOOGLE_SECRET: "TPDX-w0Mzk-_8O13RpaJ9Tcs",
   DATABASE_URL: "mongodb://localhost/dream",
-  SECRET: "",
+  SECRET: "0001",
 };
 
 const env = {
@@ -20,7 +18,7 @@ const env = {
   GOOGLE_SECRET: "TPDX-w0Mzk-_8O13RpaJ9Tcs",
   DATABASE_URL:
     "mongodb+srv://quochuydev:Quochuydev548!@cluster0.qcuvq.mongodb.net/dream?retryWrites=true&w=majority",
-  SECRET: "",
+  SECRET: "0001",
 };
 
 module.exports = Object({
