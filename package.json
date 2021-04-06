@@ -66,11 +66,13 @@
     "react-dom": "^0.0.0-8e5adfbd7",
     "react-image-crop": "^8.6.6",
     "react-select": "^3.2.0",
+    "react-slick": "^0.28.1",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
     "sass": "^1.32.7",
+    "slick-carousel": "^1.8.1",
     "slugify": "^1.4.6"
   },
   "devDependencies": {

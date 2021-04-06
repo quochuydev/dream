@@ -6,6 +6,8 @@ const envLocal = {
   GOOGLE_ID:
     "423953942314-g5kp3srv5mgv4od7q9rguio724033a29.apps.googleusercontent.com",
   GOOGLE_SECRET: "TPDX-w0Mzk-_8O13RpaJ9Tcs",
+  FACEBOOK_ID: "579992946118574",
+  FACEBOOK_SECRET: "b1c55aed30101aac87ffc6d14517c3f4",
   DATABASE_URL: "mongodb://localhost/dream",
   SECRET: "0001",
 };
@@ -16,6 +18,8 @@ const env = {
   GOOGLE_ID:
     "423953942314-g5kp3srv5mgv4od7q9rguio724033a29.apps.googleusercontent.com",
   GOOGLE_SECRET: "TPDX-w0Mzk-_8O13RpaJ9Tcs",
+  FACEBOOK_ID: "579992946118574",
+  FACEBOOK_SECRET: "b1c55aed30101aac87ffc6d14517c3f4",
   DATABASE_URL:
     "mongodb+srv://quochuydev:Quochuydev548!@cluster0.qcuvq.mongodb.net/dream?retryWrites=true&w=majority",
   SECRET: "0001",

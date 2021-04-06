@@ -5,8 +5,6 @@ import Adapters from "next-auth/adapters";
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 
-console.log("in nextauth", process.env.DATABASE_URL);
-
 export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
@@ -28,10 +26,10 @@ export default NextAuth({
     //   clientSecret: process.env.AUTH0_SECRET,
     //   domain: process.env.AUTH0_DOMAIN,
     // }),
-    // Providers.Facebook({
-    //   clientId: process.env.FACEBOOK_ID,
-    //   clientSecret: process.env.FACEBOOK_SECRET,
-    // }),
+    Providers.Facebook({
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+    }),
     // Providers.GitHub({
     //   clientId: process.env.GITHUB_ID,
     //   clientSecret: process.env.GITHUB_SECRET,
