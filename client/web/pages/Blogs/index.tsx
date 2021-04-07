@@ -32,10 +32,12 @@ export default function Blogs({ initBlogs: blogs, ...props }) {
             itemLayout="vertical"
             size="large"
             pagination={{
+              total: 100,
+              current: 3,
               onChange: (page) => {
                 console.log(page);
               },
-              // pageSize: 3,
+              pageSize: 10,
             }}
             dataSource={blogs.map((e: any) => ({
               href: "https://ant.design",

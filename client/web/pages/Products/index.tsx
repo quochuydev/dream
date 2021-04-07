@@ -21,8 +21,8 @@ export default function Products() {
 
   return (
     <Layout>
-      <Row gutter={15}>
-        <Col span={24}>
+      <Row justify="center">
+        <Col span={12}>
           <Slider {...settings}>
             <div>
               <img
@@ -58,6 +58,8 @@ export default function Products() {
             </div>
           </Slider>
         </Col>
+      </Row>
+      <Row gutter={15}>
         <Col span={8}>
           <Filter />
         </Col>

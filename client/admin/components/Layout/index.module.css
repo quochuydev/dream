@@ -1,4 +1,7 @@
-/* Set min-height to avoid page reflow while session loading */
+.header {
+  border-bottom: 5px solid black;
+}
+
 .signedInStatus {
   display: inline-flex;
   min-height: 4rem;
@@ -54,15 +57,15 @@
 
 .button,
 .buttonPrimary {
-  /* float: right;
-    font-weight: 500;
-    border-radius: 0.3rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-    line-height: 1rem;
-    padding: 0.4rem 0.4rem;
-    position: relative;
-    z-index: 10; */
+  float: right;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1rem;
+  padding: 0.4rem 0.4rem;
+  position: relative;
+  z-index: 10;
   color: #555;
 }
 

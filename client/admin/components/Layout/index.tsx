@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { Menu, Drawer, PageHeader, Layout } from "antd";
+import { Menu, Drawer, PageHeader, Layout, Breadcrumb } from "antd";
 import { signIn, signOut, useSession } from "next-auth/client";
 
 import {
@@ -8,13 +8,16 @@ import {
   LoginOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
 } from "@ant-design/icons";
-
-import "antd/dist/antd.css";
-import styles from "./index.module.css";
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+
+import "antd/dist/antd.css";
+import styles from "./index.module.css";
 
 import { MENU_DATA } from "../../../utils/routes";
 
@@ -24,85 +27,96 @@ export default function LayoutComponent(props): React.ReactElement {
 
   return (
     <Layout>
-      <Header>
-        <Drawer
-          placement={"left"}
-          closable={false}
-          onClose={() => {
-            setShowDrawer(false);
-          }}
-          visible={showDrawer}
-          bodyStyle={{ padding: 0 }}
-        >
-          <LeftMenu />
-        </Drawer>
-
-        <PageHeader
-          title={<></>}
-          subTitle={<></>}
-          extra={[
-            <div key={2} className={styles.signedInStatus}>
-              <p
-                className={`nojs-show ${
-                  !session && loading ? styles.loading : styles.loaded
-                }`}
-              >
-                {!session && (
+      <Drawer
+        placement={"left"}
+        closable={false}
+        onClose={() => {
+          setShowDrawer(false);
+        }}
+        visible={showDrawer}
+        bodyStyle={{ padding: 0 }}
+      >
+        <LeftMenu />
+      </Drawer>
+      <PageHeader
+        className={styles.header}
+        title={<></>}
+        subTitle={<></>}
+        extra={[
+          <div key={2} className={styles.signedInStatus}>
+            <div
+              className={`nojs-show ${
+                !session && loading ? styles.loading : styles.loaded
+              }`}
+            >
+              {!session && (
+                <a
+                  href={`/api/auth/signin`}
+                  className={styles.buttonPrimary}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn();
+                  }}
+                >
+                  <LoginOutlined /> Login
+                </a>
+              )}
+              {session && (
+                <div>
+                  {session.user.image && (
+                    <span
+                      style={{
+                        backgroundImage: `url(${session.user.image})`,
+                      }}
+                      className={styles.avatar}
+                    />
+                  )}
+                  <span className={styles.signedInText}>
+                    <strong>{session.user.email || session.user.name}</strong>
+                  </span>
+                  <br />
                   <a
-                    href={`/api/auth/signin`}
-                    className={styles.buttonPrimary}
+                    href={`/api/auth/signout`}
+                    className={styles.button}
                     onClick={(e) => {
                       e.preventDefault();
-                      signIn();
+                      signOut();
                     }}
                   >
-                    <LoginOutlined /> Login
+                    <LogoutOutlined /> Logout
                   </a>
-                )}
-                {session && (
-                  <div>
-                    {session.user.image && (
-                      <span
-                        style={{
-                          backgroundImage: `url(${session.user.image})`,
-                        }}
-                        className={styles.avatar}
-                      />
-                    )}
-                    <span className={styles.signedInText}>
-                      <strong>{session.user.email || session.user.name}</strong>
-                    </span>
-                    <br />
-                    <a
-                      href={`/api/auth/signout`}
-                      className={styles.button}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        signOut();
-                      }}
-                    >
-                      <LogoutOutlined /> Logout
-                    </a>
-                  </div>
-                )}
-              </p>
-            </div>,
-          ]}
-        />
-      </Header>
+                </div>
+              )}
+            </div>
+          </div>,
+        ]}
+      />
+      <Layout>
+        <Sider width={200} className="site-layout-background">
+          <LeftMenu />
+        </Sider>
+        <Layout style={{ padding: "0 16px 16px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item>List</Breadcrumb.Item>
+            <Breadcrumb.Item>App</Breadcrumb.Item>
+          </Breadcrumb>
+          <Content
+            className={styles.siteLayoutBackground}
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}
+          >
+            <div>{props.children}</div>
+          </Content>
+        </Layout>
+      </Layout>
+      {/* 
       <Sider width={200} className={styles.siteLayoutBackground}>
         <LeftMenu />
-      </Sider>
-      <Content
-        className={styles.siteLayoutBackground}
-        style={{
-          padding: 24,
-          margin: 0,
-          minHeight: 280,
-        }}
-      >
-        <div>{props.children}</div>
-      </Content>
+      </Sider> */}
     </Layout>
   );
 }
@@ -127,8 +141,13 @@ function LeftMenu() {
     }
   }
   return (
-    <div style={{ display: "block" }}>
-      <Menu>{menuItems}</Menu>
-    </div>
+    <Menu
+      mode="inline"
+      defaultSelectedKeys={["1"]}
+      defaultOpenKeys={["sub1"]}
+      style={{ height: "100%", borderRight: 0 }}
+    >
+      {menuItems}
+    </Menu>
   );
 }
