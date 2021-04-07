@@ -21,8 +21,8 @@ export default function Products() {
 
   return (
     <Layout>
-      <Row justify="center">
-        <Col span={12}>
+      <Row>
+        <Col span={24}>
           <Slider {...settings}>
             <div>
               <img
