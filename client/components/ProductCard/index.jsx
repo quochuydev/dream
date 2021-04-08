@@ -6,16 +6,11 @@ import "antd/dist/antd.css";
 
 const { Meta } = Card;
 
-export default function ProductCard() {
+export default function ProductCard({ product }) {
   return (
     <Card
       // style={{ width: 300 }}
-      cover={
-        <img
-          alt="example"
-          src="https://xetaigianat.com/wp-content/uploads/2020/10/0392VAQ09011900S-300x256.jpg"
-        />
-      }
+      cover={<img alt={product.name} src={product.avatar?.url} />}
       actions={[
         <>
           <HeartOutlined key="setting" /> Wishlist
@@ -25,7 +20,7 @@ export default function ProductCard() {
         </>,
       ]}
     >
-      <Meta title="Card title" description="100,000đ" />
+      <Meta title={product.name} description={product.price} />
     </Card>
   );
 }

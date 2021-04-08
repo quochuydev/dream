@@ -15,55 +15,61 @@ export default function Products() {
     dots: true,
     autoplay: true,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 5,
     slidesToScroll: 1,
   };
+
+  const banners = [
+    {
+      src:
+        "https://xetaigianat.com/wp-content/uploads/2020/10/ben6-300x300.jpg",
+      name: "Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn",
+    },
+    {
+      src:
+        "https://xetaigianat.com/wp-content/uploads/2020/12/xe-ben-hino-15-t-n-xe-ben-hino-15-tan-fm-4-300x300.jpg",
+      name: "Ben Hino FM8JN7A – 2 cầu thật | Ben Hino 10 khối",
+    },
+    {
+      src:
+        "https://xetaigianat.com/wp-content/uploads/2020/10/ben6-300x300.jpg",
+      name: "Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn",
+    },
+    {
+      src:
+        "https://xetaigianat.com/wp-content/uploads/2020/12/xe-ben-hino-15-t-n-xe-ben-hino-15-tan-fm-4-300x300.jpg",
+      name: "Ben Hino FM8JN7A – 2 cầu thật | Ben Hino 10 khối",
+    },
+    {
+      src:
+        "https://xetaigianat.com/wp-content/uploads/2020/10/ben6-300x300.jpg",
+      name: "Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn",
+    },
+    {
+      src:
+        "https://xetaigianat.com/wp-content/uploads/2020/12/xe-ben-hino-15-t-n-xe-ben-hino-15-tan-fm-4-300x300.jpg",
+      name: "Ben Hino FM8JN7A – 2 cầu thật | Ben Hino 10 khối",
+    },
+  ];
 
   return (
     <Layout>
       <Row>
         <Col span={24}>
           <Slider {...settings}>
-            <div>
-              <img
-                src={
-                  "https://xetaigianat.com/wp-content/uploads/2020/10/0392VAQ09011900S-300x256.jpg"
-                }
-                alt="Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn"
-              />
-            </div>
-            <div>
-              <img
-                src={
-                  "https://xetaigianat.com/wp-content/uploads/2020/10/0392VAQ09011900S-300x256.jpg"
-                }
-                alt="Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn"
-              />
-            </div>
-            <div>
-              <img
-                src={
-                  "https://xetaigianat.com/wp-content/uploads/2020/10/0392VAQ09011900S-300x256.jpg"
-                }
-                alt="Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn"
-              />
-            </div>
-            <div>
-              <img
-                src={
-                  "https://xetaigianat.com/wp-content/uploads/2020/10/0392VAQ09011900S-300x256.jpg"
-                }
-                alt="Hino 15 tấn (2 cầu thật) | Hino FM8JW7A - 8 tấn"
-              />
-            </div>
+            {banners.map((e, i) => (
+              <div key={i}>
+                <img src={e.src} alt={e.name} />
+              </div>
+            ))}
           </Slider>
         </Col>
       </Row>
       <Row gutter={15}>
-        <Col span={8}>
+        <Col span={6}>
           <Filter />
         </Col>
-        <Col span={16}>
+        <Col span={18}>
           <List />
         </Col>
       </Row>

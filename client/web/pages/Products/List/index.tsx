@@ -1,23 +1,56 @@
 import React from "react";
-import { Card, Row, Col, Slider, Tag } from "antd";
+import { Row, Col } from "antd";
 
 import { ProductCard } from "../../../components";
 
 import "antd/dist/antd.css";
 
-export default function Index({ ...props }) {
+export default function ProductList() {
   const products = [
     {
       _id: "1",
+      name: "Chenglong H7 (2020) 5 chân – 21,5 tấn",
+      price: "100,000đ",
+      avatar: {
+        url:
+          "https://xetaigianat.com/wp-content/uploads/2020/12/xe-ben-hino-15-t-n-xe-ben-hino-15-tan-fm-4-300x300.jpg",
+      },
     },
     {
-      _id: "2",
+      _id: "1",
+      name: "Chenglong H7 (2020) 5 chân – 21,5 tấn",
+      price: "100,000đ",
+      avatar: {
+        url:
+          "https://xetaigianat.com/wp-content/uploads/2020/10/ben6-300x300.jpg",
+      },
     },
     {
-      _id: "3",
+      _id: "1",
+      name: "Chenglong H7 (2020) 5 chân – 21,5 tấn",
+      price: "100,000đ",
+      avatar: {
+        url:
+          "https://xetaigianat.com/wp-content/uploads/2020/12/xe-ben-hino-15-t-n-xe-ben-hino-15-tan-fm-4-300x300.jpg",
+      },
     },
     {
-      _id: "4",
+      _id: "1",
+      name: "Chenglong H7 (2020) 5 chân – 21,5 tấn",
+      price: "100,000đ",
+      avatar: {
+        url:
+          "https://xetaigianat.com/wp-content/uploads/2020/10/ben6-300x300.jpg",
+      },
+    },
+    {
+      _id: "1",
+      name: "Chenglong H7 (2020) 5 chân – 21,5 tấn",
+      price: "100,000đ",
+      avatar: {
+        url:
+          "https://xetaigianat.com/wp-content/uploads/2020/12/xe-ben-hino-15-t-n-xe-ben-hino-15-tan-fm-4-300x300.jpg",
+      },
     },
   ];
 
@@ -27,7 +60,7 @@ export default function Index({ ...props }) {
       <Row gutter={15}>
         {products.map((e, i) => (
           <Col span={6} key={e._id}>
-            <ProductCard />
+            <ProductCard product={e} />
           </Col>
         ))}
       </Row>
