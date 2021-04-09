@@ -9,6 +9,26 @@ export default function Index() {
       value: "4",
       label: "T-Shirt",
     },
+    {
+      value: "4",
+      label: "T-Shirt",
+    },
+    {
+      value: "4",
+      label: "T-Shirt",
+    },
+    {
+      value: "4",
+      label: "T-Shirt",
+    },
+    {
+      value: "4",
+      label: "T-Shirt",
+    },
+    {
+      value: "4",
+      label: "T-Shirt",
+    },
   ];
 
   const data = [
@@ -64,8 +84,8 @@ export default function Index() {
           onAfterChange={onAfterChange}
         />
         <h3>Tags</h3>
-        {tags.map((tag) => (
-          <Tag key={tag.value} color="cyan" style={{ marginRight: 5 }}>
+        {tags.map((tag, i) => (
+          <Tag key={i} color="cyan" style={{ marginRight: 5 }}>
             {tag.label}
           </Tag>
         ))}

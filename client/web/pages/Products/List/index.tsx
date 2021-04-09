@@ -57,9 +57,9 @@ export default function ProductList() {
   return (
     <>
       <h1>Products</h1>
-      <Row gutter={15}>
+      <Row gutter={[15, 15]}>
         {products.map((e, i) => (
-          <Col span={6} key={e._id}>
+          <Col xs={12} md={6} key={i}>
             <ProductCard product={e} />
           </Col>
         ))}

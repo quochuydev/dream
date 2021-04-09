@@ -98,8 +98,10 @@ export default function LayoutComponent(props): React.ReactElement {
           </div>,
         ]}
       >
-        <Banner />
-        <div>{props.children}</div>
+        <div>
+          <Banner />
+          {props.children}
+        </div>
       </PageHeader>
       <Footer />
     </>
