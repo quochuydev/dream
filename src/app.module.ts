@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { Module } from "@nestjs/common";
+import { Module,NestModule, MiddlewareConsumer } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
 import { AuthModule } from "./modules/auth/auth.module";
@@ -9,6 +9,10 @@ import { TagModule } from "./modules/tag/tag.module";
 import { SSRModule } from "./server";
 import { UserModule } from "./modules/user/user.module";
 import { RoleModule } from "./modules/role/role.module";
+
+import { BlogController } from './modules/blog/blog.controller';
+
+import { AdminMiddleware } from './middlewares/admin.middleware';
 
 @Module({
   imports: [
@@ -23,4 +27,10 @@ import { RoleModule } from "./modules/role/role.module";
   ],
   controllers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AdminMiddleware)
+      .forRoutes(BlogController);
+  }
+}

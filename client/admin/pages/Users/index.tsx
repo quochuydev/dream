@@ -56,18 +56,18 @@ export default function AdminUsers() {
       },
     },
     {
-      key: "updated_at",
-      title: "updated_at",
-      dataIndex: "updated_at",
+      key: "updatedAt",
+      title: "updatedAt",
+      dataIndex: "updatedAt",
     },
     {
-      key: "deleted_at",
-      title: "deleted_at",
+      key: "deletedAt",
+      title: "deletedAt",
       render: (value) => {
         return (
           <div>
-            {value.deleted_at}
-            {!value.deleted_at && (
+            {value.deletedAt}
+            {!value.deletedAt && (
               <Button
                 onClick={async () => {
                   const result = await userService.remove(value._id);
@@ -78,12 +78,12 @@ export default function AdminUsers() {
                 remove
               </Button>
             )}
-            {!!value.deleted_at && (
+            {!!value.deletedAt && (
               <Button
                 onClick={async () => {
                   const result = await userService.update(
                     { id: value._id },
-                    { deleted_at: null }
+                    { deletedAt: null }
                   );
                   message.success(result.message);
                   setQuery({ ...query });

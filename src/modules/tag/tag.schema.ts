@@ -10,18 +10,18 @@ export class Tag {
   name: string;
 
   @Prop()
-  created_at: Date;
+  createdAt: Date;
 
   @Prop()
-  updated_at: Date;
+  updatedAt: Date;
 
   @Prop()
-  deleted_at: Date;
+  deletedAt: Date;
 }
 
 export const TagSchema = new mongoose.Schema({
   name: { type: String, default: null },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-  deleted_at: { type: Date, default: null },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  deletedAt: { type: Date, default: null },
 });

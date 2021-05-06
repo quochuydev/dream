@@ -23,5 +23,5 @@ export class BlogDto {
 
   @IsOptional()
   @IsString()
-  file_id: string;
+  fileId: string;
 }

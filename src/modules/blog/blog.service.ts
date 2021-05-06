@@ -21,8 +21,8 @@ export class BlogService extends BaseService {
       slug: toSlug(data.title),
       body: data.body,
       tags: data.tags,
-      file_id: data.file_id,
-      user_id: data.user_id,
+      fileId: data.fileId,
+      userId: data.userId,
     });
     const blog = await newBlog.save();
     return blog;
@@ -34,10 +34,10 @@ export class BlogService extends BaseService {
       {
         $set: {
           ...data,
-          updated_at: new Date(),
+          updatedAt: new Date(),
         },
       },
-      { lean: true, new: true, populate: "file_id" }
+      { lean: true, new: true, populate: "fileId" }
     );
     return blog;
   }

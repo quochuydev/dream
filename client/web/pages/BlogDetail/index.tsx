@@ -9,7 +9,7 @@ export default function Blog({ blog }) {
   return (
     <Layout>
       <h1>{blog.title}</h1>
-      <p>{blog.created_at}</p>
+      <p>{blog.createdAt}</p>
       {blog.tags.map((tag) => (
         <Tag key={tag.value} color="cyan" style={{ marginRight: 5 }}>
           {tag.label}

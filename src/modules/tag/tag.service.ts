@@ -25,7 +25,7 @@ export class TagService extends BaseService {
       {
         $set: {
           name: data.name,
-          updated_at: new Date(),
+          updatedAt: new Date(),
         },
       },
       { lean: true, new: true }

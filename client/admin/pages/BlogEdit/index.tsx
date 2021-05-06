@@ -37,7 +37,7 @@ export default function Blog({}) {
     if (result) {
       setData({ title: result.title, body: result.body || "" });
       setTags(result.tags);
-      setFile(result.file_id);
+      setFile(result.fileId);
     }
   }
 
@@ -54,7 +54,7 @@ export default function Blog({}) {
             title: value.title,
             body: value.body,
             tags,
-            file_id: file?._id,
+            fileId: file?._id,
           }
         );
         message.success("Update blog");
@@ -63,7 +63,7 @@ export default function Blog({}) {
           title: value.title,
           body: value.body,
           tags,
-          file_id: file?._id,
+          fileId: file?._id,
         });
         message.success("Create blog");
         Router.push(`/publish/blogs/edit/${result._id}`);

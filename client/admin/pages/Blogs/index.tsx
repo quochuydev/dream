@@ -45,25 +45,25 @@ export default function AdminBlog() {
       },
     },
     {
-      key: "created_at",
-      title: "created_at",
+      key: "createdAt",
+      title: "createdAt",
       render: (value) => {
-        return <div>{value.created_at}</div>;
+        return <div>{value.createdAt}</div>;
       },
     },
     {
-      key: "updated_at",
-      title: "updated_at",
-      dataIndex: "updated_at",
+      key: "updatedAt",
+      title: "updatedAt",
+      dataIndex: "updatedAt",
     },
     {
-      key: "deleted_at",
-      title: "deleted_at",
+      key: "deletedAt",
+      title: "deletedAt",
       render: (value) => {
         return (
           <div>
-            {value.deleted_at}
-            {!value.deleted_at && (
+            {value.deletedAt}
+            {!value.deletedAt && (
               <Button
                 onClick={async () => {
                   const result = await blogService.remove(value._id);
@@ -74,12 +74,12 @@ export default function AdminBlog() {
                 remove
               </Button>
             )}
-            {!!value.deleted_at && (
+            {!!value.deletedAt && (
               <Button
                 onClick={async () => {
                   const result = await blogService.update(
                     { id: value._id },
-                    { deleted_at: null }
+                    { deletedAt: null }
                   );
                   message.success(result.message);
                   setQuery({ ...query });

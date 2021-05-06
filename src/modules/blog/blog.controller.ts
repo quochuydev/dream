@@ -11,43 +11,40 @@ import {
 } from "@nestjs/common";
 import { BlogService } from "./blog.service";
 import { AuthUser } from "../../decorators";
-import { JwtGuard, UserGuard } from "../auth/jwt.guard";
+import { JwtGuard,  } from "../auth/jwt.guard";
 import { BlogDto } from "./blog.dto";
 
 @Controller("/api/blogs")
+@UseGuards(JwtGuard)
 export class BlogController {
   constructor(private blogService: BlogService) {}
 
   @Get()
-  @UseGuards(JwtGuard)
-  async list(@Query() query, @AuthUser("id") user_id: string) {
+  async list(@Query() query, @AuthUser("id") userId: string) {
     return this.blogService.paginate(query, {
       keyword: "title",
-      populate: "file_id",
+      populate: "fileId",
     });
   }
 
   @Get("/:id")
   async detail(@Param("id") id: string) {
     return await this.blogService.get(id, {
-      populate: "file_id",
+      populate: "fileId",
     });
   }
 
   @Post()
-  @UseGuards(JwtGuard)
-  async create(@Body() data: BlogDto, @AuthUser("id") user_id: string) {
-    return await this.blogService.create({ ...data, user_id });
+  async create(@Body() data: BlogDto, @AuthUser("id") userId: string) {
+    return await this.blogService.create({ ...data, userId });
   }
 
   @Put("/:id")
-  @UseGuards(JwtGuard)
   async update(@Param("id") id: string, @Body() data: any) {
     return await this.blogService.update(id, data);
   }
 
   @Delete("/:id")
-  @UseGuards(JwtGuard)
   async remove(@Param("id") id: string) {
     return await this.blogService.remove(id);
   }

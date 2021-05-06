@@ -8,12 +8,12 @@ export class BaseService {
   async paginate(query, props: any = { options: {} }): Promise<any> {
     const { keyword, ...options } = props;
     const { page, limit, skip, filter } = this.parseQuery(query);
-    const result = { total: 0, limit, page, skip, items: [] };
+    const result = { total: 0, totalPage: 0, limit, page, skip, items: [] };
 
     const criteria: any = {};
 
     if (filter.all != "true") {
-      criteria.deleted_at = { $in: [null] };
+      criteria.deletedAt = { $in: [null] };
     }
 
     if (filter.q) {
@@ -30,6 +30,7 @@ export class BaseService {
     if (!result.total) {
       return result;
     }
+    result.totalPage = Math.ceil(result.total/result.limit)
 
     result.items = await this.model
       .find(criteria, null, options)
@@ -51,7 +52,7 @@ export class BaseService {
       { _id: id },
       {
         $set: {
-          deleted_at: new Date(),
+          deletedAt: new Date(),
         },
       },
       { lean: true, new: true, upsert: true }
@@ -63,7 +64,7 @@ export class BaseService {
   parseQuery(
     body,
     option = { writeLog: true, maxLimit: 500 },
-    defaults = { page: 1, limit: 20, fields: "", sort: { created_at: -1 } }
+    defaults = { page: 1, limit: 20, fields: "", sort: { createdAt: -1 } }
   ) {
     let { page = 1, limit = 20 } = { ...defaults, ...body };
     page = Number(page);

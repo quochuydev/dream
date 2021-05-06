@@ -42,7 +42,7 @@ export default function Blogs({ initBlogs: blogs, ...props }) {
             dataSource={blogs.map((e: any) => ({
               href: "https://ant.design",
               title: `${e.title}`,
-              avatar: e.file_id?.url,
+              avatar: e.fileId?.url,
               description:
                 "Ant Design, a design language for background applications, is refined by Ant UED Team.",
               content:
@@ -73,10 +73,10 @@ export default function Blogs({ initBlogs: blogs, ...props }) {
                     key="list-vertical-message"
                   />,
                 ]}
-                extra={<img width={272} alt="logo" src={item.file_id?.url} />}
+                extra={<img width={272} alt="logo" src={item.fileId?.url} />}
               >
                 <List.Item.Meta
-                  avatar={<Avatar src={item.file_id?.url} />}
+                  avatar={<Avatar src={item.fileId?.url} />}
                   title={<a href={item.href}>{item.title}</a>}
                   description={item.description}
                 />
@@ -90,13 +90,13 @@ export default function Blogs({ initBlogs: blogs, ...props }) {
             <div key={e._id}>
               <List.Item.Meta
                 avatar={
-                  <Avatar shape="square" size={80} src={e.file_id?.url} />
+                  <Avatar shape="square" size={80} src={e.fileId?.url} />
                 }
                 title={
                   <Link href={`/blogs/${e._id}`}>
                     <div>
                       <a>{e.title}</a>
-                      <p>{e.created_at}</p>
+                      <p>{e.createdAt}</p>
                       <p>{e.user_id}</p>
                     </div>
                   </Link>

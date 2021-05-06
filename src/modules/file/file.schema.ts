@@ -19,13 +19,13 @@ export class File {
   size: number;
 
   @Prop()
-  created_at: Date;
+  createdAt: Date;
 
   @Prop()
-  updated_at: Date;
+  updatedAt: Date;
 
   @Prop()
-  deleted_at: Date;
+  deletedAt: Date;
 }
 
 export const FileSchema = new mongoose.Schema({
@@ -33,7 +33,7 @@ export const FileSchema = new mongoose.Schema({
   key: { type: String, default: null },
   contentType: { type: String, default: null },
   size: { type: Number, default: null },
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
-  deleted_at: { type: Date, default: null },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+  deletedAt: { type: Date, default: null },
 });

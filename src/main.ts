@@ -1,7 +1,5 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
-import session from "express-session";
-import passport from "passport";
 
 import { AppModule } from "./app.module";
 
@@ -26,4 +24,5 @@ async function bootstrap() {
 
   await app.listen(PORT);
 }
+
 bootstrap();

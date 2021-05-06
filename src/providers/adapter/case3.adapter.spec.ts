@@ -23,8 +23,8 @@ describe("AppController (e2e)", () => {
       },
     ],
     total_prices: { type: Number },
-    created_at: { type: Date },
-    updated_at: { type: Date },
+    createdAt: { type: Date },
+    updatedAt: { type: Date },
     status: { type: String },
     private_field: { type: Number },
     order_number: { type: String },
@@ -62,7 +62,7 @@ describe("AppController (e2e)", () => {
       defaults: {
         page: 1,
         limit: 20,
-        sort: "created_at_asc",
+        sort: "createdAt_asc",
         is_deleted: false,
       },
       skippedValues: ["", null, undefined],
@@ -100,6 +100,6 @@ describe("AppController (e2e)", () => {
     assert.equal(page, 2);
     assert.equal(skip, 20);
     assert.equal(limit, 20);
-    assert.deepEqual(sort, { created_at: 1 });
+    assert.deepEqual(sort, { createdAt: 1 });
   });
 });

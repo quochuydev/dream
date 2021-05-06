@@ -1,6 +1,5 @@
 import { RoleService } from "./role.service";
 import { Param, Controller, Get, Query, UseGuards } from "@nestjs/common";
-import { JwtGuard, AdminGuard } from "../auth/jwt.guard";
 
 @Controller("/api/roles")
 export class RoleController {

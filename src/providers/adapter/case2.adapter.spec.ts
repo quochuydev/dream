@@ -23,8 +23,8 @@ describe("AppController (e2e)", () => {
       },
     ],
     total_prices: { type: Number },
-    created_at: { type: Date },
-    updated_at: { type: Date },
+    createdAt: { type: Date },
+    updatedAt: { type: Date },
     status: { type: String },
     private_field: { type: Number },
     order_number: { type: String },
@@ -58,7 +58,7 @@ describe("AppController (e2e)", () => {
       defaults: {
         page: 1,
         limit: 20,
-        sort: "created_at_asc",
+        sort: "createdAt_asc",
         is_deleted: false,
       },
       skippedValues: ["", null, undefined],
@@ -77,8 +77,8 @@ describe("AppController (e2e)", () => {
     const query = {
       _id: "5d8d8b6dee26642f1099eb5f",
       shop_id: "100000001",
-      updated_at_from_date: "2019-04-01T03:12:34.123Z",
-      updated_at_to_date: "2019-04-30T04:12:34.123Z",
+      updatedAt_from_date: "2019-04-01T03:12:34.123Z",
+      updatedAt_to_date: "2019-04-30T04:12:34.123Z",
       "customer.id": "",
       tags: "",
       location_id_in: "1000,2000",
@@ -90,7 +90,7 @@ describe("AppController (e2e)", () => {
     const expectedFilter = {
       _id: { $eq: "5d8d8b6dee26642f1099eb5f" },
       shop_id: { $eq: "100000001" },
-      updated_at: {
+      updatedAt: {
         $gte: new Date(
           new Date("2019-04-01T03:15:00.000Z").setHours(0, 0, 0, 0)
         ),
@@ -108,6 +108,6 @@ describe("AppController (e2e)", () => {
     assert.equal(page, 1);
     assert.equal(skip, 0);
     assert.equal(limit, 20);
-    assert.deepEqual(sort, { created_at: 1 });
+    assert.deepEqual(sort, { createdAt: 1 });
   });
 });
