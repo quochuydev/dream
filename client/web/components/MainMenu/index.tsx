@@ -24,7 +24,7 @@ export default function MainMenu({ ...props }) {
       <Menu.Item key="home">
         <Link href={"/"}>
           {/* <HomeOutlined /> */}
-          Home
+          HOME
         </Link>
       </Menu.Item>
       <SubMenu
@@ -51,7 +51,7 @@ export default function MainMenu({ ...props }) {
       </SubMenu>
 
       <Menu.Item key="blogs">
-        <Link href="/blogs">Blogs</Link>
+        <Link href="/blogs">BLOGS</Link>
       </Menu.Item>
     </Menu>
   );

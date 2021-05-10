@@ -45,6 +45,7 @@ export default function Sliders(): React.ReactElement {
       name: "Ben Hino FM8JN7A – 2 cầu thật | Ben Hino 10 khối",
     },
   ];
+
   return (
     <Slider {...settings}>
       {banners.map((e, i) => (

@@ -30,7 +30,7 @@ export default function AdminBlog() {
       key: "id",
       title: "id",
       render: (value) => {
-        return <Link href={`/admin/blogs/${value._id}`}>{value._id}</Link>;
+        return <Link href={`/admin/blogs/edit/${value._id}`}>{value._id}</Link>;
       },
     },
     {
@@ -38,7 +38,7 @@ export default function AdminBlog() {
       title: "title",
       render: (value) => {
         return (
-          <Link href={`/admin/blogs/${value._id}`}>
+          <Link href={`/admin/blogs/edit/${value._id}`}>
             <p>{value.title}</p>
           </Link>
         );
@@ -96,7 +96,7 @@ export default function AdminBlog() {
 
   return (
     <Layout>
-      <Link href={`/publish/blogs/create`}>New</Link>
+      <Link href={`/admin/blogs/create`}>New</Link>
       {" | "}
       <a
         onClick={() => {
