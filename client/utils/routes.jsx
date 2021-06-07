@@ -1,5 +1,5 @@
 import React from "react";
-import { RightCircleOutlined } from "@ant-design/icons";
+import { RightCircleOutlined, HomeOutlined } from "@ant-design/icons";
 import { PATHS } from "../common/constants";
 
 const MENU_DATA = [
@@ -9,6 +9,13 @@ const MENU_DATA = [
     name: "Blog",
     icon: <RightCircleOutlined />,
     path: "/blogs",
+  },
+  {
+    is_open: true,
+    key: "user",
+    name: "User",
+    icon: <HomeOutlined />,
+    path: "/users",
   },
 ];
 

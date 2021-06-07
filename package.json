@@ -20,7 +20,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node ./dist/main",
-    "lint": "eslint './src/**/**/*.{ts,tsx}'",
+    "lint": "eslint './src/**/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint './src/**/*.{ts,tsx}' --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -43,6 +43,7 @@
     "class-transformer": "^0.3.2",
     "class-validator": "^0.13.1",
     "cookie": "^0.4.0",
+    "cookie-parser": "^1.4.5",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -63,6 +64,7 @@
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
+    "sass": "^1.32.7",
     "slugify": "^1.4.6"
   },
   "devDependencies": {

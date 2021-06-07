@@ -9,7 +9,7 @@ import {
   HomeOutlined,
 } from "@ant-design/icons";
 
-import "./style.css";
+import "./Layout.module.css";
 import "antd/dist/antd.css";
 
 import MainMenu from "../MainMenu";
